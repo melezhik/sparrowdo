@@ -1,0 +1,144 @@
+#!perl6
+
+
+use Sparrowdo;
+
+use Sparrowdo::Ssh;
+
+use Sparrowdo::Docker;
+
+use Sparrowdo::Localhost;
+
+use Sparrowdo::Utils;
+
+use Sparrow6::DSL;
+
+
+use Config::Simple;
+
+
+sub MAIN (
+
+  Str  :$host = '127.0.0.1', 
+  Str  :$sparrowfile, 
+  Str  :$repo, 
+  Str  :$ssh_user, 
+  Int  :$ssh_port = 22, 
+  Str  :$ssh_private_key, 
+  Bool :$verbose = False,
+  Bool :$debug   = False,
+  Bool :$bootstrap = False, 
+  Bool :$no_sudo = False,
+  Bool :$localhost = False,
+  Str  :$docker,
+  Str  :$conf,
+  Str  :$prefix,
+  Str  :$sync,
+  Bool :$no_index_update  = False,
+)
+
+{
+
+
+  my $spf = $sparrowfile || 'sparrowfile'; # Sparrowfile to run
+
+  my $path-to-config = $conf || "config.pl6";
+
+  if $conf && ! ( $path-to-config.IO ~~ :e ) {
+    die "configuration file $path-to-config does not exist";
+  }
+
+  generate-sparrowdo-harness %(
+    config => $path-to-config,
+    sparrowfile => $spf,
+    ssh-user => $ssh_user,
+    sync => $sync,
+    verbose => $verbose,
+    sudo => ! $no_sudo,
+    debug => $debug,
+    repo => $repo,
+    prefix => $prefix,
+    index-update => ! $no_index_update,
+    type => $docker ?? "docker" !! "default"
+  );
+
+  if ($docker) {
+
+    prepare-docker-host($docker,%( verbose => $verbose ));
+
+    if $bootstrap {
+      bootstrap-docker-host($docker,%( verbose => $verbose ));
+      if ! $sparrowfile && ! $spf.IO.e  { 
+        # don't try to run sparrowfile if in bootstrap mode
+        # and if sparrowfile is not passed and 
+        # default sparrowfile does not exist
+        say "Congratulations!\nYour system is ready to be configured automatically using Sparrowdo!";
+        exit 0;
+      }
+    }
+
+    die "sparrowfile $spf does not exit" unless $spf.IO ~~ :e;
+
+    run-tasks-docker-host(
+      $docker, %( 
+        verbose => $verbose, 
+      )
+    );
+
+  } elsif $localhost {  
+
+
+    if $bootstrap {
+      bootstrap-localhost %( verbose => $verbose );
+      if ! $sparrowfile && ! $spf.IO.e  { 
+        # don't try to run sparrowfile if in bootstrap mode
+        # and if sparrowfile is not passed and 
+        # default sparrowfile does not exist
+        say "Congratulations!\nYour system is ready to be configured automatically using Sparrowdo!";
+        exit 0;
+      }
+    }
+
+    die "sparrowfile $spf does not exit" unless $spf.IO ~~ :e;
+
+    run-tasks-localhost %( 
+      verbose => $verbose, 
+    );
+
+  } else {  
+
+    prepare-ssh-host(
+      $host,
+      %( 
+        ssh-user => $ssh_user,
+        ssh-port => $ssh_port,
+        verbose => $verbose,
+        sync => $sync,
+      )
+    );
+
+    if $bootstrap {
+      bootstrap-ssh-host($host,%( verbose => $verbose, ssh-user => $ssh_user, ssh-port => $ssh_port  ));
+      if ! $sparrowfile && ! $spf.IO.e  { 
+        # don't try to run sparrowfile if in bootstrap mode
+        # and if sparrowfile is not passed and 
+        # default sparrowfile does not exist
+        say "Congratulations!\nYour system is ready to be configured automatically using Sparrowdo!";
+        exit 0;
+      }
+    }
+
+    die "sparrowfile $spf does not exit" unless $spf.IO ~~ :e;
+
+    run-tasks-ssh-host(
+      $host,$spf,
+      %( 
+        ssh-user => $ssh_user,
+        ssh-port => $ssh_port,
+        verbose => $verbose, 
+      )
+    );
+  }
+
+}
+

@@ -1,0 +1,3 @@
+#!perl6
+
+bash "echo Hello World";
