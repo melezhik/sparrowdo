@@ -411,4 +411,3 @@ Alexey Melezhik
 # Thanks
 
 To God as the One Who inspires me to do my job!
-
