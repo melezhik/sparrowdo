@@ -28,6 +28,6 @@ proc-exists-by-pid 'nginx', '/var/run/nginx.pid';
 
 service-stop('nginx');
 
-http-ok 'https://sparrowhub.org';
+http-ok 'https://perl.org';
 
 

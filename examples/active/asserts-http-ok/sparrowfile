@@ -9,5 +9,5 @@ if os() ~~ / ubuntu || debian / {
 }
 
 
-http-ok 'https://sparrowhub.org', %( has-content => "SparrowHub" );
+http-ok 'https://perl6.org', %( has-content => "Perl6" );
 
