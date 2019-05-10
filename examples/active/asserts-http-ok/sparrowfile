@@ -9,5 +9,5 @@ if os() ~~ / ubuntu || debian / {
 }
 
 
-http-ok 'https://perl6.org', %( has-content => "Perl6" );
+http-ok 'https://perl6.org', %( has-content => "Perl 6 Programming Language" );
 
