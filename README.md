@@ -149,25 +149,26 @@ Localhost:
 
 ## Repositories
 
-Sparrowdo repository is storage various Sparrow6 plugins that executed on target hosts.
+Sparrowdo use Sparrow6 repository to download tasks that are executed on target hosts.
 
-During scenario execution Sparrowdo pulls  plugin from repository and runs it _with parameters_.
+During scenario execution Sparrowdo pulls plugins from repository and runs it _with parameters_.
 
-Parametrized with certian parameters Sparrow6 plugin is a Sparrow6 task.
+Plugin that gets run with parameters is a Sparrow6 task.
 
 * Detailed explanation of Sparrow6 tasks is available at [Sparrow6 development](https://github.com/melezhik/Sparrow6/blob/master/documentation/development.md) documentation.
 * Detailed explanation of Sparrow6 plugins  [Sparrow6 plugins](https://github.com/melezhik/Sparrow6/blob/master/documentation/plugins.md) documentation
 * Detailed explanation of Sparrow6 repositories is available at [Sparrow6 repositories](https://github.com/melezhik/Sparrow6/blob/master/documentation/repository.md) documentation.
 
-By default [main Sparrow6](https://sparrowhub.org) repository is used to manage task dependencies:
+By default local repository located at `~/repo` is used:
 
-    $ sparrowdo --host=192.168.0.1 # SparrowHub repository is used
+    $ sparrowdo --host=192.168.0.1 #  using repo ~/repo
 
-Unless `--repo` flag is used, which comes in different flavors:
+Use `--repo` flag to set repository URI. For example:
 
     $ sparrowdo --repo=file:///tmp/repo --localhost # use /tmp/repo repository for local mode
 
     $ docker run --name --name=fox -d sh -v /tmp/repo:/var/data
+
     $ sparrowdo --repo=/var/data --docker=fox --repo=file://var/data # mount /tmp/repo to /var/data within docker instance
 
     $ sparrowdo --repo=http://sparrow.repo # use http repository
@@ -175,12 +176,12 @@ Unless `--repo` flag is used, which comes in different flavors:
 Ssh mode supports synchronizing local file repositories with master and target host using rsync.
 It extremely useful if for some reason you can't use http based repositories:
 
-    $ sparrowdo --sync=/tmp/repo --host=192.168.0.1 # rsync local repository /tmp/repo to target host
-    # and use it within there
+    $ sparrowdo --sync=/tmp/repo --host=192.168.0.1 # rsync local repository /tmp/repo to target host 
+    # and use it within target host
 
 
 Read [Sparrow6 documentation](https://github.com/melezhik/Sparrow6/blob/master/documentation/repository.md)
-on task repositories.
+to know more about Sparrow6 repositories.
 
 # Sparrowdo files anatomy
 
@@ -361,13 +362,13 @@ runs scenarion on the machine but using ssh.
 
 * `--repo`
 
-If set, define Sparrow6 repository `URL`, for example:
+Defines Sparrow6 repository `URI`, for example:
 
-    --repo=https://192.168.0.1 # Http repository
+    --repo=https://192.168.0.1 # Remote http repository
 
     --repo=file:///var/data/repo # Local file system repository
 
-If Sparrow6 repository not set by usign `--repo`, main Sparrow6 repository is used which http://sparrowhub.org
+If `--repo` is not set, Sparrowdo uses default local repository located at `~/repo` path.
 
 Sparrowdo uses repository to pull plugins from, see also [Sparrowdo workflow](#sparrowdo-workflow) section.
 
