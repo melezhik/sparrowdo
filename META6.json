@@ -13,11 +13,11 @@
   "perl" : "6.*",
   "provides" : {
     "Sparrowdo" : "lib/Sparrowdo.pm6",
-    "Sparrowdo::Ssh" : "lib/Sparrowdo/Ssh.pm6",
+    "Sparrowdo::Bootstrap" : "lib/Sparrowdo/Bootstrap.pm6",
     "Sparrowdo::Docker" : "lib/Sparrowdo/Docker.pm6",
-    "Sparrowdo::Localhost":  "lib/Sparrowdo/Localhost.pm6",
-    "Sparrowdo::Utils" : "lib/Sparrowdo/Utils.pm6",
-    "Sparrowdo::Bootstrap" : "lib/Sparrowdo/Bootstrap.pm6"
+    "Sparrowdo::Localhost" : "lib/Sparrowdo/Localhost.pm6",
+    "Sparrowdo::Ssh" : "lib/Sparrowdo/Ssh.pm6",
+    "Sparrowdo::Utils" : "lib/Sparrowdo/Utils.pm6"
   },
   "resources" : [
     "bootstrap.sh"
@@ -30,5 +30,5 @@
   },
   "tags" : [ ],
   "test-depends" : [ ],
-  "version" : "0.0.45"
+  "version" : "0.1.0"
 }
