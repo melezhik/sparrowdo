@@ -1,6 +1,6 @@
 # Sparrowdo
 
-Run Sparrow6 tasks remotely.
+Perl6 Configuration Management Tool.
 
 # Build status
 

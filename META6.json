@@ -7,7 +7,7 @@
     "Config::Simple",
     "Sparrow6"
   ],
-  "description" : "Configuration management tool",
+  "description" : "Perl6 Configuration Management Tool",
   "license" : "Artistic-2.0",
   "name" : "Sparrowdo",
   "perl" : "6.*",
