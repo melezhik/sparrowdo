@@ -2,8 +2,5 @@ lib/.precomp/
 .precomp
 *.tar.gz
 Sparrowdo-*
-/.vs
 .cache
 log.txt
-.sparrowdo
-

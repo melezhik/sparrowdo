@@ -2,9 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    - Restore Readme
+
 0.1.0  2019-07-16T21:16:21-05:00
 
-    - Dump tasks data in verbose mode
+    - Switched to Sparrow6
 
 0.0.45  2019-01-07T13:19:02-06:00
 
