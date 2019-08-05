@@ -50,6 +50,7 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
   $fh.say("export SP6_PREFIX={%args<prefix>}") if %args<prefix>;
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
+  $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
 
   if %args<sudo> && %args<type> eq 'default' {
 
@@ -59,7 +60,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
     }
 
-    $fh.say("sudo --login d=\$PWD SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO bash -c 'cd \$d && perl6 -MSparrow6::DSL sparrowfile'");
+    $fh.say("sudo --login d=\$PWD SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO bash -c 'cd \$d && perl6 -MSparrow6::DSL sparrowfile'");
 
   } else {
 
