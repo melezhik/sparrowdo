@@ -3,13 +3,13 @@
 # install Foo::Bar module
 my $user = %*ENV<USER>;
 
-zef 'Foo::Bar', %( user => $user );
+zef 'Foo', %( user => $user );
 
 # Force install
-zef 'Foo::Bar', %( force => True, user => $user );
+zef 'Foo', %( force => True, user => $user );
 
 # Sets custom description
-zef 'Foo::Bar', %( description => 'A dummy module to use for testing Github Perl 6 modules and their interaction with the Perl 6 part of CPAN', user => $user );
+zef 'Foo', %( description => 'A dummy module to use for testing Github Perl 6 modules and their interaction with the Perl 6 part of CPAN', user => $user );
 
 # Show debug info when install
-zef 'Foo::Bar', %( debug => True, user => $user );
+zef 'Foo', %( debug => True, user => $user );

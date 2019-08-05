@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Fix some failing Travis tests
+    Passing SP6_CARTON_OFF var
+
 0.1.1  2019-07-16T21:22:17-05:00
 
     - Restore Readme
