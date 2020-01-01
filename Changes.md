@@ -2,6 +2,7 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    HotFix for alpine bootstrap ( now Rakudo is installed and downloaded )
     Fix some failing Travis tests
     Passing SP6_CARTON_OFF var
 
