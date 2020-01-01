@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.2  2020-01-01T17:51:10-06:00
+
     HotFix for alpine bootstrap ( now Rakudo is installed and downloaded )
     Fix some failing Travis tests
     Passing SP6_CARTON_OFF var
