@@ -5,7 +5,7 @@ case "$OS" in
   alpine)
     apk update --wait 120
     apk add --wait 120 curl perl bash git
-    curl -L -k -o /tmp/rakudo-pkg-Alpine3.7_2019.11-01_x86_64.apk https://github.com/nxadm/rakudo-pkg/releases/download/v2019.11/rakudo-pkg-Alpine3.7_2019.11-01_x86_64.apk
+    curl -s -L -k -o /tmp/rakudo-pkg-Alpine3.7_2019.11-01_x86_64.apk https://github.com/nxadm/rakudo-pkg/releases/download/v2019.11/rakudo-pkg-Alpine3.7_2019.11-01_x86_64.apk
     apk add --allow-untrusted /tmp/rakudo-pkg-Alpine3.7_2019.11-01_x86_64.apk
 
   ;;
