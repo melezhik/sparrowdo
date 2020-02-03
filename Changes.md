@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Pass SP6_PREFIX to a docker
+
 0.1.2  2020-01-01T17:51:10-06:00
 
     HotFix for alpine bootstrap ( now Rakudo is installed and downloaded )

@@ -16,8 +16,8 @@ before_install:
   - sudo apt-get update && sudo apt-get install rakudo-pkg
 
 install:
-  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.perl6/bin:$PATH && zef install --/test https://github.com/melezhik/Sparrow6.git
-  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.perl6/bin:$PATH && zef install --/test .
+  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH && zef install --/test https://github.com/melezhik/Sparrow6.git
+  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH && zef install --/test .
   - git clone https://github.com/melezhik/sparrow-plugins && s6 --repo-init /tmp/repo
   - cd sparrow-plugins && git checkout master && git pull origin master
   - export SP6_REPO=file:///tmp/repo && find -maxdepth 2 -mindepth 2 -name sparrow.json -execdir s6 --upload \;

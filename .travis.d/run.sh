@@ -8,7 +8,7 @@ sparrowfile=$2
 
 machine_type=$3
 
-PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:~/.perl6/bin:$PATH
+PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:~/.raku/bin:$PATH
 
 
 if test "$distro" = "localhost"; then
