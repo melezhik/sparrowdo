@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Docker - full prefix support ( allows concurrent requests )
+
 0.1.3  2020-02-03T23:29:38Z
 
     Pass SP6_PREFIX to a docker

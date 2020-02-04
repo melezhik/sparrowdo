@@ -10,11 +10,26 @@ sub prepare-docker-host ($host,%args?) is export {
 
   say "[docker] copy harness files" if %args<verbose>;
 
+  my $prefix = %args<prefix> || "default";
+
   my @cp-cmd = (
+    "docker",
+    "exec",
+    "-i",
+    $host,
+    "mkdir",
+    "-p",
+    "/root/.sparrowdo/env/$prefix",
+  );
+
+  run @cp-cmd;
+
+
+  @cp-cmd = (
     "docker",
     "cp",
     ".sparrowdo/",
-    "$host:/root/",
+    "$host:/root/.sparrowdo/env/$prefix",
   );
 
   run @cp-cmd;
@@ -22,21 +37,11 @@ sub prepare-docker-host ($host,%args?) is export {
 }
 
 
-sub run-tasks-docker-host ($host,%args?) is export {
-
-  say "[docker] run tasks on instance $host" if %args<verbose>;
-
-  my $cmd = "docker exec -i $host sh /root/.sparrowdo/sparrowrun.sh";
-
-  say "[docker] effective cmd: $cmd" if %args<verbose>;
-
-  shell $cmd;
-
-}
-
 sub bootstrap-docker-host ($host, %args?) is export {
 
   say "[docker] bootstrap" if %args<verbose>;
+
+  my $prefix = %args<prefix> || "default";
 
   my @cmd = (
     "docker",
@@ -44,9 +49,24 @@ sub bootstrap-docker-host ($host, %args?) is export {
     "-i",
     "$host",
     "sh", 
-    "/root/.sparrowdo/bootstrap.sh"
+    "/root/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
   );
 
   run @cmd;
 
 }
+
+sub run-tasks-docker-host ($host,%args?) is export {
+
+  say "[docker] run tasks on instance $host" if %args<verbose>;
+
+  my $prefix = %args<prefix> || "default";
+
+  my $cmd = "docker exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+
+  say "[docker] effective cmd: $cmd" if %args<verbose>;
+
+  shell $cmd;
+
+}
+

@@ -64,10 +64,22 @@ sub MAIN (
 
   if ($docker) {
 
-    prepare-docker-host($docker,%( verbose => $verbose ));
+    prepare-docker-host(
+      $docker,
+      %( 
+        verbose => $verbose,
+        prefix  => $prefix,
+      )
+    );
 
     if $bootstrap {
-      bootstrap-docker-host($docker,%( verbose => $verbose ));
+      bootstrap-docker-host(
+        $docker,
+        %( 
+            verbose => $verbose, 
+            prefix  => $prefix 
+         )
+      );
       if ! $sparrowfile && ! $spf.IO.e  { 
         # don't try to run sparrowfile if in bootstrap mode
         # and if sparrowfile is not passed and 
@@ -80,8 +92,10 @@ sub MAIN (
     die "sparrowfile $spf does not exit" unless $spf.IO ~~ :e;
 
     run-tasks-docker-host(
-      $docker, %( 
+      $docker, 
+      %( 
         verbose => $verbose, 
+        prefix  => $prefix 
       )
     );
 
@@ -89,7 +103,9 @@ sub MAIN (
 
 
     if $bootstrap {
-      bootstrap-localhost %( verbose => $verbose );
+      bootstrap-localhost %( 
+        verbose => $verbose 
+      );
       if ! $sparrowfile && ! $spf.IO.e  { 
         # don't try to run sparrowfile if in bootstrap mode
         # and if sparrowfile is not passed and 
@@ -113,12 +129,22 @@ sub MAIN (
         ssh-user => $ssh_user,
         ssh-port => $ssh_port,
         verbose => $verbose,
-        sync => $sync,
+        sync    => $sync,
+        prefix  => $prefix 
+
       )
     );
 
     if $bootstrap {
-      bootstrap-ssh-host($host,%( verbose => $verbose, ssh-user => $ssh_user, ssh-port => $ssh_port  ));
+      bootstrap-ssh-host(
+        $host,
+        %( 
+          verbose   => $verbose, 
+          ssh-user  => $ssh_user, 
+          ssh-port  => $ssh_port,
+          prefix    => $prefix 
+        )    
+      );
       if ! $sparrowfile && ! $spf.IO.e  { 
         # don't try to run sparrowfile if in bootstrap mode
         # and if sparrowfile is not passed and 
@@ -135,7 +161,8 @@ sub MAIN (
       %( 
         ssh-user => $ssh_user,
         ssh-port => $ssh_port,
-        verbose => $verbose, 
+        verbose  => $verbose, 
+        prefix   => $prefix 
       )
     );
   }
