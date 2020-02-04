@@ -7,6 +7,8 @@ use Sparrowdo::Bootstrap;
 sub generate-sparrowdo-harness (%args) is export {
 
 
+  my $prefix = %args<prefix> || "default";
+
   say "[utils] create .sparrowdo directory" if %args<verbose>;
 
   mkdir ".sparrowdo";
@@ -32,7 +34,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   if %args<type> eq 'docker' {
 
-    $fh.say("cd /root/.sparrowdo");
+    $fh.say("cd /root/.sparrowdo/env/$prefix/.sparrowdo");
     $fh.say("export PATH=/opt/rakudo-pkg/bin/:\$PATH");
 
   } else {
@@ -48,7 +50,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("export SP6_CONFIG={%args<config>}") if %args<config> and %args<config>.IO ~~ :e ; 
   $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
-  $fh.say("export SP6_PREFIX={%args<prefix>}") if %args<prefix>;
+  $fh.say("export SP6_PREFIX=$prefix");
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
 

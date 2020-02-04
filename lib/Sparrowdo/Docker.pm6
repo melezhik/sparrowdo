@@ -29,7 +29,7 @@ sub prepare-docker-host ($host,%args?) is export {
     "docker",
     "cp",
     ".sparrowdo/",
-    "$host:/root/.sparrowdo/env/$prefix",
+    "$host:/root/.sparrowdo/env/$prefix/",
   );
 
   run @cp-cmd;
