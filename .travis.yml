@@ -1,50 +1,21 @@
-services:
-  - docker
+language: perl
 
 env:
-  - distro=localhost
-  - distro=alpine
-  - distro=debian
-  - distro=ubuntu
-  - distro=fedora
-  - distro=centos
-  #- distro=archlinux
+  global:
+    - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH
+    - SP6_REPO=file:///tmp/repo
 
 before_install:
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61
   - echo "deb https://dl.bintray.com/nxadm/rakudo-pkg-debs `lsb_release -cs` main" | sudo tee -a /etc/apt/sources.list.d/rakudo-pkg.list 
   - sudo apt-get update && sudo apt-get install rakudo-pkg
+  - sudo apt-get install libtemplate-perl carton
 
 install:
-  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH && zef install --/test https://github.com/melezhik/Sparrow6.git
-  - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH && zef install --/test .
-  - git clone https://github.com/melezhik/sparrow-plugins && s6 --repo-init /tmp/repo
-  - cd sparrow-plugins && git checkout master && git pull origin master
-  - export SP6_REPO=file:///tmp/repo && find -maxdepth 2 -mindepth 2 -name sparrow.json -execdir s6 --upload \;
-  - cd ../
+  - zef install --/test .
+  - zef install --/test Tomty
+  - s6 --repo-init /tmp/repo
+  - s6 --index-update
 
 script:
-  - sh .travis.d/docker-run.sh "$distro"
-  - sh .travis.d/post-configure.sh "$distro"
-  - sh .travis.d/bootstrap.sh "$distro"
-  - sh .travis.d/run.sh "$distro" examples/active/hello-world.pl6 any
-  - sh .travis.d/run.sh "$distro" examples/active/asserts/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/asserts-http-ok/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/bash/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/copy-local-file/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/cpan/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/directory/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/files/sparrowfile any 
-  - sh .travis.d/run.sh "$distro" examples/active/git/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/group/sparrowfile any 
-  - sh .travis.d/run.sh "$distro" examples/active/packages/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/packages-os-specific/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/read-config/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/user/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/df-check/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/templates/sparrowfile localhost
-  - sh .travis.d/run.sh "$distro" examples/active/zef/sparrowfile any
-  - sh .travis.d/run.sh "$distro" examples/active/service/sparrowfile localhost
-  #- sh .travis.d/run.sh "$distro" examples/active/systemd/sparrowfile localhost
-  - sh .travis.d/run.sh "$distro" examples/active/ssh/sparrowfile localhost
-  - sh .travis.d/run.sh "$distro" examples/active/scp/sparrowfile localhost
+  - tomty -all --show-failed

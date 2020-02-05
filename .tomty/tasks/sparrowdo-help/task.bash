@@ -1,0 +1,1 @@
+sparrowdo --help
