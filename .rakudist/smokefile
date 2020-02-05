@@ -1,4 +1,4 @@
-bash "cd ../ && tomty -all --show-failed", %(
+bash "pwd", %(
   user => config()<user>,
   envvars => %( 
     PATH => "/home/{config()<user>}/.raku/bin:/home/{config()<user>}/.perl6/bin:{%*ENV<PATH>}",
