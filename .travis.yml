@@ -1,20 +1,4 @@
 language: perl
 
-env:
-  global:
-    - PATH=/usr/local/bin:/opt/rakudo-pkg/bin/:/home/travis/.raku/bin:$PATH
-    - SP6_REPO=file:///tmp/repo
-
-before_install:
-  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61
-  - echo "deb https://dl.bintray.com/nxadm/rakudo-pkg-debs `lsb_release -cs` main" | sudo tee -a /etc/apt/sources.list.d/rakudo-pkg.list 
-  - sudo apt-get update && sudo apt-get install rakudo-pkg
-
-install:
-  - zef install --/test .
-  - zef install --/test Tomty
-  - s6 --repo-init /tmp/repo
-  - s6 --index-update
-
 script:
-  - tomty -all --show-failed
+  - ./rakudist-run.sh
