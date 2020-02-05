@@ -2,7 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.4  2020-02-05T21:39:20Z
+
     Docker - full prefix support ( allows concurrent requests )
+    Simplifying and improving tests
 
 0.1.3  2020-02-03T23:29:38Z
 
