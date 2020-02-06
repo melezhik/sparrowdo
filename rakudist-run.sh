@@ -7,6 +7,7 @@ while true; do
     break
   fi
 done
+echo
 echo "test: $status"
 curl -L -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/report
 if [ $status != "success" ]; then
