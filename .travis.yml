@@ -1,4 +1,4 @@
-language: minimal 
+language: minimal
 
 script:
-  - ./rakudist-run.sh
+  - curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/debian/melezhik/sparrowdo -s | bash
