@@ -2,7 +2,7 @@ token=$(curl -s -d os=alpine -d project=melezhik/sparrowdo http://repo.westus.cl
 while true; do
   status=$(curl -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status)
   sleep 5
-  echo $status
+  echo -n .
   if [ $status != "running" ]; then
     break
   fi
