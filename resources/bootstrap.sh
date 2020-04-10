@@ -10,7 +10,7 @@ case "$OS" in
 
   ;;
   amazon|centos|red)
-    yum -q -y install make curl perl bash redhat-lsb-core git
+    yum -q -y install make curl perl bash redhat-lsb-core git perl-JSON-PP
     rm -rf /etc/yum.repos.d/rakudo-pkg.repo
     echo -e "[rakudo-pkg]\nname=rakudo-pkg\nbaseurl=https://dl.bintray.com/nxadm/rakudo-pkg-rpms/`lsb_release -is`/`lsb_release -rs| cut -d. -f1`/x86_64\ngpgcheck=0\nenabled=1" | tee -a /etc/yum.repos.d/rakudo-pkg.repo
     yum -q -y install rakudo-pkg
