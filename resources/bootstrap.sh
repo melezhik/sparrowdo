@@ -35,6 +35,12 @@ case "$OS" in
     echo -e "[rakudo-pkg]\nname=rakudo-pkg\nbaseurl=https://dl.bintray.com/nxadm/rakudo-pkg-rpms/`lsb_release -is`/`lsb_release -rs| cut -d. -f1`/x86_64\ngpgcheck=0\nenabled=1" | tee -a /etc/yum.repos.d/rakudo-pkg.repo
     dnf -yq install rakudo-pkg
   ;;
+  opensuse)
+    zypper install -y lsb-release
+    #zypper ar -f https://dl.bintray.com/nxadm/rakudo-pkg-rpms/openSUSE/`lsb-release -rs`/x86_64 rakudo-pkg
+    zypper install -y rakudo-pkg
+    zypper install -y git curl tar gzip
+  ;;
   *)
     printf "Your OS (%s) is not supported\n" "$OS"
     exit 1

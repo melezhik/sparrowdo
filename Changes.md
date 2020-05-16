@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Bugfix: ssh run: passing SP6_CONFIG to sudo
+    Bugfix: ssh run: passing ssh-private-key to ssh hosts
+
 0.1.4  2020-02-05T21:39:20Z
 
     Docker - full prefix support ( allows concurrent requests )

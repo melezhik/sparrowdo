@@ -62,7 +62,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
     }
 
-    $fh.say("sudo --login d=\$PWD SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO bash -c 'cd \$d && perl6 -MSparrow6::DSL sparrowfile'");
+    $fh.say("sudo --login d=\$PWD SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO bash -c 'cd \$d && perl6 -MSparrow6::DSL sparrowfile'");
 
   } else {
 

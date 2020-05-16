@@ -23,6 +23,7 @@ sub prepare-ssh-host ($host,%args?) is export {
     "-o",
     "StrictHostKeyChecking=no",
     (  %args<ssh-port> ?? "-P {%args<ssh-port>}" !! "-P 22" ),
+    ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     ".sparrowdo/",
     (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:" !! "$host:" ),
   );
@@ -53,6 +54,7 @@ sub prepare-ssh-host ($host,%args?) is export {
       "-o",
       "StrictHostKeyChecking=no'",
       (  %args<ssh-port> ?? "--port {%args<ssh-port>}" !! "--port 22" ),
+      (  %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
       %args<sync>,
       (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/" !! "$host:.sparrowdo/" ),
     );
@@ -88,6 +90,7 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
     "StrictHostKeyChecking=no",
     "-tt",
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
+    ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     "$host",
     "bash --login .sparrowdo/sparrowrun.sh"
   );
@@ -119,6 +122,7 @@ sub bootstrap-ssh-host ($host, %args?) is export {
     "StrictHostKeyChecking=no",
     "-tt",
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
+    ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
   );
 
   push @cmd, ("-l", %args<ssh-user> ) if   %args<ssh-user>;
