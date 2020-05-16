@@ -91,7 +91,7 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
     "-tt",
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
-    "$host",
+    (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host" !! "$host" ),
     "bash --login .sparrowdo/sparrowrun.sh"
   );
 
