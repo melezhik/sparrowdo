@@ -4,6 +4,7 @@ Revision history for Sparrowdo
 
     Bugfix: ssh run: passing SP6_CONFIG to sudo
     Bugfix: ssh run: passing ssh-private-key to ssh hosts
+    Improvement: replace rsync by scp, on some cases rsync fails to respect ssh key configurations
 
 0.1.4  2020-02-05T21:39:20Z
 

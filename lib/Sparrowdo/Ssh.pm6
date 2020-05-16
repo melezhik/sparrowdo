@@ -36,15 +36,12 @@ sub prepare-ssh-host ($host,%args?) is export {
 
   if %args<sync> {
 
-    say "[ssh] sync local repo from {%args<sync>}" if %args<verbose>;
+    say "[scp] sync local repo from {%args<sync>}" if %args<verbose>;
 
     @cmd = (
-      "rsync",
+      "scp",
       "-r",
-      "-a",
-      " --relative",
       "-q",
-      "-e 'ssh",
       "-o",
       "ConnectionAttempts=1",
       "-o",
@@ -52,8 +49,8 @@ sub prepare-ssh-host ($host,%args?) is export {
       "-o",
       "UserKnownHostsFile=/dev/null",
       "-o",
-      "StrictHostKeyChecking=no'",
-      (  %args<ssh-port> ?? "--port {%args<ssh-port>}" !! "--port 22" ),
+      "StrictHostKeyChecking=no",
+      (  %args<ssh-port> ?? "-P {%args<ssh-port>}" !! "-P 22" ),
       (  %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
       %args<sync>,
       (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/" !! "$host:.sparrowdo/" ),
@@ -98,7 +95,7 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
 
   my $cmd =  @cmd.join(" ");
 
-  say "[ssh] effective cmd: $cmd" if %args<verbose>;
+  say "[scp] effective cmd: $cmd" if %args<verbose>;
 
   shell $cmd;
 
