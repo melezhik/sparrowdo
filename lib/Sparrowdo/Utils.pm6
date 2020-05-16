@@ -42,7 +42,7 @@ sub generate-sparrowdo-harness (%args) is export {
     $fh.say("cd .sparrowdo");
 
     if %args<sync> {
-      $fh.say("export SP6_REPO=file://\$PWD/{%args<sync>}")
+      $fh.say("export SP6_REPO=file://\$PWD/{%args<sync>.IO.basename}")
     }
 
   }
