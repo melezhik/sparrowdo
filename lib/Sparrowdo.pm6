@@ -1,4 +1,4 @@
 use v6;
 
-unit module Sparrowdo:ver<0.1.5>;
+unit module Sparrowdo:ver<0.1.6>;
 
