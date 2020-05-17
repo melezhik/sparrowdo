@@ -1,6 +1,6 @@
 # Sparrowdo
 
-Perl6 Configuration Management Tool.
+Sparrow Based Configuration Management Tool.
 
 # Build status
 
@@ -173,11 +173,13 @@ Use `--repo` flag to set repository URI. For example:
 
     $ sparrowdo --repo=http://sparrow.repo # use http repository
 
-Ssh mode supports synchronizing local file repositories with master and target host using rsync.
+Ssh mode supports synchronizing local file repositories with master and target host using scp.
 It extremely useful if for some reason you can't use http based repositories:
 
-    $ sparrowdo --sync=/tmp/repo --host=192.168.0.1 # rsync local repository /tmp/repo to target host 
+    # scp local repository /tmp/repo to target host
     # and use it within target host
+
+    $ sparrowdo --sync=/tmp/repo --host=192.168.0.1
 
 
 Read [Sparrow6 documentation](https://github.com/melezhik/Sparrow6/blob/master/documentation/repository.md)
@@ -377,7 +379,7 @@ documentation.
 
 * `--sync`
 
-If set synchronize local file system repository with target hosts using `rsync`, it's useful if for some reasons
+If set synchronize local file system repository with target hosts using `scp`, it's useful if for some reasons
 remote http repositories are not available or disable, so one can _automatically copy_ repository from master host
 to target. `--sync` parameter value should file path pointing repository directory at master host:
 
