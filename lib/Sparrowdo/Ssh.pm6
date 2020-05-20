@@ -8,9 +8,42 @@ sub prepare-ssh-host ($host,%args?) is export {
 
   say "[ssh] prepare host: $host" if %args<verbose>;
 
+  my $prefix = %args<prefix> || "default";
+
+  my @cmd = ("ssh");
+
+  push @cmd,  ("-l", %args<ssh-user> ) if   %args<ssh-user>;
+
+  push @cmd, (
+    "-q",
+    "-o",
+    "ConnectionAttempts=1",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "UserKnownHostsFile=/dev/null",
+    "-o",
+    "StrictHostKeyChecking=no",
+    "-o",
+    "ServerAliveInterval=300",
+    "-o",
+    "ServerAliveCountMax=2",
+    "-tt",
+    ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
+    ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
+    (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host" !! "$host" ),
+    "mkdir -p .sparrowdo/env/$prefix"
+  );
+
+  my $cmd =  @cmd.join(" ");
+
+  say "[ssh] effective cmd: $cmd" if %args<verbose>;
+
+  shell $cmd;
+
   say "[ssh] copy harness files" if %args<verbose>;
 
-  my @cmd = (
+  @cmd = (
     "scp",
     "-r",
     "-q",
@@ -25,10 +58,10 @@ sub prepare-ssh-host ($host,%args?) is export {
     (  %args<ssh-port> ?? "-P {%args<ssh-port>}" !! "-P 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     ".sparrowdo/",
-    (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:" !! "$host:" ),
+    (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/env/$prefix/" !! "$host:.sparrowdo/env/$prefix/" ),
   );
 
-  my $cmd =  @cmd.join(" ");
+  $cmd =  @cmd.join(" ");
 
   say "[ssh] effective cmd: $cmd" if %args<verbose>;
 
@@ -53,7 +86,7 @@ sub prepare-ssh-host ($host,%args?) is export {
       (  %args<ssh-port> ?? "-P {%args<ssh-port>}" !! "-P 22" ),
       (  %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
       %args<sync>,
-      (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/" !! "$host:.sparrowdo/" ),
+      (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/env/$prefix/.sparrowdo/" !! "$host:.sparrowdo/env/$prefix/.sparrowdo/" ),
     );
   
     $cmd =  @cmd.join(" ");
@@ -70,6 +103,8 @@ sub prepare-ssh-host ($host,%args?) is export {
 sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
 
   say "[ssh] run tasks from $sparrowfile on host $host" if %args<verbose>;
+
+  my $prefix = %args<prefix> || "default";
 
   my @cmd = ("ssh");
 
@@ -93,7 +128,7 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host" !! "$host" ),
-    "bash --login .sparrowdo/sparrowrun.sh"
+    "bash --login .sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh"
   );
 
 
@@ -109,6 +144,8 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
 sub bootstrap-ssh-host ($host, %args?) is export {
 
   say "[ssh] bootstrap" if %args<verbose>;
+
+  my $prefix = %args<prefix> || "default";
 
   my @cmd = (
     "ssh",
@@ -130,7 +167,7 @@ sub bootstrap-ssh-host ($host, %args?) is export {
 
   push @cmd, (
     "$host",
-    "sudo --login sh \\\$PWD/.sparrowdo/bootstrap.sh"
+    "sudo --login sh \\\$PWD/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
   );
 
   my $cmd =  @cmd.join(" ");
