@@ -59,7 +59,8 @@ sub MAIN (
     repo => $repo,
     prefix => $prefix,
     index-update => ! $no_index_update,
-    type => $docker ?? "docker" !! "default"
+    type => $docker ?? "docker" !! "default",
+    localhost => $localhost,
   );
 
   if ($docker) {

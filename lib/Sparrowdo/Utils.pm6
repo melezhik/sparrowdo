@@ -37,6 +37,10 @@ sub generate-sparrowdo-harness (%args) is export {
     $fh.say("cd /root/.sparrowdo/env/$prefix/.sparrowdo");
     $fh.say("export PATH=/opt/rakudo-pkg/bin/:\$PATH");
 
+  } elsif %args<localhost> {
+
+    $fh.say("cd .sparrowdo/");
+
   } else {
 
     $fh.say("cd .sparrowdo/env/$prefix/.sparrowdo");
