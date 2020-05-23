@@ -13,7 +13,7 @@ sub prepare-docker-host ($host,%args?) is export {
   my $prefix = %args<prefix> || "default";
 
   my @cp-cmd = (
-    "docker",
+    "podman",
     "exec",
     "-i",
     $host,
@@ -26,7 +26,7 @@ sub prepare-docker-host ($host,%args?) is export {
 
 
   @cp-cmd = (
-    "docker",
+    "podman",
     "cp",
     ".sparrowdo/",
     "$host:/root/.sparrowdo/env/$prefix/",
@@ -44,7 +44,7 @@ sub bootstrap-docker-host ($host, %args?) is export {
   my $prefix = %args<prefix> || "default";
 
   my @cmd = (
-    "docker",
+    "podman",
     "exec",
     "-i",
     "$host",
@@ -62,7 +62,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "docker exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "podman exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
