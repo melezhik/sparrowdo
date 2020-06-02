@@ -62,7 +62,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "podman exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "podman exec -t $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
