@@ -3,6 +3,7 @@ Revision history for Sparrowdo
 {{$NEXT}}
 
     Fix broken travis build since RakuDist moved to https://rakudist.raku.org
+    Allocate a pseudo-TTY for docker
 
 0.1.7  2020-05-23T17:18:14-05:00
 
