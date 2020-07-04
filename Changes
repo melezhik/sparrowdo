@@ -2,7 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.8  2020-06-03T12:28:48Z
+
     Fix broken travis build since RakuDist moved to https://rakudist.raku.org
+    Allocate a pseudo-TTY for docker
 
     Add `.sparrowdo` to prefix dir so that sparrow cache dir will be $sparrow_root/.sparrowdo/$prefix
 
