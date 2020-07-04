@@ -54,7 +54,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("export SP6_CONFIG={%args<config>}") if %args<config> and %args<config>.IO ~~ :e ; 
   $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
-  $fh.say("export SP6_PREFIX=$prefix");
+  $fh.say("export SP6_PREFIX=.sparrowdo/$prefix");
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
 

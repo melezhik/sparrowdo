@@ -4,6 +4,8 @@ Revision history for Sparrowdo
 
     Fix broken travis build since RakuDist moved to https://rakudist.raku.org
 
+    Add `.sparrowdo` to prefix dir so that sparrow cache dir will be $sparrow_root/.sparrowdo/$prefix
+
 0.1.7  2020-05-23T17:18:14-05:00
 
     Improvement - ssh builds concurrency support
