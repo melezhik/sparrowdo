@@ -126,18 +126,36 @@ sub MAIN (
 
     prepare-sparrowdo-files %( verbose => $verbose );
 
+    my $sparky-project-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/worker01" !! "{%*ENV<HOME>}/.sparky/projects/worker01";
+
+    mkdir "{$sparky-project-dir}/.triggers";
+
+    spurt "{$sparky-project-dir}/sparrowfile", "# dummy scenario";
+
     my @hosts = EVALFILE($host);
 
     for @hosts -> $h {
       my $rand = ('a' .. 'z').pick(20).join('');
       my $id = "{$rand}{$*PID}";
       my $cache-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/.cache/$id/" !! "{%*ENV<HOME>}/.sparky/.cache/$id/";
+
       mkdir $cache-dir;
+
       if $verbose {
-        shell("cp -rv .sparrowdo/ $cache-dir");
-     } else {
-        shell("cp -r .sparrowdo/ $cache-dir");
+        shell("cp -rv .sparrowdo/* $cache-dir");
+      } else {
+        shell("cp -r .sparrowdo/* $cache-dir");
       }
+
+
+      spurt "{$sparky-project-dir}/.triggers/$id", "%(
+        cwd =>  '$cache-dir',
+        description => 'host [$h]',
+        host => '$h'
+      )";
+
+      say "queue build, key [$id] ...";
+
     }
 
   } else {  
