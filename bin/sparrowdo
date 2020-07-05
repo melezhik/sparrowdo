@@ -150,12 +150,20 @@ sub MAIN (
         shell("cp -r .sparrowdo/* $cache-dir");
       }
 
+      my %trigger = %(
+        cwd => $cache-dir,
+        description => "host [$h]",
+      ) ;
 
-      spurt "{$sparky-project-dir}/.triggers/$id", "%(
-        cwd =>  '$cache-dir',
-        description => 'host [$h]',
-        host => '$h'
-      )";
+      if $h ~~ /^^ \s* docker:(\S+)/ {
+        %trigger<docker> = "$0"
+      } elsif $h eq "localhost" {
+        %trigger<localhost> = True
+      } else {
+        %trigger<host> = $h
+      }
+
+      spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
       say "queue build, key [$id] ...";
 
