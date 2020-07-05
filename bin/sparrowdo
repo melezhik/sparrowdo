@@ -21,7 +21,7 @@ sub MAIN (
 
   Str  :$host = '127.0.0.1', 
   Str  :$sparrowfile, 
-  Str  :$repo, 
+  Str  :$repo = "http://rakudist.raku.org/repo/", 
   Str  :$ssh_user, 
   Int  :$ssh_port = 22, 
   Str  :$ssh_private_key, 
@@ -150,7 +150,12 @@ sub MAIN (
         shell("cp -r .sparrowdo/* $cache-dir");
       }
 
-      my @sparrowdo-options;
+      my @sparrowdo-options = ("--repo=$repo");
+
+      push @sparrowdo-options, "--verbose" if $verbose;
+      push @sparrowdo-options, "--bootstrap" if $bootstrap;
+      push @sparrowdo-options, "--no_index_update" if $no_index_update;
+
       my %trigger = %(
         cwd => $cache-dir,
       ) ;
@@ -158,11 +163,16 @@ sub MAIN (
       if $h ~~ /^^ \s* docker:(\S+)/ {
         %trigger<docker> = "$0";
         push @sparrowdo-options, "--docker=$0";  
+        push @sparrowdo-options, "--nosudo";  
         %trigger<description> = "docker [$0]"
       } elsif $h eq "localhost" {
-        %trigger<description> = "[localhost]"
+        %trigger<description> = "[localhost]";
+        push @sparrowdo-options, "--nosudo";  
       } else {
         push @sparrowdo-options, "--host=$h";  
+        push @sparrowdo-options, "--ssh_port=$ssh_port" if $ssh_port;  
+        push @sparrowdo-options, "--ssh_user=$ssh_user" if $ssh_user;  
+        push @sparrowdo-options, "--ssh_private_key=$ssh_private_key" if $ssh_private_key;  
         %trigger<description> = "host [$h]"
       }
 
