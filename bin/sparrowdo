@@ -128,15 +128,15 @@ sub MAIN (
 
     my @hosts = EVALFILE($host);
 
-    my $i = 0;
-
     for @hosts -> $h {
-      $i++;
-      my $cache-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/.cache/$i/" !! "{%*ENV<HOME>}/.sparky/.cache/$i/";
+      my $rand = ('a' .. 'z').pick(20).join('');
+      my $id = "{$rand}{$*PID}";
+      my $cache-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/.cache/$id/" !! "{%*ENV<HOME>}/.sparky/.cache/$id/";
+      mkdir $cache-dir;
       if $verbose {
-        shell("cp -rv .sparrowdo/ {$cache-dir}/$i/");
+        shell("cp -rv .sparrowdo/ $cache-dir");
      } else {
-        shell("cp -r .sparrowdo/ {$cache-dir}/$i/");
+        shell("cp -r .sparrowdo/ $cache-dir");
       }
     }
 
