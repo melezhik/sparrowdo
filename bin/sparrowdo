@@ -133,8 +133,6 @@ sub MAIN (
 
     mkdir "{$sparky-project-dir}/.triggers";
 
-    spurt "{$sparky-project-dir}/sparrowfile", "say 'hello sparrow'";
-
     my @hosts = EVALFILE($host);
 
     for @hosts -> $h {
@@ -151,16 +149,18 @@ sub MAIN (
       }
 
       my %trigger = %(
-        cwd => $cache-dir,
-        description => "host [$h]",
+        cwd => $cache-dir
       ) ;
 
       if $h ~~ /^^ \s* docker:(\S+)/ {
-        %trigger<docker> = "$0"
+        %trigger<docker> = "$0";
+        %trigger<description> = "docker [$0]"
       } elsif $h eq "localhost" {
-        %trigger<localhost> = True
+        %trigger<localhost> = True;
+        %trigger<description> = "[localhost]"
       } else {
-        %trigger<host> = $h
+        %trigger<host> = $h;
+        %trigger<description> = "host [$h]"
       }
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
