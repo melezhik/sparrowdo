@@ -124,13 +124,16 @@ sub MAIN (
 
   } elsif $host.IO ~~ :f {  
 
-    prepare-sparrowdo-files %( verbose => $verbose );
+    prepare-sparrowdo-files %( 
+      verbose => $verbose,
+      sparrowfile => $spf
+    );
 
     my $sparky-project-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/worker01" !! "{%*ENV<HOME>}/.sparky/projects/worker01";
 
     mkdir "{$sparky-project-dir}/.triggers";
 
-    spurt "{$sparky-project-dir}/sparrowfile", "# dummy scenario";
+    spurt "{$sparky-project-dir}/sparrowfile", "say 'hello sparrow'";
 
     my @hosts = EVALFILE($host);
 
