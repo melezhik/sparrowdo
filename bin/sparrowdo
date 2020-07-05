@@ -61,7 +61,7 @@ sub MAIN (
     index-update => ! $no_index_update,
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
-  );
+  ) unless $host.IO ~~ :f;
 
   if ($docker) {
 
@@ -121,6 +121,24 @@ sub MAIN (
     run-tasks-localhost %( 
       verbose => $verbose, 
     );
+
+  } elsif $host.IO ~~ :f {  
+
+    prepare-sparrowdo-files %( verbose => $verbose );
+
+    my @hosts = EVALFILE($host);
+
+    my $i = 0;
+
+    for @hosts -> $h {
+      $i++;
+      my $cache-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/.cache/$i/" !! "{%*ENV<HOME>}/.sparky/.cache/$i/";
+      if $verbose {
+        shell("cp -rv .sparrowdo/ {$cache-dir}/$i/");
+     } else {
+        shell("cp -r .sparrowdo/ {$cache-dir}/$i/");
+      }
+    }
 
   } else {  
 

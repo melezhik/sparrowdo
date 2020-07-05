@@ -94,9 +94,11 @@ sub generate-sparrowdo-harness (%args) is export {
 
 }
 
-sub prepare-sparrowdo-files (%args?)  {
+sub prepare-sparrowdo-files (%args?)  is export {
 
   say "[utils] prepare sparrowdo files" if %args<verbose>;
+
+  mkdir ".sparrowdo";
 
   my @cmd = (
     'cp',
