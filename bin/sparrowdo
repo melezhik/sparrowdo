@@ -180,7 +180,7 @@ sub MAIN (
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-      say "queue build, key [$id] ...({%trigger.perl})";
+      say "queue build, key [$id]";
 
     }
 
