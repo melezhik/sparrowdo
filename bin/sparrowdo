@@ -42,11 +42,11 @@ sub MAIN (
 
   my $spf = $sparrowfile || 'sparrowfile'; # Sparrowfile to run
 
-  my $path-to-config = $conf || "config.pl6";
-
-  if $conf && ! ( $path-to-config.IO ~~ :e ) {
-    die "configuration file $path-to-config does not exist";
+  if $conf && ! ( $conf.IO ~~ :e ) {
+    die "configuration file $conf does not exist";
   }
+
+  my $path-to-config = $conf || "config.pl6";
 
   generate-sparrowdo-harness %(
     config => $path-to-config,
@@ -156,6 +156,8 @@ sub MAIN (
           bootstrap => $bootstrap,
           no_index_update => $no_index_update
       );
+
+      %sparrowdo-config<conf> = $path-to-config if $path-to-config.IO ~~ :e;
 
       my %trigger = %(
         cwd => $cache-dir,
