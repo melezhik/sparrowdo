@@ -131,7 +131,7 @@ Execution of Sparrow6 tasks on target host is made under `sudo` by default, to d
 
     $ sparrowdo --docker=brave_cat --no_sudo # We don't need sudo on docker
 
-## Varios types of target hosts
+## Various types of target hosts
 
 Once sparrowfile is created it could be run on target host.
 
@@ -347,20 +347,20 @@ Docker container name to run Sparrowdo scenario on, none required.
 
 * `--localhost`
 
-If set, runs Sparrowdo in localhost, in that case Sparrow6 tasks get run directly withouth launching ssh
+If set, runs Sparrowdo in localhost, in that case Sparrow6 tasks get run directly without launching ssh
 
 * `--ssh_user`
 
-If set defines ssh user when run Sparrowdo scenarion over ssh, none required.
+If set defines ssh user when run Sparrowdo scenario over ssh, none required.
 
 * `--ssh_port`
 
-If set defines ssh port to use  when run Sparrowdo scenarion over ssh. Default value is 22.
+If set defines ssh port to use  when run Sparrowdo scenario over ssh. Default value is 22.
 
 
 
-If set, run Sparrowdo scenario on localhost, don't consfuse with `--host=127.0.0.1` which
-runs scenarion on the machine but using ssh.
+If set, run Sparrowdo scenario on localhost, don't confuse with `--host=127.0.0.1` which
+runs scenario on the machine but using ssh.
 
 * `--repo`
 
