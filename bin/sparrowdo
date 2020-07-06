@@ -161,7 +161,7 @@ sub MAIN (
         cwd => $cache-dir,
       ) ;
 
-      if $h ~~ /^^ \s* docker:(\S+)/ {
+      if $h ~~ /^^ \s* 'docker:' (\S+)/ {
         %sparrowdo-config<docker> = "$0";  
         %sparrowdo-config<nosudo> = True;  
         %trigger<description> = "docker [$0]"
