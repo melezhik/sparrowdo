@@ -2,7 +2,7 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
-    Dinamic hosts support
+    Dynamic hosts support
     Bug fix for localhost bootstrap
 
 0.1.8  2020-06-03T12:28:48Z
