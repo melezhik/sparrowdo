@@ -150,37 +150,37 @@ sub MAIN (
         shell("cp -r .sparrowdo/* $cache-dir");
       }
 
-      my @sparrowdo-options = ("--repo=$repo");
-
-      push @sparrowdo-options, "--verbose" if $verbose;
-      push @sparrowdo-options, "--bootstrap" if $bootstrap;
-      push @sparrowdo-options, "--no_index_update" if $no_index_update;
+      my %sparrowdo-config = %(
+          repo => $repo,
+          verbose => $verbose,
+          bootstrap => $bootstrap,
+          no_index_update => $no_index_update
+      );
 
       my %trigger = %(
         cwd => $cache-dir,
       ) ;
 
       if $h ~~ /^^ \s* docker:(\S+)/ {
-        %trigger<docker> = "$0";
-        push @sparrowdo-options, "--docker=$0";  
-        push @sparrowdo-options, "--nosudo";  
+        %sparrowdo-config<docker> = "$0";  
+        %sparrowdo-config<nosudo> = True;  
         %trigger<description> = "docker [$0]"
       } elsif $h eq "localhost" {
         %trigger<description> = "[localhost]";
-        push @sparrowdo-options, "--nosudo";  
+        %sparrowdo-config<nosudo> = True;  
       } else {
-        push @sparrowdo-options, "--host=$h";  
-        push @sparrowdo-options, "--ssh_port=$ssh_port" if $ssh_port;  
-        push @sparrowdo-options, "--ssh_user=$ssh_user" if $ssh_user;  
-        push @sparrowdo-options, "--ssh_private_key=$ssh_private_key" if $ssh_private_key;  
+        %sparrowdo-config<host> = $h;  
+        %sparrowdo-config<ssh_port> = $ssh_port if $ssh_port;  
+        %sparrowdo-config<ssh_user> = $ssh_user if $ssh_user;  
+        %sparrowdo-config<ssh_private_key> = $ssh_private_key if $ssh_private_key;  
         %trigger<description> = "host [$h]"
       }
 
-      %trigger<sparrowdo-options> = @sparrowdo-options.join(" ");
+      %trigger<sparrowdo> = %sparrowdo-config;
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-      say "queue build, key [$id] ...";
+      say "queue build, key [$id] ...({%trigger.perl})";
 
     }
 
