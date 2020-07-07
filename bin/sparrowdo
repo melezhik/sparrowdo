@@ -13,10 +13,6 @@ use Sparrowdo::Utils;
 
 use Sparrow6::DSL;
 
-
-use Config::Simple;
-
-
 sub MAIN (
 
   Str  :$host = '127.0.0.1', 

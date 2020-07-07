@@ -1,3 +1,3 @@
 bash "ls -l";
 
-say config().perl;
+say config()<foo>;

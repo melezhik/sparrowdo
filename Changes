@@ -4,6 +4,7 @@ Revision history for Sparrowdo
 
     Dynamic hosts support
     Bug fix for localhost bootstrap
+    Remove Config::Simple dependency ( it has not been used ever )
 
 0.1.8  2020-06-03T12:28:48Z
 
