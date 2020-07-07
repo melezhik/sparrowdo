@@ -172,7 +172,7 @@ sub MAIN (
         %trigger<description> = "docker [$0]"
       } elsif $h eq "localhost" {
         %trigger<description> = "[localhost]";
-        %sparrowdo-config<no_sudo> = True;  
+        %sparrowdo-config<no_sudo> = $no_sudo;  
       } else {
         %sparrowdo-config<host> = $h;  
         %sparrowdo-config<ssh_port> = $ssh_port if $ssh_port;  

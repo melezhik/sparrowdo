@@ -1,5 +1,6 @@
 #!perl6
 
-task-run "files/tasks/hello-world";
+#task-run "files/tasks/hello-world";
 #bash "zypper install -y make gcc";
 #zef "Digest::SHA256::Native";
+package-install "nano";
