@@ -54,7 +54,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("export SP6_CONFIG={%args<config>}") if %args<config> and %args<config>.IO ~~ :e ; 
   $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
-  $fh.say("export SP6_PREFIX=$prefix");
+  $fh.say("export SP6_PREFIX=.sparrowdo/$prefix");
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
 
@@ -94,9 +94,11 @@ sub generate-sparrowdo-harness (%args) is export {
 
 }
 
-sub prepare-sparrowdo-files (%args?)  {
+sub prepare-sparrowdo-files (%args?)  is export {
 
   say "[utils] prepare sparrowdo files" if %args<verbose>;
+
+  mkdir ".sparrowdo";
 
   my @cmd = (
     'cp',
@@ -107,6 +109,7 @@ sub prepare-sparrowdo-files (%args?)  {
 
   my @files;
 
+  push @files, %args<sparrowfile> if %args<sparrowfile>;
   push @files, "config.pl6" if "config.pl6".IO ~~ :f;
   push @files, "templates" if "templates".IO ~~ :d;
   push @files, "files" if "files".IO ~~ :d;

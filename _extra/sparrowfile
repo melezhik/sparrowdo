@@ -1,0 +1,5 @@
+#!perl6
+
+task-run "files/tasks/hello-world";
+bash "whoami";
+package-install "nano";

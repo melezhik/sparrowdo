@@ -1,6 +1,0 @@
-bash "cd /data/test/{config()<user>} && tomty --all --show-failed", %(
-  user => config()<user>,
-  envvars => %( 
-    SP6_REPO => "http://repo.westus.cloudapp.azure.com"
-  )
-)

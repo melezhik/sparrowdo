@@ -4,7 +4,6 @@
   ],
   "build-depends" : [ ],
   "depends" : [
-    "Config::Simple",
     "Sparrow6"
   ],
   "description" : "Sparrow Based Configuration Management Tool",
@@ -30,5 +29,5 @@
   },
   "tags" : [ ],
   "test-depends" : [ ],
-  "version" : "0.1.6"
+  "version" : "0.1.8"
 }
