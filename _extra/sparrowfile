@@ -1,3 +1,5 @@
-bash "ls -l";
+#!perl6
 
-say config()<foo>;
+task-run "files/tasks/hello-world";
+bash "whoami";
+package-install "nano";
