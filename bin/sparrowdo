@@ -168,7 +168,7 @@ sub MAIN (
 
       if $h ~~ /^^ \s* 'docker:' (\S+)/ {
         %sparrowdo-config<docker> = "$0";  
-        %sparrowdo-config<nosudo> = True;  
+        %sparrowdo-config<no_sudo> = True;  
         %trigger<description> = "docker [$0]"
       } elsif $h eq "localhost" {
         %trigger<description> = "[localhost]";
@@ -178,6 +178,7 @@ sub MAIN (
         %sparrowdo-config<ssh_port> = $ssh_port if $ssh_port;  
         %sparrowdo-config<ssh_user> = $ssh_user if $ssh_user;  
         %sparrowdo-config<ssh_private_key> = $ssh_private_key if $ssh_private_key;  
+        %sparrowdo-config<no_sudo> = $no_sudo;  
         %trigger<description> = "host [$h]"
       }
 
