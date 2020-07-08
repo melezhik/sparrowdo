@@ -186,7 +186,7 @@ sub MAIN (
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-      say "queue build [{$id}] on [worker-{$worker-id}]";
+      say "queue build for [$h] on [worker-{$worker-id}]";
 
     }
 

@@ -3,12 +3,19 @@ use Data::Dump;
 
 my $data = from-json("/home/melezhik/projects/terraform/examples/aws/terraform.tfstate".IO.slurp);
 
-my @aws-instances = $data<resources>.grep({ .<type> eq "aws_instance" }).pick<instances><>;
+my @aws-instances = $data<resources><>.grep({ .<type> eq "aws_instance" }).map({.<instances>.flat}).flat;
+
+#say Dump(@aws-instances);
+#exit(0);
 
 my @list;
 
 for @aws-instances -> $i {
   push @list, $i<attributes><public_dns>;
+  #say Dump($i);
 } 
+
+
+say @list.perl;
 
 @list;
