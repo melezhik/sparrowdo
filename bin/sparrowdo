@@ -134,14 +134,44 @@ sub MAIN (
     for @hosts -> $i {
 
       my $h;
-      my $tags;
+
+      my $host-tags;
 
       if $i.isa("Hash") {
         $h = $i<host>;
-        $tags = $i<tags> if $i<tags>;
+        $host-tags = $i<tags> if $i<tags>;
       } else {
         $h = $i;
       }
+
+
+     # if --tags is passed
+     # filter hosts by tags
+
+     my $tag-pass = False;
+ 
+     if $tags {
+
+        my %tags = parse-tags($tags); 
+
+        my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
+ 
+        for %tags.keys -> $tg {
+          if %host-tags{$tg}:exists {
+            $tag-pass = True;
+          } else {
+            $tag-pass = False;
+            last;
+          }
+        }
+
+      } else {
+
+        $tag-pass = True
+
+      }
+
+      next unless $tag-pass;
 
       my $worker-id = (^3).pick + 1;
   
@@ -172,7 +202,7 @@ sub MAIN (
           no_index_update => $no_index_update
       );
 
-      %sparrowdo-config<tags> = $tags if $tags;  
+      %sparrowdo-config<tags> = $host-tags if $host-tags;  
       %sparrowdo-config<conf> = $path-to-config if $path-to-config.IO ~~ :e;
 
       my %trigger = %(
