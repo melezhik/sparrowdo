@@ -11,7 +11,7 @@ my @aws-instances = $data<resources><>.grep({ .<type> eq "aws_instance" }).map({
 my @list;
 
 for @aws-instances -> $i {
-  push @list, $i<attributes><public_dns>;
+  push @list, %( host => $i<attributes><public_dns>, tags => 'aws' );
   #say Dump($i);
 } 
 

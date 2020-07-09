@@ -17,6 +17,7 @@ sub MAIN (
 
   Str  :$host = '127.0.0.1', 
   Str  :$sparrowfile, 
+  Str  :$tags, 
   Str  :$repo = "http://rakudist.raku.org/repo/", 
   Str  :$ssh_user, 
   Int  :$ssh_port = 22, 
@@ -55,6 +56,7 @@ sub MAIN (
     repo => $repo,
     prefix => $prefix,
     index-update => ! $no_index_update,
+    tags => $tags,
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
   ) unless $host.IO ~~ :f;
@@ -129,7 +131,17 @@ sub MAIN (
 
     my @hosts = EVALFILE($host);
 
-    for @hosts -> $h {
+    for @hosts -> $i {
+
+      my $h;
+      my $tags;
+
+      if $i.isa("Hash") {
+        $h = $i<host>;
+        $tags = $i<tags> if $i<tags>;
+      } else {
+        $h = $i;
+      }
 
       my $worker-id = (^3).pick + 1;
   
@@ -160,6 +172,7 @@ sub MAIN (
           no_index_update => $no_index_update
       );
 
+      %sparrowdo-config<tags> = $tags if $tags;  
       %sparrowdo-config<conf> = $path-to-config if $path-to-config.IO ~~ :e;
 
       my %trigger = %(
