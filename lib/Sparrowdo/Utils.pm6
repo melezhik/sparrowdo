@@ -110,7 +110,6 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   my @files;
 
-  push @files, %args<sparrowfile> if %args<sparrowfile>;
   push @files, "config.pl6" if "config.pl6".IO ~~ :f;
   push @files, "templates" if "templates".IO ~~ :d;
   push @files, "files" if "files".IO ~~ :d;
