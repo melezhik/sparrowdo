@@ -18,7 +18,9 @@ if tags()<frontend> {
 
   service-start "mysql";
 
-  my %state = task-run "files/tasks/set-mysql";
+  my %state = task-run "files/tasks/set-mysql", %(
+    backend_ip => tags()<backend_ip>
+  );
 
   say %state.perl;
 
@@ -28,4 +30,6 @@ if tags()<frontend> {
 
   }
 
+} elsif tags()<backend> {
+  package-install "mysql-client";
 }

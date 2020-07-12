@@ -16,6 +16,12 @@ else
 
 fi
 
+backend_ip=$(config backend_ip)
+
+mysql -c "create database test"
+
+mysql -c "GRANT ALL PRIVILEGES  ON test.* TO 'test'@'$backend_ip'"
+
 echo "[/etc/mysql/mysql.conf.d/mysqld.cnf]"
 echo "===================================="
 cat /etc/mysql/mysql.conf.d/mysqld.cnf
