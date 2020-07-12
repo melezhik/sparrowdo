@@ -1,0 +1,9 @@
+code: <<CODE
+!perl6
+if "{cache_root_dir()}/mysql-need-restart.ok".IO ~~ :f {
+  update_state %( restart => True );
+  say "need to restart mysql";
+} else {
+  update_state %( restart => False )
+}
+CODE
