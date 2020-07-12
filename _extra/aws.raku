@@ -1,3 +1,5 @@
+say tags().perl;
+
 if tags()<frontend> {
 
   package-install "nginx";
