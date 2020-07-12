@@ -18,4 +18,14 @@ if tags()<frontend> {
 
   service-start "mysql";
 
+  my %state = task-run "files/tasks/set-mysql";
+
+  say %state.perl;
+
+  if %state<restart> {
+
+    service-restart "mysql";
+
+  }
+
 }
