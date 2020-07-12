@@ -18,9 +18,13 @@ fi
 
 backend_ip=$(config backend_ip)
 
-mysql -c "create database test"
+set -x
 
-mysql -c "GRANT ALL PRIVILEGES  ON test.* TO 'test'@'$backend_ip'"
+mysql -e "create database test"
+
+mysql -e "GRANT ALL PRIVILEGES  ON test.* TO 'test'@'$backend_ip'"
+
+set +x
 
 echo "[/etc/mysql/mysql.conf.d/mysqld.cnf]"
 echo "===================================="
