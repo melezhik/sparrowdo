@@ -101,6 +101,8 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   mkdir ".sparrowdo";
 
+  shell "touch .sparrowdo/sparrowdo.dummy";
+
   my @cmd = (
     'cp',
     '-r',
