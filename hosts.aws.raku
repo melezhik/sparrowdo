@@ -20,7 +20,7 @@ my @aws-instances = $data<resources><>.grep({
 
   %( 
     host => .<instances>[0]<attributes><public_dns>,
-    tags => "{.<instances>[0]<attributes><tags><Name>},aws,ip={.<instances>[0]<attributes><public_ip>}"
+    tags => "{.<instances>[0]<attributes><tags><Name>},name={.<instances>[0]<attributes><tags><Name>},aws,ip={.<instances>[0]<attributes><public_ip>}"
   )
 });
 

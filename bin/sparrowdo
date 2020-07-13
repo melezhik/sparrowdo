@@ -214,12 +214,14 @@ sub MAIN (
         cwd => $cache-dir,
       ) ;
 
+      my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
+
       if $h ~~ /^^ \s* 'docker:' (\S+)/ {
         %sparrowdo-config<docker> = "$0";  
         %sparrowdo-config<no_sudo> = True;  
-        %trigger<description> = "docker [$0]"
+        %trigger<description> = %host-tags<name> ?? "docker [{%host-tags<name>}]" !! "docker [$0]"
       } elsif $h eq "localhost" {
-        %trigger<description> = "[localhost]";
+        %trigger<description> =  %host-tags<name> ?? "localhost [{%host-tags<name>}]" !! "[localhost]";
         %sparrowdo-config<no_sudo> = $no_sudo;  
       } else {
         %sparrowdo-config<host> = $h;  
@@ -227,7 +229,7 @@ sub MAIN (
         %sparrowdo-config<ssh_user> = $ssh_user if $ssh_user;  
         %sparrowdo-config<ssh_private_key> = $ssh_private_key if $ssh_private_key;  
         %sparrowdo-config<no_sudo> = $no_sudo;  
-        %trigger<description> = "host [$h]"
+        %trigger<description> =  %host-tags<name> ?? "host [{%host-tags<name>}]" !! "host [$h]"
       }
 
       %trigger<sparrowdo> = %sparrowdo-config;

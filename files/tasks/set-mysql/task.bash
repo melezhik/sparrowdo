@@ -20,9 +20,9 @@ backend_ip=$(config backend_ip)
 
 set -x
 
-mysql -e "create database if not exists test2"
-mysql -e "create user if not exists 'test2'@'$backend_ip'"
-mysql -e "GRANT ALL PRIVILEGES  ON test2.* TO 'test2'@'$backend_ip'"
+mysql -e "create database if not exists test"
+mysql -e "create user if not exists 'test'@'$backend_ip'"
+mysql -e "GRANT ALL PRIVILEGES  ON test.* TO 'test'@'$backend_ip'; FLUSH PRIVILEGES"
 
 set +x
 
