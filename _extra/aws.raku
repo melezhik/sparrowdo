@@ -35,11 +35,29 @@ if tags()<frontend> {
 } elsif tags()<backend> {
 
   package-install "mysql-client";
-
+  
   bash "mysql -h {tags<database_ip>} -u test test -e 'select 100'", %(
-
     description => "check database connection"
+  );
+  
+  user "app";
 
-  )
+  directory "/home/app/cro-example", %(
+    owner => "app",
+    group => "app"
+  );
+
+  git-scm "https://github.com/melezhik/cro-example.git", %(
+    user => "app",
+    to => "/home/app/cro-example"
+  );
+
+  bash "cat /home/app/cro-example/schema.sql | mysql -h {tags<database_ip>} -u test test", %(
+    description => "create database schema",
+    debug => True,
+  );
+
+  zef "Cro::HTTP", %(  notest => True );
+  zef "DBIish", %(  notest => True );
 
 }

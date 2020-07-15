@@ -4,7 +4,7 @@
   ],
   "build-depends" : [ ],
   "depends" : [
-    "Sparrow6"
+    "Sparrow6:ver<0.0.25+>"
   ],
   "description" : "Sparrow Based Configuration Management Tool",
   "license" : "Artistic-2.0",
@@ -29,5 +29,5 @@
   },
   "tags" : [ ],
   "test-depends" : [ ],
-  "version" : "0.1.8"
+  "version" : "0.1.9"
 }
