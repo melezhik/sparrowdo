@@ -1,6 +1,5 @@
 use JSON::Tiny;
 use Data::Dump;
-use Sparrow6::DSL;
 
 my $data = from-json("/home/melezhik/projects/terraform/examples/aws/terraform.tfstate".IO.slurp);
 my $backend-ip;
@@ -30,7 +29,5 @@ for @aws-instances -> $i {
 }
 
 say Dump(@aws-instances);
-
-#exit(0);
 
 @aws-instances;

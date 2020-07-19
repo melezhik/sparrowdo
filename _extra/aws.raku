@@ -57,7 +57,7 @@ if tags()<frontend> {
     debug => True,
   );
 
-  zef "Cro::HTTP", %(  notest => True );
-  zef "DBIish", %(  notest => True );
+  #zef "Cro::HTTP", %(  notest => True );
+  #zef "DBIish", %(  notest => True );
 
 }
