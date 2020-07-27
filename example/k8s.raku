@@ -24,7 +24,7 @@ task-run "install docker", "docker-engine";
 
 if tags()<master> {
 
-  package-install "kubectl"
+  package-install "kubectl";
 
   task-run "files/tasks/k8s-cluster-init";
 
