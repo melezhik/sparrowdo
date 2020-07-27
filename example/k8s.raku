@@ -33,7 +33,7 @@ if tags()<master> {
     group => "ubuntu",
   );
 
-  file "/home/ubunut/.kube/config", %(
+  file "/home/ubuntu/.kube/config", %(
     owner => "ubuntu",
     group => "ubuntu",
     source => "/etc/kubernetes/admin.conf"
@@ -42,6 +42,7 @@ if tags()<master> {
 
   bash q:to/HERE/, %( user => "ubuntu", description => "install flannel");
     set -e;
+    rm -rf pod_network_setup.txt
     if test -f pod_network_setup.txt; then
       echo "flannel already installed"
       echo "========================="
