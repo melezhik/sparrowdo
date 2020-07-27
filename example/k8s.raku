@@ -28,7 +28,7 @@ if tags()<master> {
 
   task-run "files/tasks/k8s-cluster-init";
 
-  directory "/home/ubunut/.kube", %(
+  directory "/home/ubuntu/.kube", %(
     owner => "ubuntu",
     group => "ubuntu",
   );
