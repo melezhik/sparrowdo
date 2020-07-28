@@ -53,7 +53,7 @@ if tags()<master> {
   
 } elsif tags()<worker> {
 
-  bash "kubeadm join 172.31.52.2:6443 --token {tags()<token>} --discovery-token-ca-cert-hash sha256:{tags<cert_hash>}", %(
+  bash "kubeadm join {tags()<master_ip>}:6443 --token {tags()<token>} --discovery-token-ca-cert-hash sha256:{tags<cert_hash>}", %(
     debug => True
   );
 

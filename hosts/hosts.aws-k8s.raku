@@ -10,7 +10,7 @@ my @aws-instances = $data<resources><>.grep({
 }).map({
 
   if .<instances>[0]<attributes><tags><Name> eq "master" {
-    $master-ip = .<instances>[0]<attributes><public_ip>
+    $master-ip = .<instances>[0]<attributes><private_ip>
   }
 
   %( 
