@@ -4,7 +4,6 @@ use Data::Dump;
 my $data = from-json("/home/melezhik/projects/terraform/examples/aws-k8s/terraform.tfstate".IO.slurp);
 
 my $master-ip;
-my $worker-ip;
 
 my @aws-instances = $data<resources><>.grep({ 
   .<type> eq "aws_instance" 
@@ -13,10 +12,6 @@ my @aws-instances = $data<resources><>.grep({
   if .<instances>[0]<attributes><tags><Name> eq "master" {
     $master-ip = .<instances>[0]<attributes><public_ip>
   }
-  if .<instances>[0]<attributes><tags><Name> eq "worker" {
-    $worker-ip = .<instances>[0]<attributes><public_ip>
-  }
-
 
   %( 
     host => .<instances>[0]<attributes><public_dns>,
@@ -26,7 +21,6 @@ my @aws-instances = $data<resources><>.grep({
 
 for @aws-instances -> $i {
   $i<tags> ~= ",master_ip={$master-ip}";
-  $i<tags> ~= ",worker_ip={$worker-ip}"
 }
 
 say Dump(@aws-instances);

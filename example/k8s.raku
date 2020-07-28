@@ -39,7 +39,7 @@ if tags()<master> {
     source => "/etc/kubernetes/admin.conf"
   );
 
-  service-restart "kubelet";
+  service-start "kubelet";
 
   bash q:to/HERE/, %( user => "ubuntu", description => "install flannel");
     set -e;
@@ -47,5 +47,15 @@ if tags()<master> {
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
   HERE
 
-} 
+  task-run "check master", "k8s-master-check", %(
+    user => "ubuntu"
+  );
+  
+} elsif tags()<worker> {
+
+  bash "kubeadm join 172.31.52.2:6443 --token {tags()<token>} --discovery-token-ca-cert-hash sha256:{tags<cert_hash>}", %(
+    debug => True
+  );
+
+}
 

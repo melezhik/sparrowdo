@@ -156,6 +156,7 @@ sub MAIN (
         my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
  
         for %tags.keys -> $tg {
+          next unless %tags{$tg}.isa(Bool);
           if %host-tags{$tg}:exists {
             $tag-pass = True;
           } else {
@@ -207,7 +208,14 @@ sub MAIN (
           no_index_update => $no_index_update
       );
 
-      %sparrowdo-config<tags> = $host-tags if $host-tags;  
+      my @effective-tags;
+      push @effective-tags, $host-tags if $host-tags;
+      push @effective-tags, $tags if $tags;
+
+      if @effective-tags.elems {
+        %sparrowdo-config<tags> = @effective-tags.join(",");
+      }
+
       %sparrowdo-config<conf> = $path-to-config if $path-to-config.IO ~~ :e;
 
       my %trigger = %(
