@@ -39,19 +39,12 @@ if tags()<master> {
     source => "/etc/kubernetes/admin.conf"
   );
 
+  service-restart "kubelet";
 
   bash q:to/HERE/, %( user => "ubuntu", description => "install flannel");
     set -e;
-    rm -rf pod_network_setup.txt
-    if test -f pod_network_setup.txt; then
-      echo "flannel already installed"
-      echo "========================="
-      cat pod_network_setup.txt
-    else
-      echo "run [kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml]"
-      kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml >> pod_network_setup.txt
-      cat pod_network_setup.txt
-    fi
+    echo "run [kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml]"
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
   HERE
 
 } 
