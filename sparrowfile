@@ -2,6 +2,6 @@
 
 say tags().perl;
 
-#task-run "files/tasks/hello-world";
+task-run "files/tasks/hello-world";
 
 #package-install "nano";
