@@ -53,9 +53,13 @@ if tags()<master> {
   
 } elsif tags()<worker> {
 
-  bash "kubeadm join {tags()<master_ip>}:6443 --token {tags()<token>} --discovery-token-ca-cert-hash sha256:{tags<cert_hash>}", %(
+  if tags()<token> && tags()<cert_hash> {
+    bash "kubeadm join {tags()<master_ip>}:6443 --token {tags()<token>} --discovery-token-ca-cert-hash sha256:{tags<cert_hash>}", %(
     debug => True
-  );
+    );
+  } else {
+    say "token and/or cerh_hash parameters are not passed, skip node join to cluster stage"
+  }
 
 }
 

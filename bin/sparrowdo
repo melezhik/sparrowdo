@@ -23,6 +23,7 @@ sub MAIN (
   Int  :$ssh_port = 22, 
   Str  :$ssh_private_key, 
   Bool :$verbose = False,
+  Bool :$dry_run = False,
   Bool :$debug   = False,
   Bool :$bootstrap = False, 
   Bool :$no_sudo = False,
@@ -126,9 +127,16 @@ sub MAIN (
       verbose => $verbose
     );
 
-    
 
     my @hosts = EVALFILE($host);
+
+    my %tags = $tags ?? parse-tags($tags) !! %(); 
+
+    say "cli tags: {%tags.perl}" if $verbose;
+
+    my @required-tags = %tags.values.grep({ .isa(Bool) });
+
+    say "required tags: {@required-tags.perl}" if $verbose;
 
     for @hosts -> $i {
 
@@ -143,20 +151,18 @@ sub MAIN (
         $h = $i;
       }
 
+     my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
 
      # if --tags is passed
      # filter hosts by tags
 
      my $tag-pass = False;
  
-     if $tags {
+     if @required-tags {
 
-        my %tags = parse-tags($tags); 
+        $tag-pass = False;
 
-        my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
- 
-        for %tags.keys -> $tg {
-          next unless %tags{$tg}.isa(Bool);
+        for @required-tags -> $tg {
           if %host-tags{$tg}:exists {
             $tag-pass = True;
           } else {
@@ -171,7 +177,15 @@ sub MAIN (
 
       }
 
-      next unless $tag-pass;
+      if $tag-pass {
+        say "ALLOW host {$h} by tags creteria" if $verbose;
+      } else {
+        say "SKIP host {$h} by tags creteria" if $verbose;
+        next;
+      }
+
+
+      next if $dry_run;
 
       my $worker-id = (^3).pick + 1;
   
@@ -209,6 +223,7 @@ sub MAIN (
       );
 
       my @effective-tags;
+
       push @effective-tags, $host-tags if $host-tags;
       push @effective-tags, $tags if $tags;
 
@@ -220,9 +235,7 @@ sub MAIN (
 
       my %trigger = %(
         cwd => $cache-dir,
-      ) ;
-
-      my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
+      );
 
       if $h ~~ /^^ \s* 'docker:' (\S+)/ {
         %sparrowdo-config<docker> = "$0";  
