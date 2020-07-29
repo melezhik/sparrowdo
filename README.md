@@ -339,7 +339,18 @@ In case you need to run sparrowdo on localhost use `--localhost` flag:
 
 * `--host`
 
-Ssh host to run Sparrowdo scenario on. Default value is `127.0.0.1`, none required.
+One of two things:
+
+Ssh host to run Sparrowdo scenario on. Default value is `127.0.0.1`. For example:
+
+      --host=192.168.0.1
+
+Path to raku file with dynamic hosts configuration. For example:
+
+      --host=hosts.raku
+
+This will effectively runs Sparrowdo in asynchronous mode through a Sparky backend.
+See [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts) wiki.
 
 * `--docker`
 
@@ -388,6 +399,12 @@ to target. `--sync` parameter value should file path pointing repository directo
 * `--no_index_update`
 
 If set, don't request Sparrow6 repository update. Useful when in limited internet and using http based remote repositories.
+
+* `--dry_run`
+
+Runs in dry run mode. Only applies when run in asynchronous mode through a Sparky backend.
+
+See [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts) wiki.
 
 * `--verbose`
 
