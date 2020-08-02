@@ -47,6 +47,8 @@ if tags()<master> {
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
   HERE
 
+  sleep(15);
+
   task-run "check master", "k8s-master-check", %(
     user => "ubuntu"
   );
