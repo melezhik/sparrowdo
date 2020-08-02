@@ -134,7 +134,7 @@ sub MAIN (
 
     say "cli tags: {%tags.perl}" if $verbose;
 
-    my @required-tags = %tags.values.grep({ .isa(Bool) });
+    my @required-tags = %tags.keys.grep({ %tags{$_}.isa(Bool) });
 
     say "required tags: {@required-tags.perl}" if $verbose;
 
