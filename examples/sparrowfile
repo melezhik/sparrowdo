@@ -3,3 +3,6 @@
 task-run "files/tasks/hello-world";
 bash "whoami";
 package-install "nano";
+package-install "mc";
+
+say tags().perl;

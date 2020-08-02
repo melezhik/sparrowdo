@@ -1,3 +1,7 @@
 #!perl6
 
+say tags().perl;
+
 task-run "files/tasks/hello-world";
+
+#package-install "nano";
