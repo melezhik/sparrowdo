@@ -2,8 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
-    Passing key/value pairs as `--tags` in command line
+0.1.10  2020-08-02T21:16:08-05:00
 
+    Documenting `--tags`
+    Passing key/value pairs as `--tags` in command line
     Dry run mode
 
 0.1.9  2020-07-15T16:28:05-05:00

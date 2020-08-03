@@ -368,8 +368,6 @@ If set defines ssh user when run Sparrowdo scenario over ssh, none required.
 
 If set defines ssh port to use  when run Sparrowdo scenario over ssh. Default value is 22.
 
-
-
 If set, run Sparrowdo scenario on localhost, don't confuse with `--host=127.0.0.1` which
 runs scenario on the machine but using ssh.
 
@@ -405,6 +403,10 @@ If set, don't request Sparrow6 repository update. Useful when in limited interne
 Runs in dry run mode. Only applies when run in asynchronous mode through a Sparky backend.
 
 See [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts) wiki.
+
+* `--tags`
+
+Set host(s) tags, see [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts#tags) wiki.
 
 * `--verbose`
 
