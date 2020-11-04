@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Make default repository http://sparrowhub.io/repo
+
 0.1.10  2020-08-02T21:16:08-05:00
 
     Documenting `--tags`
