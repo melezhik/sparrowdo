@@ -1,33 +1,36 @@
 {
-  "authors" : [
+  "authors": [
     "Alexey Melezhik"
   ],
-  "build-depends" : [ ],
-  "depends" : [
+  "build-depends": [
+  ],
+  "depends": [
     "Sparrow6:ver<0.0.25+>"
   ],
-  "description" : "Sparrow Based Configuration Management Tool",
-  "license" : "Artistic-2.0",
-  "name" : "Sparrowdo",
-  "perl" : "6.*",
-  "provides" : {
-    "Sparrowdo" : "lib/Sparrowdo.pm6",
-    "Sparrowdo::Bootstrap" : "lib/Sparrowdo/Bootstrap.pm6",
-    "Sparrowdo::Docker" : "lib/Sparrowdo/Docker.pm6",
-    "Sparrowdo::Localhost" : "lib/Sparrowdo/Localhost.pm6",
-    "Sparrowdo::Ssh" : "lib/Sparrowdo/Ssh.pm6",
-    "Sparrowdo::Utils" : "lib/Sparrowdo/Utils.pm6"
+  "description": "Sparrow Based Configuration Management Tool",
+  "license": "Artistic-2.0",
+  "name": "Sparrowdo",
+  "perl": "6.*",
+  "provides": {
+    "Sparrowdo": "lib/Sparrowdo.pm6",
+    "Sparrowdo::Bootstrap": "lib/Sparrowdo/Bootstrap.pm6",
+    "Sparrowdo::Docker": "lib/Sparrowdo/Docker.pm6",
+    "Sparrowdo::Localhost": "lib/Sparrowdo/Localhost.pm6",
+    "Sparrowdo::Ssh": "lib/Sparrowdo/Ssh.pm6",
+    "Sparrowdo::Utils": "lib/Sparrowdo/Utils.pm6"
   },
-  "resources" : [
+  "resources": [
     "bootstrap.sh"
   ],
-  "source-type" : "git",
-  "source-url" : "https://github.com/melezhik/sparrowdo.git",
-  "support" : {
-    "bugtracker" : "https://github.com/melezhik/sparrowdo/issues",
-    "source" : "https://github.com/melezhik/sparrowdo.git"
+  "source-type": "git",
+  "source-url": "https://github.com/melezhik/sparrowdo.git",
+  "support": {
+    "bugtracker": "https://github.com/melezhik/sparrowdo/issues",
+    "source": "https://github.com/melezhik/sparrowdo.git"
   },
-  "tags" : [ ],
-  "test-depends" : [ ],
-  "version" : "0.1.10"
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.1.11"
 }
