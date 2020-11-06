@@ -152,7 +152,8 @@ sub MAIN (
       }
 
      my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
-
+     say "host tag: ", %host-tags.perl if $verbose;
+ 
      # if --tags is passed
      # filter hosts by tags
 
