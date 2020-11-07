@@ -25,6 +25,8 @@ For example:
     # localhost, with sudo
     sparrowdo --localhost
 
+    # read hosts from file
+    sparrowdo --host=hosts.raku
 
 # DSL
 
@@ -56,7 +58,6 @@ The full list of function is available at [Sparrow6 DSL](https://github.com/mele
 documentation.
 
 If DSL is not enough you can call any Sparrow6 plugin using `task-run` function:
-
 
     task-run "show me your secrets", "azure-kv-show", %(
       kv      => "Stash" # key vault name

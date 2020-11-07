@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    New feature: Tags as Hash support
+
+0.1.11  2020-11-04T19:04:23Z
+
     Make default repository http://sparrowhub.io/repo
 
 0.1.10  2020-08-02T21:16:08-05:00
