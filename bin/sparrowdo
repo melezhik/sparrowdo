@@ -151,7 +151,13 @@ sub MAIN (
         $h = $i;
       }
 
-     my %host-tags = $host-tags ?? parse-tags($host-tags) !! %();
+     my %host-tags = %();
+     
+     if $host-tags && $host-tags.isa(Str) {
+       %host-tags = parse-tags($host-tags)
+     } elsif $host-tags.isa(Hash) {
+       %hosts-tags = $host-tags;
+     }
 
      # if --tags is passed
      # filter hosts by tags
@@ -177,6 +183,8 @@ sub MAIN (
 
       }
 
+      say "host tags: ", %host-tags.perl if $verbose;
+      
       if $tag-pass {
         say "ALLOW host {$h} by tags creteria" if $verbose;
       } else {
