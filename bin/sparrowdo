@@ -156,7 +156,7 @@ sub MAIN (
      if $host-tags && $host-tags.isa(Str) {
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
-       %hosts-tags = $host-tags;
+       %host-tags = $host-tags;
      }
 
      # if --tags is passed
