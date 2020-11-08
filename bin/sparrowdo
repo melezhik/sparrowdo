@@ -157,7 +157,7 @@ sub MAIN (
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
        %host-tags = $host-tags;
-     } elsif $host-tags.isa(Array) {
+     } elsif $host-tags.isa(List) {
        %host-tags = $host-tags.map({ ($_ => True) });
      }
 
