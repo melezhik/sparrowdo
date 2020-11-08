@@ -157,6 +157,8 @@ sub MAIN (
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
        %host-tags = $host-tags;
+     } elsif $host-tags.isa(Array) {
+       %host-tags = $host-tags.map({ ($_ => True) });
      }
 
      # if --tags is passed
