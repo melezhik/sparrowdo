@@ -423,6 +423,10 @@ If set, define path to be appending to local cache directory on target host, use
 when running concurrent Sparrowdo scenario on one target host, for example in Sparky CI server.
 None required, no default value.
 
+# Advanced topics
+
+[Run Sparrowdo scenarios in asynchronous mode, using Sparky backend](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md)
+
 # Author
 
 Alexey Melezhik
