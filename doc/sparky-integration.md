@@ -39,6 +39,7 @@ package-install "nano";
 ## Setup hosts
 
 `$ nano hosts.raku`
+
 ```raku
 [
   "localhost", # run on localhost
