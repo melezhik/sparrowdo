@@ -234,8 +234,21 @@ sub MAIN (
 
       my @effective-tags;
 
-      push @effective-tags, $host-tags if $host-tags;
+      if $host-tags && $host-tags.isa(Str) {
+        push @effective-tags, $host-tags;
+      } elsif $host-tags.isa(Hash) {
+        for $host-tags.keys -> $t {
+          push @effective-tags, "{$t}={$host-tags{$t}}"
+        }
+      } elsif $host-tags.isa(List) {
+        for $host-tags<> -> $t {
+          push @effective-tags, "{$t}"
+        }
+      }
+
       push @effective-tags, $tags if $tags;
+
+      say "effective tags: ", @effective-tags.perl if $verbose;
 
       if @effective-tags.elems {
         %sparrowdo-config<tags> = @effective-tags.join(",");
