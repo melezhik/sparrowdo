@@ -2,7 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.12  2020-11-10T01:26:23Z
+
     New feature: Tags as Hash/Array support
+    Improvement: calculate value for build description through tags
 
 0.1.11  2020-11-04T19:04:23Z
 

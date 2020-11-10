@@ -2,7 +2,7 @@
 task-run "module release", "raku-utils-mi6", %(
   args => [
     ["yes"], 
-    %( next-version => "=0.1.11" ),
+    %( next-version => "=0.1.12" ),
     "release",
   ]
 );
