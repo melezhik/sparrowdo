@@ -69,7 +69,7 @@ If DSL is not enough you can call any Sparrow6 plugin using `task-run` function:
 
 DSL is high level adapter with addition of some "syntax sugar" to make a code concise and readable. 
 
-DSL functions are Perl6 functions, you take advantage of input parameters validation. 
+DSL functions are Raku functions, you take advantage of input parameters validation. 
 
 However DSL is limited. Not every Sparrow6 plugin has related DSL function.
 
@@ -261,7 +261,7 @@ The same as `files` and `templates` folder but to keep "data" files, just anothe
 # Scenario configuration
 
 If `config.pl6` file exists at the current working directory it _will be
-loaded_ via Perl6 [EVALFILE](https://docs.perl6.org/routine/EVALFILE) at the _beginning_ of scenario. 
+loaded_ via Raku [EVALFILE](https://docs.raku.org/routine/EVALFILE) at the _beginning_ of scenario. 
 
 For example:
 
@@ -273,7 +273,7 @@ For example:
     }
 
 Later on in the scenario you may access config data via `config` function, that returns
-configuration as Perl6 Hash object:
+configuration as Raku Hash object:
 
     $ cat sparrowfile
 
@@ -288,8 +288,8 @@ See also [Sparrowdo files anatomy](#sparrowdo-files-anatomy) section.
 
 # Including other Sparrowdo scenarios
 
-Because Sparrowdo scenarios are Perl6 code files, you're free to include other scenarios into
-"main" one using via Perl6 [EVALFILE](https://docs.perl6.org/routine/EVALFILE) mechanism:
+Because Sparrowdo scenarios are Raku code files, you're free to include other scenarios into
+"main" one using via Raku [EVALFILE](https://docs.raku.org/routine/EVALFILE) mechanism:
 
 
     $ cat sparrowfile
