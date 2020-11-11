@@ -17,7 +17,7 @@ Run Sparrow tasks remotely (and not only)
 For example:
 
     # ssh host, bootstrap first, use of local repository
-    sparrowdo --host=13.84.166.232  --repo=file:///home/gimy/repo --verbose  --bootstrap
+    sparrowdo --host=13.84.166.232  --repo=file:///home/melezhik/repo --verbose  --bootstrap
 
     # docker host, don't add sudo
     sparrowdo --docker=SparrowBird --no_sudo
@@ -84,7 +84,7 @@ In case you need more DSL wrappers let us know!
       |    MasterHost    |  --- [ Sparrowdo Scenario ] --->  |    TargetHost    | Docker 
       |                  |               *                   |                  | Ssh
       ====================               |                   ====================
-       {Sparrow6 Module}                 |                    {Sparrow6 Module}
+       {Sparrow6 Module}                 |                    {Sparrow6 Client}
                                           \    parameters
                                            \-----------------> [ tasks ]
                                                                 ^  ^  ^
