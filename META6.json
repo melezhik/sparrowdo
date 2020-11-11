@@ -7,7 +7,7 @@
   "depends": [
     "Sparrow6:ver<0.0.25+>"
   ],
-  "description": "Sparrow Based Configuration Management Tool",
+  "description": "Run Sparrow tasks remotely (and not only)",
   "license": "Artistic-2.0",
   "name": "Sparrowdo",
   "perl": "6.*",
