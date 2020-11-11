@@ -346,12 +346,12 @@ Ssh host to run Sparrowdo scenario on. Default value is `127.0.0.1`. For example
 
       --host=192.168.0.1
 
-Path to raku file with dynamic hosts configuration. For example:
+Path to raku file with hosts configuration. For example:
 
       --host=hosts.raku
 
 This will effectively runs Sparrowdo in asynchronous mode through a Sparky backend.
-See [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts) wiki.
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
 * `--docker`
 
@@ -403,11 +403,11 @@ If set, don't request Sparrow6 repository update. Useful when in limited interne
 
 Runs in dry run mode. Only applies when run in asynchronous mode through a Sparky backend.
 
-See [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts) wiki.
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
 * `--tags`
 
-Set host(s) tags, see [Dynamic hosts](https://github.com/melezhik/sparrowdo/wiki/Dynamic-hosts#tags) wiki.
+Set host(s) tags, see [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
 * `--verbose`
 
