@@ -1,6 +1,6 @@
 # Sparrowdo
 
-Sparrow Based Configuration Management Tool.
+Run Sparrow tasks remotely (and not only)
 
 # Build status
 
