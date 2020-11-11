@@ -89,15 +89,15 @@ In case you need more DSL wrappers let us know!
                                            \-----------------> [ tasks ]
                                                                 ^  ^  ^
                                                                /  /  /
-                                 ------------                 /  /  /
-                                { Repository } ---------------------
-                                 ------------        [ plugins ]
-                                 ------------
-                                /      |     \
-                               /       |      \
-                              /        |       \
-                             /         |        \
-                          [CPAN]   [RubyGems] [PyPi]
+                                    ------------              /  /  /
+                                   { Repository } ------------------
+                                    ------------          [ plugins ]
+                                 -------------------
+                                /      |       |     \
+                               /       |       |      \
+                              /        |       |       \
+                             /         |       |        \
+                          [CPAN]   [RubyGems] [PyPi]  [modules.raku.org]
 
 
 ## Master host
