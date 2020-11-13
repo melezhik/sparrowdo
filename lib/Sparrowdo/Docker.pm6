@@ -4,6 +4,12 @@ unit module Sparrowdo::Docker;
 
 use Sparrowdo::Utils;
 
+sub docker-cmd () {
+
+  return %*ENV<SPARROWDO_DOCKER_BIN> || "docker";
+
+}
+
 sub prepare-docker-host ($host,%args?) is export {
 
   say "[docker] prepare instance: $host" if %args<verbose>;
@@ -12,8 +18,9 @@ sub prepare-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
+
   my @cp-cmd = (
-    "docker",
+    docker-cmd(),
     "exec",
     "-i",
     $host,
@@ -26,7 +33,7 @@ sub prepare-docker-host ($host,%args?) is export {
 
 
   @cp-cmd = (
-    "docker",
+    docker-cmd(),
     "cp",
     ".sparrowdo/",
     "$host:/root/.sparrowdo/env/$prefix/",
@@ -44,7 +51,7 @@ sub bootstrap-docker-host ($host, %args?) is export {
   my $prefix = %args<prefix> || "default";
 
   my @cmd = (
-    "docker",
+    docker-cmd(),
     "exec",
     "-i",
     "$host",
@@ -62,7 +69,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "docker exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "{docker-cmd()} exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
