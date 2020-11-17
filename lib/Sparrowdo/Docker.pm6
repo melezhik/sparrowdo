@@ -19,6 +19,18 @@ sub prepare-docker-host ($host,%args?) is export {
   my $prefix = %args<prefix> || "default";
 
 
+  my @rmdir-cmd = (
+    docker-cmd(),
+    "exec",
+    "-i",
+    $host,
+    "rm",
+    "-rf",
+    "/root/.sparrowdo/env/$prefix",
+  );
+
+  run @rmdir-cmd;
+
   my @cp-cmd = (
     docker-cmd(),
     "exec",
@@ -30,7 +42,6 @@ sub prepare-docker-host ($host,%args?) is export {
   );
 
   run @cp-cmd;
-
 
   @cp-cmd = (
     docker-cmd(),

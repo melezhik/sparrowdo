@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Bug fix: clean sparrowdo cache dir on remote host before run( implemented only for docker and ssh )
+
 0.1.12  2020-11-10T01:26:23Z
 
     New feature: Tags as Hash/Array support

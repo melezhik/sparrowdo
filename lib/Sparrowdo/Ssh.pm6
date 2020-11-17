@@ -32,7 +32,7 @@ sub prepare-ssh-host ($host,%args?) is export {
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host" !! "$host" ),
-    "mkdir -p .sparrowdo/env/$prefix"
+    "rm -rf .sparrowdo/env/$prefix && mkdir -p .sparrowdo/env/$prefix"
   );
 
   my $cmd =  @cmd.join(" ");
