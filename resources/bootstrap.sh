@@ -1,4 +1,5 @@
-export PATH=/opt/rakudo-pkg/bin:$PATH
+export PATH=$PATH:/opt/rakudo-pkg/bin:/root/.raku/bin/ # to support latest rakudo distributions that install zef separately to ~/.raku
+
 set -e
 
 case "$OS" in
@@ -11,9 +12,11 @@ case "$OS" in
   ;;
   amazon|centos|red)
     yum -q -y install make curl perl bash redhat-lsb-core git perl-JSON-PP
-    rm -rf /etc/yum.repos.d/rakudo-pkg.repo
-    echo -e "[rakudo-pkg]\nname=rakudo-pkg\nbaseurl=https://dl.bintray.com/nxadm/rakudo-pkg-rpms/`lsb_release -is`/`lsb_release -rs| cut -d. -f1`/x86_64\ngpgcheck=0\nenabled=1" | tee -a /etc/yum.repos.d/rakudo-pkg.repo
+    curl -1sLf \
+    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
+    | bash
     yum -q -y install rakudo-pkg
+    /opt/rakudo-pkg/bin/install-zef
   ;;
   arch|archlinux)
     pacman -Syy
@@ -31,13 +34,16 @@ case "$OS" in
   ;;
   fedora)
     dnf -yq install curl perl bash redhat-lsb-core git
-    rm -rf /etc/yum.repos.d/rakudo-pkg.repo
-    echo -e "[rakudo-pkg]\nname=rakudo-pkg\nbaseurl=https://dl.bintray.com/nxadm/rakudo-pkg-rpms/`lsb_release -is`/`lsb_release -rs| cut -d. -f1`/x86_64\ngpgcheck=0\nenabled=1" | tee -a /etc/yum.repos.d/rakudo-pkg.repo
+    curl -1sLf \
+    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
+    | bash
     dnf -yq install rakudo-pkg
+    /opt/rakudo-pkg/bin/install-zef
   ;;
   opensuse)
-    zypper install -y lsb-release
-    #zypper ar -f https://dl.bintray.com/nxadm/rakudo-pkg-rpms/openSUSE/`lsb-release -rs`/x86_64 rakudo-pkg
+    curl -1sLf \
+    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
+    | bash
     zypper install -y rakudo-pkg
     zypper install -y git curl tar gzip
   ;;

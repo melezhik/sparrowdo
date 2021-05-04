@@ -3,6 +3,8 @@ Revision history for Sparrowdo
 {{$NEXT}}
 
     Bug fix: clean sparrowdo cache dir on remote host before run( implemented only for docker and ssh )
+    Make compatible with the latest rakudo distribution installation method
+    Fixing minor issues with bootstrap
 
 0.1.12  2020-11-10T01:26:23Z
 

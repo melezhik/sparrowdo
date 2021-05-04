@@ -44,16 +44,19 @@ sub generate-sparrowdo-harness (%args) is export {
   } else {
 
     $fh.say("cd .sparrowdo/env/$prefix/.sparrowdo");
-
-    if %args<sync> {
-      $fh.say("export SP6_REPO=file://\$PWD/{%args<sync>.IO.basename}")
-    }
+    $fh.say("export PATH=/root/.raku/bin/:\$PATH"); # to support latest rakudo distributions that install zef separately to ~/.raku
 
   }
 
 
   $fh.say("export SP6_CONFIG={%args<config>}") if %args<config> and %args<config>.IO ~~ :e ; 
-  $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
+
+  if %args<sync> {
+    $fh.say("export SP6_REPO=file://\$PWD/{%args<sync>.IO.basename}")
+  } else {
+    $fh.say("export SP6_REPO={%args<repo>}") if %args<repo>;
+  }
+
   $fh.say("export SP6_PREFIX=.sparrowdo/$prefix");
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;

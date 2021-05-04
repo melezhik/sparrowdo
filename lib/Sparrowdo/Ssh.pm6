@@ -32,7 +32,7 @@ sub prepare-ssh-host ($host,%args?) is export {
     ( %args<ssh-port> ?? "-p {%args<ssh-port>}" !! "-p 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
     (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host" !! "$host" ),
-    "rm -rf .sparrowdo/env/$prefix && mkdir -p .sparrowdo/env/$prefix"
+    "'rm -rf .sparrowdo/env/$prefix && mkdir -p .sparrowdo/env/$prefix'"
   );
 
   my $cmd =  @cmd.join(" ");
@@ -134,7 +134,7 @@ sub run-tasks-ssh-host ($host,$sparrowfile,%args?) is export {
 
   my $cmd =  @cmd.join(" ");
 
-  say "[scp] effective cmd: $cmd" if %args<verbose>;
+  say "[ssh] effective cmd: $cmd" if %args<verbose>;
 
   shell $cmd;
 
