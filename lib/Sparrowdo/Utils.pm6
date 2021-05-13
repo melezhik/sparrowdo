@@ -44,7 +44,7 @@ sub generate-sparrowdo-harness (%args) is export {
   } else {
 
     $fh.say("cd .sparrowdo/env/$prefix/.sparrowdo");
-    $fh.say("export PATH=/root/.raku/bin/:\$PATH"); # to support latest rakudo distributions that install zef separately to ~/.raku
+    $fh.say("export PATH=~/.raku/bin/:\$PATH");
 
   }
 

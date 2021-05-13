@@ -1,4 +1,4 @@
-export PATH=$PATH:/opt/rakudo-pkg/bin:/root/.raku/bin/ # to support latest rakudo distributions that install zef separately to ~/.raku
+export PATH=$PATH:~/.raku/bin/:/opt/rakudo-pkg/bin # to support latest rakudo distributions that install zef separately to ~/.raku
 
 set -e
 
@@ -16,7 +16,7 @@ case "$OS" in
     'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
     | bash
     yum -q -y install rakudo-pkg
-    /opt/rakudo-pkg/bin/install-zef
+    install-zef
   ;;
   arch|archlinux)
     pacman -Syy
@@ -38,7 +38,7 @@ case "$OS" in
     'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
     | bash
     dnf -yq install rakudo-pkg
-    /opt/rakudo-pkg/bin/install-zef
+    install-zef
   ;;
   opensuse)
     curl -1sLf \
