@@ -227,6 +227,7 @@ sub MAIN (
 
       my %sparrowdo-config = %(
           repo => $repo,
+          sync => $sync,
           verbose => $verbose,
           bootstrap => $bootstrap,
           no_index_update => $no_index_update
