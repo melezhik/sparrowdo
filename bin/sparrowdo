@@ -308,7 +308,7 @@ sub MAIN (
 
      my %trigger = %(
        cwd => $cache-dir,
-       description => "localhost",
+       description => "[localhost]",
        sparrowdo => %(
           repo => $repo,
           sync => $sync,
