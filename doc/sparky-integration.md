@@ -179,9 +179,33 @@ To give hosts descriptive names, that will be visible in Sparky reports one can 
 );
 ```
 
+## Watcher jobs
+
+Watcher jobs mechanism allows one to wait until all asynchronous job finishes
+and does some action upon this even. This is very powerful and flexible feature
+enabling really complex scenarios:
+
+To active watcher mode one needs to do 2 steps:
+
+
+1. Use `--watch` flag when run `sparrowdo`:
+
+```bash
+sparrowdo --hosts=hosts.raku --watch
+```
+
+2. create `watch.raku` file:
+
+
+# TBD
+
+```raku
+say config().perl;
+```
+
 ## Existing IAAS tools integration
 
-Sparrowdo integrates well with some well known infrastructure provision tools, for examle with Terraform. Main workflow is one
+Sparrowdo integrates well with some well known infrastructure provision tools, for exapmle with Terraform. Main workflow is one
 first deploy cloud infrastructure using a dedicated tool, and then provision hosts using Sparrowdo.
 
 ### Terraform integration
