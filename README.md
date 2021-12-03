@@ -350,7 +350,14 @@ Path to raku file with hosts configuration. For example:
 
       --host=hosts.raku
 
-This will effectively runs Sparrowdo in asynchronous mode through a Sparky backend.
+This will effectively runs Sparrowdo in asynchronous mode through Sparky backend.
+
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
+
+* `--workers`
+
+Number of asynchronous workers when run in asynchronous mode through Sparky backend
+
 See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
 * `--docker`
