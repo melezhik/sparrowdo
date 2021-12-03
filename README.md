@@ -360,6 +360,12 @@ Number of asynchronous workers when run in asynchronous mode through Sparky back
 
 See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
+* `--watch`
+
+Runs watch jobs
+
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
+
 * `--docker`
 
 Docker container name to run Sparrowdo scenario on, none required.
