@@ -173,9 +173,9 @@ To give hosts descriptive names, that will be visible in Sparky reports one can 
    host => "localhost",
    tags => %(
      server => "nginx",
-     port => "443" 
+     port => "443",
+     name => "web-server"
    ),
-   name => "web server"
 );
 ```
 
