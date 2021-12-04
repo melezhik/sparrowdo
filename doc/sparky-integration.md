@@ -186,14 +186,19 @@ enabling really complex scenarios:
 
 To active watcher mode one needs to do 2 steps:
 
-
-1. Use `--watch` flag when run `sparrowdo`:
+1. Use `--watch` parameter when run `sparrowdo`:
 
 ```bash
-sparrowdo --hosts=hosts.raku --watch
+sparrowdo --hosts=hosts.raku --watch=watch.raku
 ```
+Watch parameter should point to a file with Raku
+scenario implementing watcher logic, the the next.
 
-2. create `watch.raku` file:
+
+2. Watch scenario
+
+`watch.raku` file might contain the following
+code:
 
 ```raku
 
