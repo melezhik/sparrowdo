@@ -196,16 +196,48 @@ sparrowdo --hosts=hosts.raku --watch
 
 2. create `watch.raku` file:
 
+```raku
 
-# TBD
+use Curlie;
+my \c = Curlie.new;
+
+my @jobs;
+
+# iterate through jobs
+# and get their statuses
+# till all jobs are finished
+
+while @jobs.elems < config()<jobs>.elems {
+
+  for config()<jobs><> -> $j {
+    c.get: "http://127.0.0.1/status/$project/{$j<job_id>}";
+    if c.res.content == 1 {
+      push @jobs, %( id => $j<job_id>, status => "OK")        
+    }  elsif c.res.content == -1 {
+      push @jobs, %( id => $j<job_id>, status => "FAIL")        
+    }
+  }
+}
+
+  say @jobs.grep({$_<status> eq "OK"}).elems, " jobs finished successfully";
+  say @jobs.grep({$_<status> eq "FAIL"}).elems, " jobs failed";
+
+```
+
+This simple scenario ilustrates how one can iterate though jobs (`config()<jobs>`)
+and get their statuses when they are finishedusing Sparky [HTTP API](https://github.com/melezhik/sparky#build-status-1).
+
+To get job details use `%job` hash keys:
 
 ```raku
-say config().perl;
+  say "job name: ", $j<name>;
+  say "job tags: ", $j<tags>;
 ```
+
 
 ## Existing IAAS tools integration
 
-Sparrowdo integrates well with some well known infrastructure provision tools, for exapmle with Terraform. Main workflow is one
+Sparrowdo integrates well with some well known infrastructure provision tools, for example with Terraform. Main workflow is one
 first deploy cloud infrastructure using a dedicated tool, and then provision hosts using Sparrowdo.
 
 ### Terraform integration
