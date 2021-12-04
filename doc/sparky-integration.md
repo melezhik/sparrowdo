@@ -1,6 +1,5 @@
 # Sparky Integration
 
-
 This section describes how to run Sparrowdo scenarios in asynchronous mode, using [Sparky](https://github.com/melezhik/sparky) backend. 
 
 ## Install Sparky
