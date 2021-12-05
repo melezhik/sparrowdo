@@ -7,7 +7,7 @@ This section describes how to run Sparrowdo scenarios in asynchronous mode, usin
 ```
 git clone https://github.com/melezhik/sparky.git
 cd sparky
-zef install .
+zef install . --/test
 
 # Initialize Sparky DB
 raku db-init.raku
@@ -17,14 +17,6 @@ nohup sparkyd &
 
 # Run Sparky Web UI
 nohup raku bin/sparky-web.raku &
-```
-
-## Install Sparrowdo
-
-```bash
-# # we will need Bleeding edge versions of Sparrow6 and Sparrowdo
-zef install https://github.com/melezhik/sparrow6.git 
-zef install https://github.com/melezhik/sparrowdo.git
 ```
 
 ## Create sparrowdo scenario
@@ -214,11 +206,11 @@ my @jobs;
 while @jobs.elems < config()<jobs>.elems {
 
   for config()<jobs><> -> $j {
-    c.get: "http://127.0.0.1/status/$project/{$j<job_id>}";
+    c.get: "http://127.0.0.1/status/$project/{$j<job-id>}";
     if c.res.content == 1 {
-      push @jobs, %( id => $j<job_id>, status => "OK")        
+      push @jobs, %( id => $j<job-id>, status => "OK")        
     }  elsif c.res.content == -1 {
-      push @jobs, %( id => $j<job_id>, status => "FAIL")        
+      push @jobs, %( id => $j<job-id>, status => "FAIL")        
     }
   }
 }
@@ -228,13 +220,14 @@ while @jobs.elems < config()<jobs>.elems {
 
 ```
 
-This simple scenario ilustrates how one can iterate though jobs (`config()<jobs>`)
-and get their statuses when they are finishedusing Sparky [HTTP API](https://github.com/melezhik/sparky#build-status-1).
+This simple scenario illustrates how one can iterate though jobs (`config()<jobs>`)
+and get their statuses when they are finished using Sparky [HTTP API](https://github.com/melezhik/sparky#build-status-1).
 
 To get job details use `%job` hash keys:
 
 ```raku
   say "job name: ", $j<name>;
+  say "job host: ", $j<host>;
   say "job tags: ", $j<tags>;
 ```
 

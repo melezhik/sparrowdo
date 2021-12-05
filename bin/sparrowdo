@@ -32,7 +32,7 @@ sub MAIN (
   Str  :$conf,
   Str  :$prefix,
   Str  :$sync,
-  Bool :$watch = False, 
+  Str  :$watch, 
   Int  :$workers = 3, 
   Bool :$no_index_update  = False,
 )
@@ -40,7 +40,7 @@ sub MAIN (
 {
 
 
-  my @builds; # queued builds
+  my @jobs; # queued jobs
 
   my $spf = $sparrowfile || 'sparrowfile'; # Sparrowfile to run
 
@@ -289,13 +289,18 @@ sub MAIN (
 
       %trigger<job_id> = $id;
 
-      @builds.push(%trigger); 
+      @jobs.push(%(
+        job-id => $id,
+        job-name => %host-tags<name>,
+        host => $h,
+        tags => %host-tags,
+      )); 
 
     }
 
-    if $watch == True {
+    if $watch {
 
-       die "no watch.raku exists" unless "watch.raku".IO ~~ :f;
+       die "file $watch does not exist" unless $watch.IO ~~ :f;
 
        my $watcher-id = (^$workers).pick + 1;
 
@@ -326,9 +331,9 @@ sub MAIN (
          )
        );
 
-       copy "watch.raku", "{$cache-dir}/sparrowfile";
+       copy $watch, "{$cache-dir}/sparrowfile";
 
-       spurt "{$cache-dir}/config.pl6", %( jobs => @builds ).perl;
+       spurt "{$cache-dir}/config.pl6", %( jobs => @jobs ).perl;
 
        spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
