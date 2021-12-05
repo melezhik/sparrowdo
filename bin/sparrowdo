@@ -293,7 +293,7 @@ sub MAIN (
         job-id => $id,
         job-name => %host-tags<name>,
         host => $h,
-        tags => %host-tags,
+        tags => %host-tags || %( name => %host-tags<name> ),
       )); 
 
     }
