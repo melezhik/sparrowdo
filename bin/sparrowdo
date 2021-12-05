@@ -291,9 +291,9 @@ sub MAIN (
 
       @jobs.push(%(
         job-id => $id,
-        job-name => %host-tags<name>,
+        job-name => %host-tags<name> || "",
         host => $h,
-        tags => %host-tags || %( name => %host-tags<name> ),
+        tags => %host-tags || %( name => %host-tags<name> || ""),
       )); 
 
     }
