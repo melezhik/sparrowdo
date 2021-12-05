@@ -362,9 +362,9 @@ See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/s
 
 * `--watch`
 
-Runs watch job
+Runs watcher job
 
-See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md#watcher-jobs) doc.
 
 * `--docker`
 

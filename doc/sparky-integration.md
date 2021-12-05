@@ -183,8 +183,9 @@ To active watcher mode one needs to do 2 steps:
 ```bash
 sparrowdo --hosts=hosts.raku --watch=watch.raku
 ```
+
 Watch parameter should point to a file with Raku
-scenario implementing watcher logic, the the next.
+scenario implementing watcher logic, see next.
 
 
 2. Watch scenario
