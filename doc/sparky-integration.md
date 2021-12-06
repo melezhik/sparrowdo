@@ -173,15 +173,16 @@ A build name will appear in Sparky reports list:
 );
 ```
 
-## Bind to project
+## Bind build to project
 
-To run build on a certain Sparky project use `project` key:
+To run a build on a certain Sparky project use `project` key:
 
 ```raku
 %(
    host => "localhost",
    project => "web-app-build" 
 );
+```
 
 ## Watcher jobs
 
