@@ -228,7 +228,6 @@ for config()<jobs><> -> $j {
             emit %( id => $j<job-id>, status => "RUNNING");
           }
           $i++;
-          sleep(5);
           if $i>=30 {
             emit %( id => $j<job-id>, status => "TIMEOUT");
             done
