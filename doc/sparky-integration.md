@@ -155,9 +155,12 @@ You can pass `key/value` tags as cli parameters as well:
 sparrowdo --sparrowfile=database.raku --tags=nginx_port=443,mode=production --host=hosts.raku
 ```
 
-Names.
+## names
 
-To give hosts descriptive names, that will be visible in Sparky reports one can use `name` key:
+To give builds descriptive names use `name` key, it should not contain spaces.
+
+A build name will appear in Sparky reports list:
+
 
 ```raku
 %( 
@@ -169,6 +172,16 @@ To give hosts descriptive names, that will be visible in Sparky reports one can 
    ),
 );
 ```
+
+## Bind to project
+
+To run build on a certain Sparky project use `project` key:
+
+```raku
+%(
+   host => "localhost",
+   project => "web-app-build" 
+);
 
 ## Watcher jobs
 
