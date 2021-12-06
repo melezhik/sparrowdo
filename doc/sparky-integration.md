@@ -207,34 +207,50 @@ scenario implementing watcher logic, see next.
 code:
 
 ```raku
-
 use Curlie;
-my \c = Curlie.new;
 
+my \c = Curlie.new;
 my @jobs;
 
-# iterate through jobs
-# and get their statuses
-# till all jobs are finished
-
-while @jobs.elems < config()<jobs>.elems {
-  for config()<jobs><> -> $j {
-    c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}";
-    if c.res.content == 1 {
-      push @jobs, %( id => $j<job-id>, status => "OK")        
-    }  elsif c.res.content == -1 {
-      push @jobs, %( id => $j<job-id>, status => "FAIL")        
-    }
+for config()<jobs><> -> $j {
+  my $supply = supply {
+      my $i = 1;
+      while True {
+          c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}";
+          if c.res.content.Int == 1 {
+            emit %( id => $j<job-id>, status => "OK");
+            done;
+          } elsif c.res.content.Int == -1 {
+            emit %( id => $j<job-id>, status => "FAIL");
+            done;
+          } elsif c.res.content.Int == 0 {
+            emit %( id => $j<job-id>, status => "RUNNING");
+          }
+          sleep(3);
+          $i++;
+          if $i>=30 {
+            emit %( id => $j<job-id>, status => "TIMEOUT");
+            done
+          }
+      }
   }
+
+  $supply.tap( -> $v {
+      if $v<status> eq "FAIL" or $v<status> eq "OK"  or $v<status> eq "TIMEOUT" {
+        push @jobs, $v;
+      }
+      say $v;
+  });
+
 }
 
-  say @jobs.grep({$_<status> eq "OK"}).elems, " jobs finished successfully";
-  say @jobs.grep({$_<status> eq "FAIL"}).elems, " jobs failed";
-
+say @jobs.grep({$_<status> eq "OK"}).elems, " jobs finished successfully";
+say @jobs.grep({$_<status> eq "FAIL"}).elems, " jobs failed";
+say @jobs.grep({$_<status> eq "TIMEOUT"}).elems, " jobs timeout";
 ```
 
 This simple scenario illustrates how one can iterate though jobs (`config()<jobs>`)
-and get their statuses when they are finished using Sparky [HTTP API](https://github.com/melezhik/sparky#build-status-1).
+and get their statuses when they are finished using [Sparky HTTP API](https://github.com/melezhik/sparky#build-status-1).
 
 To get job details use `%job` hash keys:
 
