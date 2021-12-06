@@ -218,9 +218,8 @@ my @jobs;
 # till all jobs are finished
 
 while @jobs.elems < config()<jobs>.elems {
-
   for config()<jobs><> -> $j {
-    c.get: "http://127.0.0.1/status/$project/{$j<job-id>}";
+    c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}";
     if c.res.content == 1 {
       push @jobs, %( id => $j<job-id>, status => "OK")        
     }  elsif c.res.content == -1 {
@@ -241,6 +240,7 @@ To get job details use `%job` hash keys:
 
 ```raku
   say "job name: ", $j<name>;
+  say "project: ", $j<project>;
   say "job host: ", $j<host>;
   say "job tags: ", $j<tags>;
 ```
