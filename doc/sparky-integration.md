@@ -227,7 +227,6 @@ for config()<jobs><> -> $j {
           } elsif c.res.content.Int == 0 {
             emit %( id => $j<job-id>, status => "RUNNING");
           }
-          sleep(3);
           $i++;
           if $i>=30 {
             emit %( id => $j<job-id>, status => "TIMEOUT");
@@ -247,7 +246,7 @@ for config()<jobs><> -> $j {
 
 say @jobs.grep({$_<status> eq "OK"}).elems, " jobs finished successfully";
 say @jobs.grep({$_<status> eq "FAIL"}).elems, " jobs failed";
-say @jobs.grep({$_<status> eq "TIMEOUT"}).elems, " jobs timeout";
+say @jobs.grep({$_<status> eq "TIMEOUT"}).elems, " jobs timeouted";
 ```
 
 This simple scenario illustrates how one can iterate though jobs (`config()<jobs>`)
