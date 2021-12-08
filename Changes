@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.13 2021-12-08T00:00:00Z
+
+    New feature: watcher jobs
     Bug fix: clean sparrowdo cache dir on remote host before run( implemented only for docker and ssh )
     Bug fix: respect `sync` cli paramneter when run in sparky integration mode
     Make compatible with the latest rakudo distribution installation method
