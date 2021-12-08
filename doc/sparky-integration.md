@@ -217,7 +217,7 @@ for config()<jobs><> -> $j {
   my $supply = supply {
       my $i = 1;
       while True {
-          c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}";
+          c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}" or next;
           if c.res.content.Int == 1 {
             emit %( id => $j<job-id>, status => "OK");
             done;
@@ -228,7 +228,7 @@ for config()<jobs><> -> $j {
             emit %( id => $j<job-id>, status => "RUNNING");
           }
           $i++;
-          if $i>=30 {
+          if $i>=300 { # timeout after 300 requests
             emit %( id => $j<job-id>, status => "TIMEOUT");
             done
           }
