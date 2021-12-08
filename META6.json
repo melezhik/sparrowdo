@@ -1,5 +1,6 @@
 {
-  "authors": [
+ "auth": "zef:melezhik",
+ "authors": [
     "Alexey Melezhik"
   ],
   "build-depends": [
