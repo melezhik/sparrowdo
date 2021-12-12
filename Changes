@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.14 2021-12-11T00:00:00Z
+
+    Fix project parameter bug
+    Output job id when runs with hosts file
+
 0.1.13 2021-12-08T00:00:00Z
 
     New feature: watcher jobs

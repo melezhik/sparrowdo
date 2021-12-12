@@ -153,14 +153,14 @@ sub MAIN (
         $host-tags = $i<tags> if $i<tags>;
       } else {
         $h = $i;
-      }
+      } 
 
      my %host-tags = %();
      
      if $host-tags && $host-tags.isa(Str) {
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
-       %host-tags = $host-tags;
+       %host-tags = $host-tags.map({ .key => .value.subst(/\s/, '{space}',:g) });
      } elsif $host-tags.isa(List) {
        %host-tags = $host-tags.map({ ($_ => True) });
      }
@@ -201,7 +201,7 @@ sub MAIN (
 
       next if $dry_run;
 
-      my $project = $i<project>:exists ?? $i<project> !! "worker" ~~ ((^$workers).pick + 1);
+      my $project = $i<project>:exists ?? $i<project> !! "workers{(^$workers).pick(1)}";
 
       my $sparky-project-dir = %*ENV<SPARKY_ROOT> ?? "{%*ENV<SPARKY_ROOT>}/{$project}" !! "{%*ENV<HOME>}/.sparky/projects/{$project}";
 
@@ -285,7 +285,7 @@ sub MAIN (
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-      say "queue build for [$project] on [$h]";
+      say "queue build for [$project] on [$h] id = $id";
 
       %trigger<job_id> = $id;
 
@@ -338,7 +338,7 @@ sub MAIN (
 
        spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-       say "queue build for [watcher-{$watcher-id}] on [localhost]";
+       say "queue build for [watcher-{$watcher-id}] on [localhost] id = $id";
 
     }
 

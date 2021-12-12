@@ -101,6 +101,16 @@ One can attach more then one tag using `,` separator:
 );
 ```
 
+Or using Raku List syntax:
+
+
+```raku
+%(
+  host => "192.168.0.1", 
+  tags => [ "database", "dev" ]
+);
+```
+
 One can filter out certain hosts by providing `--tags` cli option:
 
 ```raku
