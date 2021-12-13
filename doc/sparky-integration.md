@@ -167,7 +167,7 @@ sparrowdo --sparrowfile=database.raku --tags=nginx_port=443,mode=production --ho
 
 ## names
 
-To give builds descriptive names use `name` key, it should not contain spaces.
+To give builds descriptive names use `name` key.
 
 A build name will appear in Sparky reports list:
 
