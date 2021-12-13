@@ -9,5 +9,8 @@
   %(
     host => "localhost",
     project => "test123",
+    tags => %(
+      message => "hello world"
+    ),
   ),
 ]

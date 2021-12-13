@@ -160,7 +160,7 @@ sub MAIN (
      if $host-tags && $host-tags.isa(Str) {
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
-       %host-tags = $host-tags.map({ .key => .value.subst(/\s/, '{space}',:g) });
+       %host-tags = $host-tags;
      } elsif $host-tags.isa(List) {
        %host-tags = $host-tags.map({ ($_ => True) });
      }
@@ -243,7 +243,7 @@ sub MAIN (
         push @effective-tags, $host-tags;
       } elsif $host-tags.isa(Hash) {
         for $host-tags.keys -> $t {
-          push @effective-tags, "{$t}={$host-tags{$t}}"
+          push @effective-tags, "{$t}={$host-tags{$t}.subst(/\s/, '{space}',:g)}";
         }
       } elsif $host-tags.isa(List) {
         for $host-tags<> -> $t {
