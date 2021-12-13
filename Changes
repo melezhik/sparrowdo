@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    Support spaces in tags
+
 0.1.14 2021-12-11T00:00:00Z
 
     Fix project parameter bug
