@@ -165,6 +165,19 @@ You can pass `key/value` tags as cli parameters as well:
 sparrowdo --sparrowfile=database.raku --tags=nginx_port=443,mode=production --host=hosts.raku
 ```
 
+One can use spaces in tags value as well:
+
+```
+  --tags="author=good robot,message=hello world,version=0.0.1"
+```
+
+```raku
+  tags => %(
+    author => "good robot",
+    message => "hello world",
+    version => "0.0.1"
+  )
+```
 ## names
 
 To give builds descriptive names use `name` key.
