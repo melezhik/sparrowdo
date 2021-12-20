@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    New feature: Sparky JobApi support
+    Improvement: Don't create dummy sparrowfile is the one exists
+
 0.1.15 2021-12-14T00:00:00Z
 
     Support spaces in tags
