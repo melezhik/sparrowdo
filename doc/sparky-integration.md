@@ -178,6 +178,7 @@ One can use spaces in tags value as well:
     version => "0.0.1"
   )
 ```
+
 ## names
 
 To give builds descriptive names use `name` key.
@@ -206,6 +207,19 @@ To run a build on a certain Sparky project use `project` key:
    project => "web-app-build" 
 );
 ```
+
+## Reserved tags
+
+When sparrowdo scenarios using Sparky, there are some reserved tags:
+
+* `SPARKY_JOB_ID`
+
+Sparky Job ID
+
+* `SPARKY_PROJECT`
+
+Sparky project name
+
 
 ## Watcher jobs
 
