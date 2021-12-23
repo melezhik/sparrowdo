@@ -307,9 +307,9 @@ sub MAIN (
 
        die "file $watch does not exist" unless $watch.IO ~~ :f;
 
-       my $watcher-id = (^$workers).pick + 1;
+       my $wid = "watcher_%.2d".sprintf((^$workers).pick(1)+1);
 
-       my $sparky-project-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/watcher{$watcher-id}" !! "{%*ENV<HOME>}/.sparky/projects/watcher{$watcher-id}";
+       my $sparky-project-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/{$wid}" !! "{%*ENV<HOME>}/.sparky/projects/{$wid}";
 
        mkdir "{$sparky-project-dir}/.triggers" unless "{$sparky-project-dir}/.triggers".IO ~~ :d;
 
@@ -344,7 +344,7 @@ sub MAIN (
 
        spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
-       say "queue build for [watcher-{$watcher-id}] on [localhost] id = $id";
+       say "queue build for [$wid] on [localhost] id = $id";
 
     }
 
