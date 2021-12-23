@@ -201,7 +201,9 @@ sub MAIN (
 
       next if $dry_run;
 
-      my $project = $i<project>:exists ?? $i<project> !! "workers{(^$workers).pick(1)}";
+      my $wid = "worker_%.2d".sprintf((^$workers).pick(1)+1);
+
+      my $project = $i<project>:exists ?? $i<project> !! $wid;
 
       my $sparky-project-dir = %*ENV<SPARKY_ROOT> ?? "{%*ENV<SPARKY_ROOT>}/{$project}" !! "{%*ENV<HOME>}/.sparky/projects/{$project}";
 
