@@ -1,1 +1,2 @@
-say config().perl;
+say "config: ", config().perl;
+say "tags: ", tags().perl;
