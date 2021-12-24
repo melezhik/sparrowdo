@@ -201,7 +201,7 @@ sub MAIN (
 
       next if $dry_run;
 
-      my $wid = "worker_%.2d".sprintf((^$workers).pick(1)+1);
+      my $wid = "worker_%.2d".sprintf((^$workers).pick(1).join("")+1);
 
       my $project = $i<project>:exists ?? $i<project> !! $wid;
 
@@ -307,7 +307,7 @@ sub MAIN (
 
        die "file $watch does not exist" unless $watch.IO ~~ :f;
 
-       my $wid = "watcher_%.2d".sprintf((^$workers).pick(1)+1);
+       my $wid = "watcher_%.2d".sprintf((^$workers).pick(1).join("")+1);
 
        my $sparky-project-dir = %*ENV<SPARKY_ROOT> ??  "{%*ENV<SPARKY_ROOT>}/{$wid}" !! "{%*ENV<HOME>}/.sparky/projects/{$wid}";
 
