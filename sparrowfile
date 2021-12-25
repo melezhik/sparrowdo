@@ -1,6 +1,7 @@
 #!perl6
 
-say tags().perl;
+say "tags: ", tags().perl;
+say "config: ", config().perl;
 
 task-run "files/tasks/hello-world";
 
