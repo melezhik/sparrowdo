@@ -4,7 +4,7 @@ if tags()<stage> eq "main" {
 
     my $project = "spawned_01";
 
-    my $r = job-queue %(
+    my %r = job-queue %(
       project => $project,
       description => "spawned job", 
       tags => %(
@@ -14,9 +14,9 @@ if tags()<stage> eq "main" {
       ),
     );
 
-    say $r.perl;
+    say %r.perl;
 
-    say "queue spawned job, job id = {$r<job-id>}";
+    say "queue spawned job, job id = {%r<job-id>}";
 
 } elsif tags()<stage> eq "child" {
 

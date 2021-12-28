@@ -2,7 +2,7 @@ if tags()<stage> eq "main" {
 
     use Sparky::JobApi;
 
-    my $job-id = job-queue %(
+    my %q = job-queue %(
       description => "spawned job", 
       #workers => 90,
       tags => %(
@@ -12,7 +12,7 @@ if tags()<stage> eq "main" {
       ),
     );
 
-    say "queue spawned job, job id = {$job-id}";
+    say "queue spawned job, job id = {%q<job-id>}";
 
 } elsif tags()<stage> eq "child" {
 
