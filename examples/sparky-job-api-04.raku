@@ -4,7 +4,7 @@
 
     use Sparky::JobApi;
 
-    my $job-id = job-queue %(
+    my %r = job-queue %(
       project => "spawned_jobs",
       description => "my spawned job",
       tags => %(
@@ -13,6 +13,8 @@
         bar => 2,
       ),
     );
+
+    my $job-id = %r<job-id>;
 
     say "queue spawned job, job id = {$job-id}";
 

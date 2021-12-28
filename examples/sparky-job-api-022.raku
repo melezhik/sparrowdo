@@ -35,6 +35,10 @@
         foo => 1,
         bar => 2,
       ),
+      sparrowdo => %(
+        host => "sparrowhub.io",
+        ssh_user => "root",
+      )
     );
 
     say "queue spawned job, job id = {%r<job-id>}";

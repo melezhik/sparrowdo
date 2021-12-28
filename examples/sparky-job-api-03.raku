@@ -38,17 +38,17 @@ if tags()<stage> eq "main" {
           my %r = $http.get("http://127.0.0.1:4000/status/worker_{$i}/{$rand}_{$i}");
           %r<status> == 200 or next;
           if %r<content>.Int == 1 {
-            emit %( id => "job_{$i}", status => "OK");
+            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "OK");
             done;
           } elsif %r<content>.Int == -1 {
-            emit %( id => "job_{$i}", status => "FAIL");
+            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "FAIL");
             done;
           } elsif %r<content>.Int == 0 {
-            emit %( id => "job_{$i}", status => "RUNNING");
+            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "RUNNING");
           }
           #$j++;
           #if $j>=300 { # timeout after 300 requests
-          #  emit %( id => "job_{$i}", status => "TIMEOUT");
+          #  emit %( id => "worker_{$i}/{$rand}_{$i}", status => "TIMEOUT");
           #  done
           #}
         }
@@ -75,7 +75,7 @@ if tags()<stage> eq "main" {
 
     if tags()<i> < 10 {
 
-      my $i = tags()<i> + 1;
+      my $i = tags()<i>.Int + 1;
 
       # do some useful stuff here
       # and launch another recursive job
