@@ -47,7 +47,7 @@ if tags()<stage> eq "main" {
       }
 
       $supply.tap( -> $v {
-        push @jobs, $v;
+        push @jobs, $v if $v<status> eq "FAIL" or $v<status> eq "OK";
         say $v;
       });
 
