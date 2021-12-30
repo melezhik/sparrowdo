@@ -1,12 +1,11 @@
+use Sparky::JobApi;
+
   if tags()<stage> eq "main" {
 
-    use Sparky::JobApi;
+    my $j = Sparky::JobApi.new(:project<spawned_01>);
 
-    my $project = "spawned_01";
-
-    my %r = job-queue %(
-      project => $project,
-      description => "spawned job", 
+    $j.queue({
+      description => "spawned job. 022", 
       tags => %(
         stage => "child",
         foo => 1,
@@ -15,21 +14,18 @@
       sparrowdo => %(
         no_index_update => True
       )
-    );
+    });
 
-    say "queue spawned job, job id = {%r<job-id>}";
+    say "queue spawned job ", $j.info.perl;
 
   } elsif tags()<stage> eq "child" {
 
-    use Sparky::JobApi;
-
     say "I am a child scenario";
 
-    my $project = "spawned_02";
+    my $j = Sparky::JobApi.new(:project<spawned_02>);
 
-    my %r = job-queue %(
-      project => $project,
-      description => "spawned job2",
+    $j.queue({
+      description => "spawned job2. 022",
       tags => %(
         stage => "off",
         foo => 1,
@@ -39,9 +35,9 @@
         host => "sparrowhub.io",
         ssh_user => "root",
       )
-    );
+    });
 
-    say "queue spawned job, job id = {%r<job-id>}";
+    say "queue spawned job ", $j.info.perl;
 
   } elsif tags()<stage> eq "off" {
 

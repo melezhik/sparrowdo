@@ -1,24 +1,19 @@
-
 use Sparky::JobApi;
 
 if tags()<stage> eq "main" {
 
     my $rand = ('a' .. 'z').pick(20).join('');
 
-    job-queue %(
-      project => "worker_1",
-      job-id => "{$rand}_1",
-      description => "spawned job",
+    my $job-id = "{$rand}_1";
+
+    Sparky::JobApi.new(:project<worker_1>,:$job-id).queue({
+      description => "spawned job. 03.1",
       tags => %(
         seed => $rand,
         stage => "child",
         i => 1,
       ),
-     );
-
-    use HTTP::Tinyish;
-
-    my $http = HTTP::Tinyish.new;
+    });
 
     my @jobs;
 
@@ -27,37 +22,32 @@ if tags()<stage> eq "main" {
     # but will be launched recursively
     # in "child" jobs 
 
-
     for 1 .. 10 -> $i {
 
       my $supply = supply {
 
-        #my $j = 1;
+        my $project = "worker_{$i}";
+
+        my $job-id = "{$rand}_{$i}";
+
+        my $j = Sparky::JobApi.new(:$project,:$job-id);
 
         while True {
-          my %r = $http.get("http://127.0.0.1:4000/status/worker_{$i}/{$rand}_{$i}");
-          %r<status> == 200 or next;
-          if %r<content>.Int == 1 {
-            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "OK");
-            done;
-          } elsif %r<content>.Int == -1 {
-            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "FAIL");
-            done;
-          } elsif %r<content>.Int == 0 {
-            emit %( id => "worker_{$i}/{$rand}_{$i}", status => "RUNNING");
-          }
-          #$j++;
-          #if $j>=300 { # timeout after 300 requests
-          #  emit %( id => "worker_{$i}/{$rand}_{$i}", status => "TIMEOUT");
-          #  done
-          #}
+
+          my $status = $j.status;
+
+          emit %( id => "{$project}/{$job-id}", status => $status );
+
+          done if $status eq "FAIL" or $status eq "OK";
+
+          sleep(1);
+
         }
+
       }
 
       $supply.tap( -> $v {
-        if $v<status> eq "FAIL" or $v<status> eq "OK"  or $v<status> eq "TIMEOUT" {
-          push @jobs, $v;
-        }
+        push @jobs, $v;
         say $v;
       });
 
@@ -84,16 +74,17 @@ if tags()<stage> eq "main" {
       # recursively launched jobs
       # get waited in a "main" scenario 
 
-      job-queue %(
-        project => "worker_{$i}",
-        job-id => "{tags()<seed>}_{$i}",
-        description => "spawned job",
+      my $project = "worker_{$i}"; 
+      my $job-id = "{tags()<seed>}_{$i}";
+
+      Sparky::JobApi.new(:$project,:$job-id).queue({
+        description => "spawned job. 03.{$i}",
         tags => %(
           seed => tags()<seed>,
           stage => "child",
           i => $i,
         ),
-     );
+      });
    }
 }
 

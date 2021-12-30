@@ -2,21 +2,18 @@ if tags()<stage> eq "main" {
 
     use Sparky::JobApi;
 
-    my $project = "spawned_01";
+    my $j = Sparky::JobApi.new(:project<spawned_01>);
 
-    my %r = job-queue %(
-      project => $project,
+    $j.queue({
       description => "spawned job", 
       tags => %(
         stage => "child",
         foo => 1,
         bar => 2,
       ),
-    );
+    });
 
-    say %r.perl;
-
-    say "queue spawned job, job id = {%r<job-id>}";
+    say "job info: ", $j.info.perl;
 
 } elsif tags()<stage> eq "child" {
 
