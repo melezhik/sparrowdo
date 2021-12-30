@@ -5,7 +5,7 @@ if tags()<stage> eq "main" {
     my $j = Sparky::JobApi.new(:project<spawned_01>);
 
     $j.queue({
-      description => "spawned job", 
+      description => "spawned job. 01", 
       tags => %(
         stage => "child",
         foo => 1,
