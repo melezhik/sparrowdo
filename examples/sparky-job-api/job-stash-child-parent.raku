@@ -45,7 +45,7 @@
     say "config: ", config().perl;
     say "tags: ", tags().perl;
 
-    my $j = Sparky::JobApi.new(:mine<True>);
+    my $j = Sparky::JobApi.new( mine => True );
 
     $j.put-stash({ hello => "Sparky" });
 
