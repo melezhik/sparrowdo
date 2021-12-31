@@ -245,38 +245,34 @@ scenario implementing watcher logic, see next.
 code:
 
 ```raku
-use Curlie;
+use Sparky::JobApi;
 
-my \c = Curlie.new;
 my @jobs;
 
-for config()<jobs><> -> $j {
+for config()<jobs><> -> $i {
+
   my $supply = supply {
-      my $i = 1;
+
+    my $project = $i<project>;
+    my $job-id = $i<job-id>;
+
+    my $j = Sparky::JobApi.new(:$project,:$job-id);
+
       while True {
-          c.get: "http://127.0.0.1:3000/status/{$j<project>}/{$j<job-id>}" or next;
-          if c.res.content.Int == 1 {
-            emit %( id => $j<job-id>, status => "OK");
-            done;
-          } elsif c.res.content.Int == -1 {
-            emit %( id => $j<job-id>, status => "FAIL");
-            done;
-          } elsif c.res.content.Int == 0 {
-            emit %( id => $j<job-id>, status => "RUNNING");
-          }
-          $i++;
-          if $i>=300 { # timeout after 300 requests
-            emit %( id => $j<job-id>, status => "TIMEOUT");
-            done
-          }
+
+        my $status = $j.status;
+
+        emit %( id => "{$project}/{$job-id}", status => $status );
+
+        done if $status eq "FAIL" or $status eq "OK";
+
       }
+
   }
 
   $supply.tap( -> $v {
-      if $v<status> eq "FAIL" or $v<status> eq "OK"  or $v<status> eq "TIMEOUT" {
-        push @jobs, $v;
-      }
-      say $v;
+    push @jobs, $v if $v<status> eq "FAIL" or $v<status> eq "OK";
+    say $v;
   });
 
 }
