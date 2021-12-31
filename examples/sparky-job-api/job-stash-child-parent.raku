@@ -1,8 +1,9 @@
+  use Sparky::JobApi;
+
   if tags()<stage> eq "main" {
 
     # spawns a child job
 
-    use Sparky::JobApi;
     my $j = Sparky::JobApi.new(:project<spawned_jobs>);
     $j.queue({
       description => "my spawned job",
@@ -33,6 +34,10 @@
     $supply.tap( -> $v {
         say $v;
     });
+
+    say $j.get-stash().perl;
+
+
   } elsif tags()<stage> eq "child" {
 
     # child job here
@@ -40,5 +45,8 @@
     say "config: ", config().perl;
     say "tags: ", tags().perl;
 
-    
+    my $j = Sparky::JobApi.new(:mine<True>);
+
+    $j.put-stash({ hello => "Sparky" });
+
   }
