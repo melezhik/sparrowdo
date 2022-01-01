@@ -1,4 +1,4 @@
-export PATH=$PATH:~/.raku/bin/:/opt/rakudo-pkg/bin # to support latest rakudo distributions that install zef separately to ~/.raku
+export PATH=$PATH:$HOME/.raku/bin/:/opt/rakudo-pkg/bin # to support latest rakudo distributions that install zef separately to ~/.raku
 
 set -e
 
