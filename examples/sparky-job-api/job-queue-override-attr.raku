@@ -12,7 +12,7 @@ use Sparky::JobApi;
         bar => 2,
       ),
       sparrowdo => %(
-        no_index_update => True
+        no_index_update => False
       )
     });
 
@@ -40,6 +40,8 @@ use Sparky::JobApi;
     say "queue spawned job ", $j.info.perl;
 
   } elsif tags()<stage> eq "off" {
+
+    bash "hostname";
 
     say "I am off now, good buy!";
     say "config: ", config().perl;
