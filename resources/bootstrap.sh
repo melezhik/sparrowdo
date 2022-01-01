@@ -31,6 +31,7 @@ case "$OS" in
     rm -rf /etc/apt/sources.list.d/rakudo-pkg.list
     echo "deb https://dl.bintray.com/nxadm/rakudo-pkg-debs `lsb_release -cs` main" | tee -a /etc/apt/sources.list.d/rakudo-pkg.list
     apt-get update -qq && apt-get install -q -y -o Dpkg::Use-Pty=0 rakudo-pkg
+    install-zef
   ;;
   fedora)
     dnf -yq install curl perl bash redhat-lsb-core git
