@@ -11,10 +11,10 @@
         foo => 1,
         bar => 2,
       ),
-      sparrowdo => %(
-        no_sudo => True,
-        bootstrap => False
-      )
+      #sparrowdo => %(
+      #  no_sudo => True,
+      #  bootstrap => False
+      #)
     });
 
     say "queue spawned job, ",$j.info.perl;
