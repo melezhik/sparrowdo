@@ -2,6 +2,8 @@ export PATH=$PATH:$HOME/.raku/bin/:/opt/rakudo-pkg/bin # to support latest rakud
 
 set -e
 
+echo "start bootstrap"
+
 case "$OS" in
   alpine)
     apk update --wait 120
