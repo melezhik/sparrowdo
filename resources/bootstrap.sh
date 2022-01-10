@@ -53,6 +53,6 @@ case "$OS" in
     exit 1
 esac
 
-zef install --/test --force-install https://github.com/melezhik/Sparrow6.git https://github.com/melezhik/sparky-job-api.git
+zef install --/test --force-install https://github.com/melezhik/Sparrow6.git https://github.com/sergot/io-socket-ssl.git https://github.com/melezhik/sparky-job-api.git
 
 
