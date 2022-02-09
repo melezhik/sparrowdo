@@ -110,9 +110,9 @@ sub MAIN (
         verbose => $verbose 
       );
       if ! $sparrowfile && ! $spf.IO.e  { 
-        # don't try to run sparrowfile if in bootstrap mode
-        # and if sparrowfile is not passed and 
-        # default sparrowfile does not exist
+        # don't don anything if in bootstrap mode
+        # and if a sparrowfile is not set via cli 
+        # and a default sparrowfile does not exist
         say "Congratulations!\nYour system is ready to be configured automatically using Sparrowdo!";
         exit 0;
       }
@@ -129,7 +129,6 @@ sub MAIN (
     prepare-sparrowdo-files %( 
       verbose => $verbose
     );
-
 
     my @hosts = EVALFILE($host);
 
