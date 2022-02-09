@@ -38,7 +38,6 @@ sub MAIN (
 
 {
 
-
   my @jobs; # queued jobs
 
   my $spf = $sparrowfile || 'sparrowfile'; # Sparrowfile to run
@@ -103,7 +102,6 @@ sub MAIN (
     );
 
   } elsif $localhost {  
-
 
     if $bootstrap {
       bootstrap-localhost %( 
@@ -195,7 +193,6 @@ sub MAIN (
         say "SKIP host {$h} by tags creteria" if $verbose;
         next;
       }
-
 
       next if $dry_run;
 
