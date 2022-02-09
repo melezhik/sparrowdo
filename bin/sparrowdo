@@ -1,5 +1,4 @@
-#!perl6
-
+#!raku
 
 use Sparrowdo;
 

@@ -67,21 +67,21 @@ sub generate-sparrowdo-harness (%args) is export {
 
     if $%args<index-update> {
 
-      $fh.say("sudo --login SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS perl6 -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
+      $fh.say("sudo --login SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
 
     }
 
-    $fh.say("sudo --login d=\$PWD SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'cd \$d && perl6 -MSparrow6::DSL sparrowfile'");
+    $fh.say("sudo --login d=\$PWD SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'cd \$d && raku -MSparrow6::DSL sparrowfile'");
 
   } else {
 
     if $%args<index-update> {
 
-      $fh.say("perl6 -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
+      $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
 
     }
 
-    $fh.say("perl6 -MSparrow6::DSL sparrowfile");
+    $fh.say("raku -MSparrow6::DSL sparrowfile");
 
   }
 
