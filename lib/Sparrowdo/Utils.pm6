@@ -35,11 +35,12 @@ sub generate-sparrowdo-harness (%args) is export {
   if %args<type> eq 'docker' {
 
     $fh.say("cd /root/.sparrowdo/env/$prefix/.sparrowdo");
-    $fh.say("export PATH=/opt/rakudo-pkg/bin/:\$PATH");
+    $fh.say("export PATH=~/.raku/bin/:\$PATH");
 
   } elsif %args<localhost> {
 
     $fh.say("cd .sparrowdo/");
+    $fh.say("export PATH=~/.raku/bin/:\$PATH");
 
   } else {
 

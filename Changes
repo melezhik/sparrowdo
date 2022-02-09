@@ -6,6 +6,7 @@ Revision history for Sparrowdo
     Improvement: Don't create dummy sparrowfile is the one exists
     Fix bootstrap issues for debian/ubuntu
     Add openssl to bootstrap to support Sparky JobApi with SSL
+    Fix PATH calculation for docker and localhost
 
 0.1.15 2021-12-14T00:00:00Z
 
