@@ -225,12 +225,13 @@ sub MAIN (
       mkdir $cache-dir;
 
       if $verbose {
-        shell("cp -rv .sparrowdo/* $cache-dir");
+        say "[utils] copy .sparrowdo/* to cache-dir";
+        shell("cp -rv .sparrowdo/* $cache-dir 2>&1");
         if $spf.IO ~~ :e {
           shell("cp -v $spf $cache-dir/sparrowfile");
         }
       } else {
-        shell("cp -r .sparrowdo/* $cache-dir");
+        shell("cp -r .sparrowdo/* $cache-dir 2>&1");
         if $spf.IO ~~ :e {
           shell("cp $spf $cache-dir/sparrowfile");
         }

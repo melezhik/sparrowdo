@@ -8,13 +8,16 @@ sub generate-sparrowdo-harness (%args) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  say "[utils] create .sparrowdo directory" if %args<verbose>;
+  say "[utils] generate-sparrowdo-harness" if %args<verbose>;
+  say "[utils] clean up .sparrowdo directory" if %args<verbose>;
 
   if %args<verbose> {
-    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rfv .sparrowdo; else echo '.sparrowdo dir does not exist'; fi";
+    shell "if test -d .sparrowdo; then rm -rfv .sparrowdo; else echo '.sparrowdo dir does not exist'; fi";
   } else {
-    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rf .sparrowdo; else echo '.sparrowdo dir does not exist'; fi";
+    shell "if test -d .sparrowdo; then rm -rf .sparrowdo; else : ; fi";
   }
+
+  say "[utils] create .sparrowdo directory" if %args<verbose>;
 
   mkdir ".sparrowdo";
 
@@ -107,6 +110,7 @@ sub generate-sparrowdo-harness (%args) is export {
 sub prepare-sparrowdo-files (%args?)  is export {
 
   say "[utils] prepare sparrowdo files" if %args<verbose>;
+  say "[utils] cwd: {$*CWD}" if %args<verbose>;
 
   shell "touch .sparrowdo/sparrowdo.dummy";
 
@@ -115,7 +119,9 @@ sub prepare-sparrowdo-files (%args?)  is export {
     '-r',
   );
 
-  push @cmd, "-v" if %args<verbose>;
+  #push @cmd, "-v" if %args<verbose>;
+
+  push @cmd, "2>&1";
 
   my @files;
 
