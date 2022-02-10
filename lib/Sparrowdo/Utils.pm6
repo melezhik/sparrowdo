@@ -11,9 +11,9 @@ sub generate-sparrowdo-harness (%args) is export {
   say "[utils] create .sparrowdo directory" if %args<verbose>;
 
   if %args<verbose> {
-    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rfv .sparrowdo; fi";
+    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rfv .sparrowdo; else echo '.sparrowdo dir does not exist'; fi";
   } else {
-    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rf .sparrowdo; fi";
+    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rf .sparrowdo; else echo '.sparrowdo dir does not exist'; fi";
   }
 
   mkdir ".sparrowdo";
