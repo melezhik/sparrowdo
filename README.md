@@ -372,7 +372,13 @@ Docker container name to run Sparrowdo scenario on, none required.
 
 * `--localhost`
 
-If set, runs Sparrowdo in localhost, in that case Sparrow6 tasks get run directly without launching ssh
+If set, runs Sparrowdo in localhost, in that case Sparrow6 tasks get run directly without launching ssh.
+
+* `--with_sparrowdo`
+
+If set, run Sparrowdo scenario under Sparky server.
+
+See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md#watcher-jobs) doc.
 
 * `--ssh_user`
 

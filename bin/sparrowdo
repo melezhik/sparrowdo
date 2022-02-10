@@ -14,7 +14,7 @@ use Sparrow6::DSL;
 
 sub MAIN (
 
-  Str  :$host = '127.0.0.1', 
+  Str  :$host = "127.0.0.1", 
   Str  :$sparrowfile, 
   Str  :$tags, 
   Str  :$repo = "http://sparrowhub.io/repo/", 
@@ -34,6 +34,7 @@ sub MAIN (
   Str  :$watch, 
   Int  :$workers = 3, 
   Bool :$no_index_update  = False,
+  Bool :$with_sparky  = False,
 )
 
 {
@@ -62,7 +63,7 @@ sub MAIN (
     tags => $tags,
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
-  ) unless $host.IO ~~ :f;
+  ) unless $host.IO ~~ :f or $with_sparky;
 
   if ($docker) {
 
@@ -101,7 +102,7 @@ sub MAIN (
       )
     );
 
-  } elsif $localhost {  
+  } elsif $localhost && ! $with_sparky {  
 
     if $bootstrap {
       bootstrap-localhost %( 
@@ -122,13 +123,20 @@ sub MAIN (
       verbose => $verbose, 
     );
 
-  } elsif $host.IO ~~ :f {  
+  } elsif $host.IO ~~ :f  or $with_sparky {  
 
     prepare-sparrowdo-files %( 
       verbose => $verbose
     );
 
-    my @hosts = EVALFILE($host);
+    my @hosts;
+
+    if $with_sparky {
+      my $hst = $localhost ??  "localhost" !! $host;
+      @hosts.push: $hst; 
+    } else {
+      @hosts = EVALFILE($host);
+    }
 
     my %tags = $tags ?? parse-tags($tags) !! %(); 
 

@@ -63,6 +63,25 @@ Queue tab contains a list of builds to be executed.
 
 Recent build tab contains a list of currently executed builds.
 
+## With_sparky parameter
+
+It's handy to use `--with_sparky` parameter instead of providing `host` file, if one
+only wants to run for a single host. 
+
+Examples.
+
+Runs on localhost under Sparky server:
+
+```bash
+sparrowdo --with_sparky --localhost
+```
+
+Runs on remote host under Sparky server:
+
+```bash
+sparrowdo --host=192.168.0.1 --with_sparky 
+```
+
 # Advanced topics
 
 ## Tags
