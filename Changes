@@ -4,10 +4,11 @@ Revision history for Sparrowdo
 
     New feature: Sparky JobApi support
     Improvement: Don't create dummy sparrowfile is the one exists
-    Fix bootstrap issues for debian/ubuntu
+    Fix bootstrap issues for Debian/Ubuntu
     Add openssl to bootstrap to support Sparky JobApi with SSL
     Fix PATH calculation for docker and localhost
     Sparrowdo cli: new parameter `--with_sparky` 
+    Improvement: clean up .sparrowdo dir every run to avoid subtle bugs
 
 0.1.15 2021-12-14T00:00:00Z
 
@@ -22,8 +23,8 @@ Revision history for Sparrowdo
 
     New feature: watcher jobs
     Bug fix: clean sparrowdo cache dir on remote host before run( implemented only for docker and ssh )
-    Bug fix: respect `sync` cli paramneter when run in sparky integration mode
-    Make compatible with the latest rakudo distribution installation method
+    Bug fix: respect `sync` cli parameter when run in sparky integration mode
+    Make compatible with the latest raked distribution installation method
     Fixing minor issues with bootstrap
 
 0.1.12  2020-11-10T01:26:23Z
@@ -112,7 +113,7 @@ Revision history for Sparrowdo
 
     - Add cwd to `bash` command
 
-    - Workaround for weird bug when `shell` does not raise exeption in case of unsuccessful exit code from run command - https://github.com/rakudo/rakudo/issues/2292#issuecomment-422848157
+    - Workaround for weird bug when `shell` does not raise exception in case of unsuccessful exit code from run command - https://github.com/rakudo/rakudo/issues/2292#issuecomment-422848157
 
     - Fixing bugs in integration tests
 
@@ -161,7 +162,7 @@ Revision history for Sparrowdo
 # 0.0.34 2017-10-16
 
 - Sparrowdo bootstrap is compelte rewitten, huge thanks to @Tyil
-- Parallel tests for varios OS, huge thanks for @Tyil
+- Parallel tests for various OS, huge thanks for @Tyil
 
 # 0.0.33 2017-10-11
 
@@ -177,7 +178,7 @@ Core-dsl doc: `on_change` parameter for `template` function
 
 - Ssh passwords support, acknowledges to @Spigell - https://github.com/melezhik/sparrowdo/pull/12
 - Minor fixes at sparrowdo cache method
-- Improvment of tests
+- Improvement of tests
 - bin/sparrowdo small refactoring
 
 # 0.0.30 2017-09-21
@@ -186,7 +187,7 @@ Core-dsl doc: `on_change` parameter for `template` function
 
 # 0.0.29 2017-09-13
 
-- Archlinux bootstrap impoved, thanks to @Spigell (https://github.com/melezhik/sparrowdo/pull/10 , https://github.com/melezhik/sparrowdo/pull/11 )
+- Archlinux bootstrap improved, thanks to @Spigell (https://github.com/melezhik/sparrowdo/pull/10 , https://github.com/melezhik/sparrowdo/pull/11 )
 
 
 # 0.0.28 2017-09-01
@@ -224,7 +225,7 @@ Core-dsl doc: `on_change` parameter for `template` function
 - Support for --cwd option
 - Sparrow/Sparrowdo cache files refactoring to allow run multiple sparrowdo scenarios on the same host safely
 - Now respect no_color completely
-- Varios zef dsl fixes
+- Various zef dsl fixes
 
 # 0.0.20 2017-06-22
 

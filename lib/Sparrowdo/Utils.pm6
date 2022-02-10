@@ -6,10 +6,15 @@ use Sparrowdo::Bootstrap;
 
 sub generate-sparrowdo-harness (%args) is export {
 
-
   my $prefix = %args<prefix> || "default";
 
   say "[utils] create .sparrowdo directory" if %args<verbose>;
+
+  if %args<verbose> {
+    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rfv .sparrowdo; fi";
+  } else {
+    shell "if test -d .sparrowdo; then echo 'clean up .sparrowdo dir'; rm -rf .sparrowdo; fi";
+  }
 
   mkdir ".sparrowdo";
 
@@ -102,8 +107,6 @@ sub generate-sparrowdo-harness (%args) is export {
 sub prepare-sparrowdo-files (%args?)  is export {
 
   say "[utils] prepare sparrowdo files" if %args<verbose>;
-
-  mkdir ".sparrowdo";
 
   shell "touch .sparrowdo/sparrowdo.dummy";
 

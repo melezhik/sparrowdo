@@ -63,7 +63,7 @@ sub MAIN (
     tags => $tags,
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
-  ) unless $host.IO ~~ :f or $with_sparky;
+  );
 
   if ($docker) {
 
