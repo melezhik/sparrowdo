@@ -50,6 +50,11 @@ sub MAIN (
 
   my $path-to-config = $conf || "config.pl6";
 
+  # check for conflict parameters combination
+  if $localhost && $host && $host.IO ~~ :f {
+    die "can't use --localhost and --host=file in the same time"
+  }
+
   generate-sparrowdo-harness %(
     config => $path-to-config,
     sparrowfile => $spf,
