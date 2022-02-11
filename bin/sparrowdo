@@ -124,7 +124,7 @@ sub MAIN (
       verbose => $verbose, 
     );
 
-  } elsif $host.IO ~~ :f  or $with_sparky {  
+  } elsif $host.IO ~~ :f or $with_sparky {  
 
     prepare-sparrowdo-files %( 
       verbose => $verbose
@@ -161,7 +161,7 @@ sub MAIN (
       } 
 
      my %host-tags = %();
-     
+
      if $host-tags && $host-tags.isa(Str) {
        %host-tags = parse-tags($host-tags)
      } elsif $host-tags.isa(Hash) {
