@@ -374,11 +374,15 @@ Docker container name to run Sparrowdo scenario on, none required.
 
 If set, runs Sparrowdo in localhost, in that case Sparrow6 tasks get run directly without launching ssh.
 
-* `--with_sparrowdo`
+* `--with_sparky`
 
-If set, run Sparrowdo scenario under Sparky server.
+If set, run in asynchronous mode through Sparky backend.
 
 See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md#watcher-jobs) doc.
+
+* `--desc`
+
+Set a descriptive name to a build, only works when run in asynchronous mode through Sparky backend
 
 * `--ssh_user`
 

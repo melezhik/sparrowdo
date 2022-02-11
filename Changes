@@ -8,6 +8,7 @@ Revision history for Sparrowdo
     Add openssl to bootstrap to support Sparky JobApi with SSL
     Fix PATH calculation for docker and localhost
     Sparrowdo cli: new parameter `--with_sparky` 
+    Sparrowdo cli: new parameter `--desc` 
     Improvement: clean up .sparrowdo dir every run to avoid subtle bugs
 
 0.1.15 2021-12-14T00:00:00Z

@@ -32,6 +32,7 @@ sub MAIN (
   Str  :$prefix,
   Str  :$sync,
   Str  :$watch, 
+  Str  :$desc,
   Int  :$workers = 3, 
   Bool :$no_index_update  = False,
   Bool :$with_sparky  = False,
@@ -276,9 +277,9 @@ sub MAIN (
       if $h ~~ /^^ \s* 'docker:' (\S+)/ {
         %sparrowdo-config<docker> = "$0";  
         %sparrowdo-config<no_sudo> = True;  
-        %trigger<description> = %host-tags<name> ?? "docker [{%host-tags<name>}]" !! "docker [$0]"
+        %trigger<description> = %host-tags<name> ?? "docker [{%host-tags<name>}]" !! ($desc || "docker [$0]")
       } elsif $h eq "localhost" {
-        %trigger<description> =  %host-tags<name> ?? "localhost [{%host-tags<name>}]" !! "[localhost]";
+        %trigger<description> =  %host-tags<name> ?? "localhost [{%host-tags<name>}]" !! ( $desc || "[localhost]");
         %sparrowdo-config<no_sudo> = $no_sudo;  
       } else {
         %sparrowdo-config<host> = $h;  
@@ -286,7 +287,7 @@ sub MAIN (
         %sparrowdo-config<ssh_user> = $ssh_user if $ssh_user;  
         %sparrowdo-config<ssh_private_key> = $ssh_private_key if $ssh_private_key;  
         %sparrowdo-config<no_sudo> = $no_sudo;  
-        %trigger<description> =  %host-tags<name> ?? "host [{%host-tags<name>}]" !! "host [$h]"
+        %trigger<description> =  %host-tags<name> ?? "host [{%host-tags<name>}]" !! ( $desc || "host [$h]")
       }
 
       %trigger<sparrowdo> = %sparrowdo-config;
