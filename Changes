@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.16 2022-02-12T00:00:00Z
+
     New feature: Sparky JobApi support
     Improvement: Don't create dummy sparrowfile is the one exists
     Fix bootstrap issues for Debian/Ubuntu

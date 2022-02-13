@@ -4,7 +4,7 @@
 
     # spawns a child job
 
-    my $j = Sparky::JobApi.new(:project<spawned_jobs>);
+    my $j = Sparky::JobApi.new(:project<spawned_jobs>, :api<http://sparrowhub.io:4000>);
 
     $j.put-stash({ hello => "world" });
 
