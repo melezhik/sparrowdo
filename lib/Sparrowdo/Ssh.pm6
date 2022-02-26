@@ -12,7 +12,7 @@ sub prepare-ssh-host ($host,%args?) is export {
 
   my @cmd = ("ssh");
 
-  push @cmd,  ("-l", %args<ssh-user> ) if   %args<ssh-user>;
+  #push @cmd,  ("-l", %args<ssh-user> ) if   %args<ssh-user>;
 
   push @cmd, (
     "-q",
@@ -65,7 +65,7 @@ sub prepare-ssh-host ($host,%args?) is export {
 
   say "[ssh] effective cmd: $cmd" if %args<verbose>;
 
-  shell $cmd;
+  shell($cmd);
 
   if %args<sync> {
 
