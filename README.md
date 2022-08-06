@@ -97,7 +97,7 @@ In case you need more DSL wrappers let us know!
                                /       |       |      \
                               /        |       |       \
                              /         |       |        \
-                          [CPAN]   [RubyGems] [PyPi]  [modules.raku.org]
+                          [CPAN]   [RubyGems] [PyPi]  [raku.land]
 
 
 ## Master host
