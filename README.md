@@ -30,7 +30,7 @@ For example:
 
 # DSL
 
-Sparrow6 DSL is high level functions to manage configurations.
+Sparrow6 DSL provides high level functions to manage configurations.
 
 Just create a file named `sparrowdo` in current working directory and add few functions:
 
@@ -43,10 +43,10 @@ Just create a file named `sparrowdo` in current working directory and add few fu
     directory '/var/data/avifauna/greetings/', %( owner => 'zookeeper' );
 
     file-create '/var/data/avifauna/greetings/sparrow.txt', %( 
-        owner => 'zookeeper',
-        group => 'birds', 
-        mode  => '0644', 
-        content => 'I am little but I am smart'
+      owner => 'zookeeper',
+      group => 'birds', 
+      mode  => '0644', 
+      content => 'I am little but I am smart'
     );
 
     service-start 'nginx';
@@ -102,7 +102,7 @@ In case you need more DSL wrappers let us know!
 
 ## Master host
 
-Master host is where Sparrow6 tasks "pushed" to target hosts.
+Master host is where Sparrow6 tasks "pushed" from totarget hosts.
 
 Sparrowdo should be installed on master host:
 
@@ -110,7 +110,7 @@ Sparrowdo should be installed on master host:
 
 ## Sparrowdo scenario
 
-Sparrowdo scenario is collection of Sparrow6 tasks executed on target host.
+Sparrowdo scenario is a collection of Sparrow6 tasks executed on target host.
 
 ## Target hosts
 

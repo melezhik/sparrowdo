@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.17 2022-08-05T23:50:00Z
+
+    Minor documentation changes
+    pl6 -> raku for tomtit and tomty scenarios
+
 0.1.16 2022-02-12T00:00:00Z
 
     New feature: Sparky JobApi support

@@ -40,6 +40,8 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("set -e");
 
+  $fh.say("# deployment type: {%args<type>}");
+
   if %args<type> eq 'docker' {
 
     $fh.say("cd /root/.sparrowdo/env/$prefix/.sparrowdo");

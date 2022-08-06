@@ -1,1 +1,1 @@
-[files/tasks/hello-world] :: hello world
+[task run: task.bash - files/tasks/hello-world]
