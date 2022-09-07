@@ -80,7 +80,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "{docker-cmd()} exec -i $host sh /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "{docker-cmd()} exec -i $host sh -l /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
