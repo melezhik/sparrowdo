@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.20 2022-09-08T13:40:00Z
+
+    Install Tomtit during bootstrap
+
 0.1.19 2022-09-07T20:50:00Z
 
     Fix alpine boostrap - use 
