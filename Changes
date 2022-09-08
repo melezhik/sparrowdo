@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.19 2022-09-07T20:50:00Z
+
+    Fix alpine boostrap - use 
+    https://github.com/nxadm/rakudo-pkg script
+
 0.1.18 2022-09-07T20:30:00Z
 
     Use `--login` when run tasks on docker,

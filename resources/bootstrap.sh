@@ -7,9 +7,10 @@ echo "start bootstrap"
 case "$OS" in
   alpine)
     apk update --wait 120
-    apk add --wait 120 curl perl bash git openssl-dev
-    curl -s -L -k -o /tmp/rakudo-pkg-Alpine3.10_2020.02.1-04_x86_64.apk https://github.com/nxadm/rakudo-pkg/releases/download/v2020.02.1-04/rakudo-pkg-Alpine3.10_2020.02.1-04_x86_64.apk
-    apk add --allow-untrusted /tmp/rakudo-pkg-Alpine3.10_2020.02.1-04_x86_64.apk
+    apk add --no-cache --wait 120 curl perl bash git openssl-dev
+    curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.alpine.sh' | bash
+    apk add rakudo-pkg
+    zef --version || install-zef
   ;;
   amazon|centos|red)
     yum -q -y install make curl perl bash redhat-lsb-core git perl-JSON-PP openssl-devel
