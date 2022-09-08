@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.18 2022-09-07T20:30:00Z
+
     Use `--login` when run tasks on docker,
     to ensure shat `/opt/rakudo-pkg/bin` in PATH
 

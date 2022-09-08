@@ -4,7 +4,7 @@ Run Sparrow tasks remotely (and not only)
 
 # Build status
 
-[![Build Status](https://travis-ci.org/melezhik/sparrowdo.svg)](https://travis-ci.org/melezhik/sparrowdo)
+[![SparkyCI](http://sparrowhub.io:2222/project/gh-melezhik-sparrowdo/badge)](http://sparrowhub.io:2222)
 
 # Install
 
