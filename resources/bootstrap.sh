@@ -54,6 +54,16 @@ case "$OS" in
     exit 1
 esac
 
-zef install --/test --force-install --install-to=home Tomtit https://github.com/melezhik/Sparrow6.git https://github.com/sergot/io-socket-ssl.git https://github.com/melezhik/sparky-job-api.git
+if raku -MTomtit -e 1; then
+  echo "Tomtit already installed"
+else
+  zef install --/test --force-install --install-to=home Tomtit
+fi
+
+if raku -MSparky::JobApi -e 1; then
+  echo "Sparky::JobApi already installed"
+else
+  zef install --/test --force-install --install-to=home Sparky::JobApi
+fi
 
 
