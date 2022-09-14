@@ -22,7 +22,13 @@ case "$OS" in
   ;;
   arch|archlinux)
     pacman -Syy
-    pacman -S --needed --noconfirm -q curl perl bash git openssl rakudo zef
+    pacman -S --needed --noconfirm -q curl perl bash git openssl
+    if raku -v 2>/dev/null; then
+    else
+      id -u aur &>/dev/null || useradd -m aur
+      su - aur -c "rm -rf /tmp/rakudo && git clone https://aur.archlinux.org/rakudo.git /tmp/rakudo && cd /tmp/rakudo && makepkg"
+      pacman -U /tmp/rakudo/rakudo.tar.gz
+    fi
   ;;
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
