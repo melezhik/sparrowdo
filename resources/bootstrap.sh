@@ -22,10 +22,7 @@ case "$OS" in
   ;;
   arch|archlinux)
     pacman -Syy
-    pacman -S --needed --noconfirm -q curl perl bash git openssl base-devel
-    git clone https://aur.archlinux.org/rakudo-bin.git ~/rakudo-bin
-    cd ~/rakudo-bin 
-    makepkg -si
+    pacman -S --needed --noconfirm -q curl perl bash git openssl rakudo
   ;;
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
