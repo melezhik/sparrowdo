@@ -22,7 +22,7 @@ case "$OS" in
   ;;
   arch|archlinux)
     pacman -Syy
-    pacman -S --needed --noconfirm -q curl perl bash git openssl rakudo
+    pacman -S --needed --noconfirm -q curl perl bash git openssl rakudo zef
   ;;
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
