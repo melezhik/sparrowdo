@@ -22,13 +22,20 @@ case "$OS" in
   ;;
   arch|archlinux)
     pacman -Syy
-    pacman -S --needed --noconfirm -q curl perl bash git openssl
+    pacman -S --needed --noconfirm -q curl perl bash git openssl base-devel 
     if raku -v 2>/dev/null; then
       echo "rakudo already installed"
     else
       id -u aur &>/dev/null || useradd -m aur
-      su - aur -c "rm -rf /tmp/rakudo && git clone https://aur.archlinux.org/rakudo.git /tmp/rakudo && cd /tmp/rakudo && makepkg"
-      pacman -U /tmp/rakudo/rakudo.tar.gz
+      su - aur -c "rm -rf /tmp/rakudo && git clone https://aur.archlinux.org/rakudo-bin.git /tmp/rakudo && cd /tmp/rakudo && makepkg --skippgpcheck"
+      pacman --noconfirm -U /tmp/rakudo/*.tar.zst
+    fi
+    if zef -v 2>/dev/null; then
+      echo "zef already installed"
+    else
+      id -u aur &>/dev/null || useradd -m aur
+      su - aur -c "rm -rf /tmp/zef && git clone https://aur.archlinux.org/zef.git /tmp/zef && cd /tmp/zef && makepkg --skippgpcheck"
+      pacman --noconfirm -U /tmp/zef/*.tar.zst
     fi
   ;;
   debian|ubuntu)
