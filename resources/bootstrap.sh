@@ -33,9 +33,10 @@ case "$OS" in
     if zef -v 2>/dev/null; then
       echo "zef already installed"
     else
-      id -u aur &>/dev/null || useradd -m aur
-      su - aur -c "rm -rf /tmp/zef && git clone https://aur.archlinux.org/zef.git /tmp/zef && cd /tmp/zef && makepkg --skippgpcheck"
-      pacman --noconfirm -U /tmp/zef/*.tar.zst
+      rm -rf /tmp/zef
+      git clone https://github.com/ugexe/zef.git /tmp/zef
+      cd /tmp/zef
+      raku -I. bin/zef install . --/test --install-to=home --force-install
     fi
   ;;
   debian|ubuntu)
