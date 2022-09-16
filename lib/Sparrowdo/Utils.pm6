@@ -72,6 +72,7 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_DEBUG=1") if %args<debug>;
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
   $fh.say("export SP6_TAGS='{%args<tags>}'") if %args<tags>;
+  $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
   if %args<sudo> && %args<type> eq 'default' {
 

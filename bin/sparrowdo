@@ -22,6 +22,7 @@ sub MAIN (
   Int  :$ssh_port = 22, 
   Str  :$ssh_private_key, 
   Bool :$verbose = False,
+  Bool :$color   = False,
   Bool :$dry_run = False,
   Bool :$debug   = False,
   Bool :$bootstrap = False, 
@@ -69,6 +70,7 @@ sub MAIN (
     tags => $tags,
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
+    color => $color,
   );
 
   if ($docker) {

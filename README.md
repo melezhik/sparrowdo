@@ -432,6 +432,10 @@ See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/s
 
 Set host(s) tags, see [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/sparky-integration.md) doc.
 
+* `--color`
+
+Enable color output. Disabled by default.
+
 * `--verbose`
 
 If set print additional information during Sparrowdo scenario execution.
