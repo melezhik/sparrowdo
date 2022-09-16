@@ -4,7 +4,7 @@ Run Sparrow tasks remotely (and not only)
 
 # Build status
 
-[![SparkyCI](http://sparrowhub.io:2222/project/gh-melezhik-sparrowdo/badge)](http://sparrowhub.io:2222)
+[![SparkyCI](https://ci.sparrowhub.io/project/gh-melezhik-sparrowdo/badge)](https://ci.sparrowhub.io)
 
 # Install
 
