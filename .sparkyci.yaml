@@ -5,6 +5,7 @@ init:
     SP6_LOG_NO_TIMESTAMPS: 1
     
 main:
+  with-zef-deps: true
   build:
     pre: |
       set -e
