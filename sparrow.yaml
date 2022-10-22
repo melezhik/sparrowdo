@@ -5,6 +5,8 @@ tasks:
     default: true
     language: Bash
     code: |
+      set -e
+      cd source 
       tomty --all --show-failed --color 
     depends:
       -
@@ -13,5 +15,7 @@ tasks:
     name: install-deps
     language: Bash
     code: |
+      set -e
+      cd source 
       zef install . --/test
 
