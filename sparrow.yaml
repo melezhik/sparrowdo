@@ -7,6 +7,7 @@ tasks:
     code: |
       set -e
       cd source 
+      PATH=/opt/rakudo-pkg/share/perl6/site/bin/:$PATH \ 
       tomty --all --show-failed --color 
     depends:
       -
@@ -17,6 +18,5 @@ tasks:
     code: |
       set -e
       cd source
-      PATH=/opt/rakudo-pkg/share/perl6/site/bin/:$PATH \ 
       zef install . --/test
 
