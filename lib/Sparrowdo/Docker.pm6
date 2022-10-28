@@ -18,7 +18,6 @@ sub prepare-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-
   my @rmdir-cmd = (
     docker-cmd(),
     "exec",
@@ -26,7 +25,7 @@ sub prepare-docker-host ($host,%args?) is export {
     $host,
     "rm",
     "-rf",
-    "/root/.sparrowdo/env/$prefix",
+    "/var/.sparrowdo/env/$prefix",
   );
 
   run @rmdir-cmd;
@@ -38,7 +37,7 @@ sub prepare-docker-host ($host,%args?) is export {
     $host,
     "mkdir",
     "-p",
-    "/root/.sparrowdo/env/$prefix",
+    "/var/.sparrowdo/env/$prefix",
   );
 
   run @cp-cmd;
@@ -47,11 +46,23 @@ sub prepare-docker-host ($host,%args?) is export {
     docker-cmd(),
     "cp",
     ".sparrowdo/",
-    "$host:/root/.sparrowdo/env/$prefix/",
+    "$host:/var/.sparrowdo/env/$prefix/",
   );
 
   run @cp-cmd;
 
+  my @chmod-cmd = (
+    docker-cmd(),
+    "exec",
+    "-i",
+    $host,
+    "chmod",
+    "-R",
+    "a+rwx",
+    "/var/.sparrowdo/env/$prefix",
+  );
+
+  run @chmod-cmd;
 }
 
 
@@ -64,10 +75,12 @@ sub bootstrap-docker-host ($host, %args?) is export {
   my @cmd = (
     docker-cmd(),
     "exec",
+    "--user",
+    "root",
     "-i",
     "$host",
     "sh", 
-    "/root/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
+    "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
   );
 
   run @cmd;
@@ -80,7 +93,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "{docker-cmd()} exec -i $host sh -l /root/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "{docker-cmd()} exec -i $host sh -l /var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 

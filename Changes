@@ -3,6 +3,8 @@ Revision history for Sparrowdo
 {{$NEXT}}
 
     - Support color option
+    - Change docker directory layout
+    - Runs docker bootstrap under root
 
 0.1.22 2022-09-15T22:20:00Z
 
