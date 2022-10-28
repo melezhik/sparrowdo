@@ -21,6 +21,8 @@ sub prepare-docker-host ($host,%args?) is export {
   my @rmdir-cmd = (
     docker-cmd(),
     "exec",
+    "--user",
+    "root",
     "-i",
     $host,
     "rm",
@@ -33,6 +35,8 @@ sub prepare-docker-host ($host,%args?) is export {
   my @cp-cmd = (
     docker-cmd(),
     "exec",
+    "--user",
+    "root",
     "-i",
     $host,
     "mkdir",
@@ -54,6 +58,8 @@ sub prepare-docker-host ($host,%args?) is export {
   my @chmod-cmd = (
     docker-cmd(),
     "exec",
+    "--user",
+    "root",
     "-i",
     $host,
     "chmod",
