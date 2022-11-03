@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    - Bootstrap - reliable way to install zef
+
 0.1.23 2022-10-27T23:50:00Z
 
     - Support color option
@@ -14,7 +16,7 @@ Revision history for Sparrowdo
 
 0.1.21 2022-09-14T17:30:00Z
 
-    Fixing boostrap for archlinux
+    Fixing bootstrap for archlinux
 
 0.1.20 2022-09-08T13:40:00Z
 
@@ -22,13 +24,13 @@ Revision history for Sparrowdo
 
 0.1.19 2022-09-07T20:50:00Z
 
-    Fix alpine boostrap - use 
+    Fix alpine bootstrap - use 
     https://github.com/nxadm/rakudo-pkg script
 
 0.1.18 2022-09-07T20:30:00Z
 
     Use `--login` when run tasks on docker,
-    to ensure shat `/opt/rakudo-pkg/bin` in PATH
+    to ensure that `/opt/rakudo-pkg/bin` in PATH
 
 0.1.17 2022-08-05T23:50:00Z
 
@@ -163,7 +165,7 @@ Revision history for Sparrowdo
 
     - Bug fix - handle sparrowdo.ini file
 
-    - Bug fix - travis tests are fixed ( used ubuntu as api box intead of centos )
+    - Bug fix - travis tests are fixed ( used ubuntu as api box instead of centos )
 
     - Minimal support for Darwin OS ( make sparrowdo runnable on OSx )
 
@@ -197,7 +199,7 @@ Revision history for Sparrowdo
 
 # 0.0.34 2017-10-16
 
-- Sparrowdo bootstrap is compelte rewitten, huge thanks to @Tyil
+- Sparrowdo bootstrap is complete rewritten, huge thanks to @Tyil
 - Parallel tests for various OS, huge thanks for @Tyil
 
 # 0.0.33 2017-10-11

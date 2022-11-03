@@ -4,13 +4,24 @@ set -e
 
 echo "start bootstrap"
 
+func install_zef()
+{
+  if zef -v 2>/dev/null; then
+    echo "zef already installed"
+  else
+    rm -rf /tmp/zef
+    git clone https://github.com/ugexe/zef.git /tmp/zef
+    cd /tmp/zef
+    raku -I. bin/zef install . --/test --install-to=home --force-install
+  fi
+}
 case "$OS" in
   alpine)
     apk update --wait 120
     apk add --no-cache --wait 120 curl perl bash git openssl-dev
     curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.alpine.sh' | bash
     apk add rakudo-pkg
-    zef --version || install-zef
+    install_zef
   ;;
   amazon|centos|red)
     yum -q -y install make curl perl bash redhat-lsb-core git perl-JSON-PP openssl-devel
@@ -18,7 +29,7 @@ case "$OS" in
     'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
     | bash
     yum -q -y install rakudo-pkg
-    zef --version || install-zef
+    install_zef
   ;;
   arch|archlinux)
     pacman -Syy
@@ -30,14 +41,7 @@ case "$OS" in
       su - aur -c "rm -rf /tmp/rakudo && git clone https://aur.archlinux.org/rakudo-bin.git /tmp/rakudo && cd /tmp/rakudo && makepkg --skippgpcheck"
       pacman --noconfirm -U /tmp/rakudo/*.tar.zst
     fi
-    if zef -v 2>/dev/null; then
-      echo "zef already installed"
-    else
-      rm -rf /tmp/zef
-      git clone https://github.com/ugexe/zef.git /tmp/zef
-      cd /tmp/zef
-      raku -I. bin/zef install . --/test --install-to=home --force-install
-    fi
+    install_zef
   ;;
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
@@ -45,7 +49,7 @@ case "$OS" in
     apt-get install -q -y -o Dpkg::Use-Pty=0 build-essential curl perl bash git lsb-release libssl-dev
     curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.deb.sh' | bash
     apt-get update -qq && apt-get install -q -y -o Dpkg::Use-Pty=0 rakudo-pkg
-    zef --version || install-zef
+    install_zef
   ;;
   fedora)
     dnf -yq install curl perl bash redhat-lsb-core git openssl-devel
@@ -53,7 +57,7 @@ case "$OS" in
     'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
     | bash
     dnf -yq install rakudo-pkg
-    zef --version || install-zef
+    install_zef
   ;;
   opensuse)
     curl -1sLf \
@@ -61,7 +65,7 @@ case "$OS" in
     | bash
     zypper install -y rakudo-pkg
     zypper install -y git curl tar gzip libopenssl-devel
-    zef --version || install-zef
+    install_zef
   ;;
   *)
     printf "Your OS (%s) is not supported\n" "$OS"
