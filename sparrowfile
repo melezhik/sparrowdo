@@ -1,4 +1,4 @@
-#!perl6
+#!raku
 
 say "tags: ", tags().perl;
 say "config: ", config().perl;

@@ -1,0 +1,2 @@
+sparrowdo  --bootstrap --localhost
+
