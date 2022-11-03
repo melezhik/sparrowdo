@@ -4,7 +4,7 @@ set -e
 
 echo "start bootstrap"
 
-func install_zef()
+install_zef()
 {
   if zef -v 2>/dev/null; then
     echo "zef already installed"
