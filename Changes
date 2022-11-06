@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    - Fix bootstrap for the latest archlinux
+
 0.1.24 2022-11-03T01:10:00Z
 
     - Bootstrap - reliable way to install zef
