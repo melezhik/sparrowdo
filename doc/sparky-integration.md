@@ -278,7 +278,9 @@ class Pipeline
       }
     }
     my $st = self.wait-jobs: @jobs;
-    unless $st<OK> == @jobs.elems {
+    if $st<OK> == @jobs.elems {
+      say "all jobs succeeded";
+    } else {
       die "some jobs failed or timeouted: {$st.perl}";
     }
   }
