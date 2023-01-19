@@ -290,13 +290,15 @@ class Pipeline
 This simple scenario illustrates how one can iterate though jobs (`config()<jobs>`)
 and get their statuses when they are finished using [Sparky HTTP API](https://github.com/melezhik/sparky#build-status-1).
 
-To get job details use `%job` hash keys:
+To get job details use `status()` and `info()` methods:
 
 ```raku
-  say "job name: ", $j<name>;
-  say "project: ", $j<project>;
-  say "job host: ", $j<host>;
-  say "job tags: ", $j<tags>;
+  for @jobs -> $j {
+    say "job id: ", $j.job-id;
+    say "project: ", $j.project;
+    say "job status: ", $j.status();  
+    say "status-url: ", $j.info()<status-url>;
+  }
 ```
 
 
