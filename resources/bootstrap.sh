@@ -32,7 +32,8 @@ case "$OS" in
     install_zef
   ;;
   arch|archlinux)
-    pacman -Syy
+    pacman -Sy archlinux-keyring
+    pacman -Suyy
     pacman -S --needed --noconfirm -q curl perl bash git openssl base-devel openssl-1.1
     if raku -v 2>/dev/null; then
       echo "rakudo already installed"
