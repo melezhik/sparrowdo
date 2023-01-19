@@ -55,7 +55,7 @@ This command run sparrowdo scenario asynchronously for all hosts defined in host
 
 To track build execution, use Sparky web interface.
 
-* Go to http://127.0.0.1:3000
+* Go to http://127.0.0.1:4000
 
 * Check queue and recent builds tabs
 

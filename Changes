@@ -2,7 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.25 2023-01-19T14:10:00Z
+
     - Fix bootstrap for the latest archlinux
+    - Automate zef release using SparrowCI
+    - Minor documentation changes
 
 0.1.24 2022-11-03T01:10:00Z
 
