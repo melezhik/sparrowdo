@@ -284,7 +284,7 @@ class Pipeline
       die "some jobs failed or timeouted: {$st.perl}";
     }
   }
-  Pipeline.new.run;
+Pipeline.new.run;
 ```
 
 This simple scenario illustrates how one can iterate though jobs (`config()<jobs>`)
