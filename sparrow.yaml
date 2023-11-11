@@ -1,7 +1,7 @@
 image:
-  - melezhik/sparrow:alpine
-  - melezhik/sparrow:archlinux
-  - melezhik/sparrow:debian
+  - melezhik/sparrow:alpine_arm
+  - melezhik/sparrow:archlinux_arm
+  - melezhik/sparrow:debian_arm
 
 secrets:
   - FEZ_TOKEN
