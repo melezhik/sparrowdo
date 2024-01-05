@@ -15,7 +15,7 @@ tasks:
       set -e
       set -x
       cd source 
-      tomty --all --show-failed --color --profile ci
+      tomty --show-failed --color --profile ci
     depends:
       -
         name: install-deps

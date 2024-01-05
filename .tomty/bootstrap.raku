@@ -1,6 +1,6 @@
 =begin tomty 
 %(
-  tags => "bootstrap"
+  tag => [ "bootstrap" ]
 )
 =end tomty
 
