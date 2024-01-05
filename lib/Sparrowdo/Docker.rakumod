@@ -10,11 +10,47 @@ sub docker-cmd () {
 
 }
 
-sub prepare-docker-host ($host,%args?) is export {
+sub prepare-docker-host ($host_str,%args?) is export {
 
-  say "[docker] prepare instance: $host" if %args<verbose>;
+  say "[docker] prepare instance: $host_str" if %args<verbose>;
 
   say "[docker] copy harness files" if %args<verbose>;
+
+  my @d = $host_str.split('@');
+  my $host;
+  if @d.elems > 1 {
+    my $image = shift @d;
+    $host = shift @d;
+    my @docker-cont-stop = (
+      docker-cmd(),
+      "stop",
+      "-t",
+      "1",
+      $host,
+      "||",
+      "echo",
+      "'docker conrainer $host is not running'"
+    );
+    say "[docker] container stop: {@docker-cont-stop.perl}" if %args<verbose>;
+    shell @docker-cont-stop.join(" ");
+    my @docker-image-run = (
+      docker-cmd(),
+      "run",
+      "-id",
+      "--rm",
+      "--stop-timeout",
+      "1",
+      "--name",
+      $host,
+      $image,
+    );
+
+    say "[docker] run image: {@docker-image-run.perl}" if %args<verbose>;
+    run @docker-image-run;
+
+  } else {
+    $host = shift @d;
+  }
 
   my $prefix = %args<prefix> || "default";
 

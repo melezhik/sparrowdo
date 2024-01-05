@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    - Support to run on docker images
+      by using `--image` method
+    - Refactoring: rename pm6 to rakumod
+
 0.1.25 2023-01-19T14:10:00Z
 
     - Fix bootstrap for the latest archlinux

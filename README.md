@@ -20,7 +20,7 @@ For example:
     sparrowdo --host=13.84.166.232  --repo=file:///home/melezhik/repo --verbose  --bootstrap
 
     # docker host, don't add sudo
-    sparrowdo --docker=SparrowBird --no_sudo
+    sparrowdo --docker=SparrowBird --image=alpine:latest --no_sudo
 
     # localhost, with sudo
     sparrowdo --localhost
@@ -322,6 +322,11 @@ run Sparrowdo scenario on it:
 
     $ sparrowdo --docker=running-horse
 
+If you need to pull an image first and then run docker container
+for this image, choose `--image` option:
+
+    $ sparrowdo --docker=running-horse --image=alpine:latest --bootstrap --no_sudo
+
 # Run Sparrowdo on ssh hosts
 
 This is probably one the most common use case for Sparrowdo - configuring servers by ssh:
@@ -368,7 +373,8 @@ See [Sparky integration](https://github.com/melezhik/sparrowdo/blob/master/doc/s
 
 * `--docker`
 
-Docker container name to run Sparrowdo scenario on, none required.
+Name of docker container to run sparrowdo scenario on, to run docker container first
+after pulling an image use `--image` option
 
 * `--localhost`
 

@@ -29,6 +29,7 @@ sub MAIN (
   Bool :$no_sudo = False,
   Bool :$localhost = False,
   Str  :$docker,
+  Str  :$image,
   Str  :$conf,
   Str  :$prefix,
   Str  :$sync,
@@ -76,7 +77,7 @@ sub MAIN (
   if ($docker) {
 
     prepare-docker-host(
-      $docker,
+      $image ?? "$image\@$docker"  !! $docker,
       %( 
         verbose => $verbose,
         prefix  => $prefix,
