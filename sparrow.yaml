@@ -1,6 +1,6 @@
 image:
   - melezhik/sparrow:alpine_arm
-  - melezhik/sparrow:archlinux_arm
+  - melezhik/sparrow:ubuntu_arm
   - melezhik/sparrow:debian_arm
 
 secrets:

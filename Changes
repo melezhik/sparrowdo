@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.26 2024-01-05T14:10:00Z
+
     - Support to run on docker images
       by using `--image` method
     - Refactoring: rename pm6 to rakumod
