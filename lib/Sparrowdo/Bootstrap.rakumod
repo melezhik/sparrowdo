@@ -10,7 +10,7 @@ sub bootstrap-script () is export {
 
   $script ~= "\n\n";
 
-  $script ~= slurp %?RESOURCES<bootstrap.sh>.Str;
+  $script ~= slurp %?RESOURCES<bootstrap.sh>;
 
   return $script;
 
