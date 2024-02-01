@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.27 2024-02-01T10:00:00Z
+
+    - Don't use Distribution::Resource Str method
+
 0.1.26 2024-01-05T14:10:00Z
 
     - Support to run on docker images
