@@ -9,8 +9,8 @@ rakudo_linux_install_prefix=$2
 install_rakudo_linux()
 {
 
-   export PATH=$rakudo_linux_install_prefix/$rakudo_linux_version/bin:\
-$rakudo_linux_install_prefix/$rakudo_linux_version/share/perl6/site/bin:$PATH
+    # try to use already installed rakudo
+    eval $($rakudo_linux_install_prefix/$rakudo_linux_version/scripts/set-env.sh --quiet)
 
    if raku --version 2>/dev/null; then 
       echo "rakudo already installed"
@@ -21,6 +21,7 @@ $rakudo_linux_install_prefix/$rakudo_linux_version/share/perl6/site/bin:$PATH
       wget $rakudo_linux_tarball -P $rakudo_linux_install_prefix
       cd $rakudo_linux_install_prefix
       tar -xzf $rakudo_linux_version.tar.gz
+      eval $($rakudo_linux_install_prefix/$rakudo_linux_version/scripts/set-env.sh --quiet)
       raku --version
       zef --version
     fi
@@ -28,13 +29,14 @@ $rakudo_linux_install_prefix/$rakudo_linux_version/share/perl6/site/bin:$PATH
 
 install_zef()
 {
+  export PATH=$PATH:$HOME/.raku/bin/
   if zef -v 2>/dev/null; then
     echo "zef already installed"
   else
     rm -rf /tmp/zef
     git clone https://github.com/ugexe/zef.git /tmp/zef
     cd /tmp/zef
-    raku -I. bin/zef install . --/test --install-to=home --force-install
+    raku -I. bin/zef install . --/test --force-install
   fi
 }
 

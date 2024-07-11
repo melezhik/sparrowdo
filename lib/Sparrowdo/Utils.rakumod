@@ -50,20 +50,25 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("# deployment type: {%args<type>}");
 
+  $fh.say("# activate sparrowdo shipped rakudo");
+
+  $fh.say("eval \$({rakudo-linux-install-prefix()}/{rakudo-linux-version()}/scripts/set-env.sh --quiet)");
+
+  $fh.say("# add binaries installed via zef install --to=home");
+  
+  $fh.say("export PATH=~/.raku/bin/:\$PATH");
+
   if %args<type> eq 'docker' {
 
     $fh.say("cd /var/.sparrowdo/env/$prefix/.sparrowdo");
-    $fh.say("export PATH=~/.raku/bin/:\$PATH");
 
   } elsif %args<localhost> {
 
     $fh.say("cd .sparrowdo/");
-    $fh.say("export PATH=~/.raku/bin/:\$PATH");
 
   } else {
 
     $fh.say("cd .sparrowdo/env/$prefix/.sparrowdo");
-    $fh.say("export PATH=~/.raku/bin/:{rakudo-linux-install-prefix()}/{rakudo-linux-version()}/bin:{rakudo-linux-install-prefix()}/{rakudo-linux-version()}/share/perl6/site/bin:\$PATH");
 
   }
 
