@@ -4,6 +4,14 @@ unit module Sparrowdo::Utils;
 
 use Sparrowdo::Bootstrap;
 
+sub rakudo-linux-version () is export {
+  'rakudo-moar-2024.06-01-linux-x86_64-gcc'
+}
+
+sub rakudo-linux-install-prefix () is export {
+  '/opt/sparrowdo/rakudo'
+}
+
 sub generate-sparrowdo-harness (%args) is export {
 
   my $prefix = %args<prefix> || "default";
@@ -55,7 +63,7 @@ sub generate-sparrowdo-harness (%args) is export {
   } else {
 
     $fh.say("cd .sparrowdo/env/$prefix/.sparrowdo");
-    $fh.say("export PATH=~/.raku/bin/:\$PATH");
+    $fh.say("export PATH=~/.raku/bin/:{rakudo-linux-install-prefix()}/{rakudo-linux-version()}/bin:{rakudo-linux-install-prefix()}/{rakudo-linux-version()}/share/perl6/site/bin:\$PATH");
 
   }
 
@@ -75,35 +83,22 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
   if %args<sudo> && %args<type> eq 'default' {
-
     if $%args<index-update> {
-
-      $fh.say("sudo --login SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
-
+      $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
     }
-
-    $fh.say("sudo --login d=\$PWD SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'cd \$d && raku -MSparrow6::DSL sparrowfile'");
-
+    $fh.say("sudo env PATH=\$PATH d=\$dir SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::DSL sparrowfile");
   } else {
-
     if $%args<index-update> {
-
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
-
     }
-
     $fh.say("raku -MSparrow6::DSL sparrowfile");
-
   }
-
 
   $fh.close;
 
-  if  %args<verbose> {
-
-   say ".sparrowdo/sparrowrun.sh content";
-   say slurp(".sparrowdo/sparrowrun.sh");
-
+  if %args<verbose> {
+    say ".sparrowdo/sparrowrun.sh content";
+    say slurp(".sparrowdo/sparrowrun.sh");
   }
 
   prepare-sparrowdo-files %( verbose => %args<verbose> );

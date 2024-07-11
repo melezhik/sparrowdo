@@ -1,8 +1,30 @@
-export PATH=$PATH:$HOME/.raku/bin/:/opt/rakudo-pkg/bin # to support latest rakudo distributions that install zef separately to ~/.raku
-
 set -e
 
 echo "start bootstrap"
+
+rakudo_linux_version=$1
+rakudo_linux_tarball=https://rakudo.org/dl/rakudo/$rakudo_linux_version.tar.gz
+rakudo_linux_install_prefix=$2
+
+install_rakudo_linux()
+{
+
+   export PATH=$rakudo_linux_install_prefix/$rakudo_linux_version/bin:\
+$rakudo_linux_install_prefix/$rakudo_linux_version/share/perl6/site/bin:$PATH
+
+   if raku --version 2>/dev/null; then 
+      echo "rakudo already installed"
+   else
+      mkdir -p $rakudo_linux_install_prefix
+      chmod a+r -R $rakudo_linux_install_prefix
+      rm -rf $rakudo_linux_install_prefix/$rakudo_linux_version.tar.gz
+      wget $rakudo_linux_tarball -P $rakudo_linux_install_prefix
+      cd $rakudo_linux_install_prefix
+      tar -xzf $rakudo_linux_version.tar.gz
+      raku --version
+      zef --version
+    fi
+}
 
 install_zef()
 {
@@ -15,6 +37,8 @@ install_zef()
     raku -I. bin/zef install . --/test --install-to=home --force-install
   fi
 }
+
+
 case "$OS" in
   alpine)
     apk update --wait 120
@@ -24,49 +48,28 @@ case "$OS" in
     install_zef
   ;;
   amazon|centos|red)
-    yum -q -y install make curl perl bash redhat-lsb-core git perl-JSON-PP openssl-devel
-    curl -1sLf \
-    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
-    | bash
-    yum -q -y install rakudo-pkg
-    install_zef
+    yum -q -y install curl bash openssl-devel
+    install_rakudo_linux
   ;;
   arch|archlinux)
     pacman -Sy --noconfirm archlinux-keyring
     pacman -Suyy --noconfirm
-    pacman -S --needed --noconfirm -q curl perl bash git openssl base-devel openssl-1.1
-    if raku -v 2>/dev/null; then
-      echo "rakudo already installed"
-    else
-      id -u aur &>/dev/null || useradd -m aur
-      su - aur -c "rm -rf /tmp/rakudo && git clone https://aur.archlinux.org/rakudo-bin.git /tmp/rakudo && cd /tmp/rakudo && makepkg --skippgpcheck"
-      pacman --noconfirm -U /tmp/rakudo/*.tar.zst
-    fi
-    install_zef
+    pacman -S --needed --noconfirm -q curl bash openssl openssl-1.1
+    install_rakudo_linux
   ;;
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
     apt-get update -q -o Dpkg::Use-Pty=0
-    apt-get install -q -y -o Dpkg::Use-Pty=0 build-essential curl perl bash git lsb-release libssl-dev
-    curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.deb.sh' | bash
-    apt-get update -qq && apt-get install -q -y -o Dpkg::Use-Pty=0 rakudo-pkg
-    install_zef
+    apt-get install -q -y -o Dpkg::Use-Pty=0 curl bash libssl-dev
+    install_rakudo_linux
   ;;
   fedora)
-    dnf -yq install curl perl bash redhat-lsb-core git openssl-devel
-    curl -1sLf \
-    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
-    | bash
-    dnf -yq install rakudo-pkg
-    install_zef
+    dnf -yq install curl bash openssl-devel
+    install_rakudo_linux
   ;;
   opensuse)
-    curl -1sLf \
-    'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.rpm.sh' \
-    | bash
-    zypper install -y rakudo-pkg
-    zypper install -y git curl tar gzip libopenssl-devel
-    install_zef
+    zypper install -y curl tar gzip libopenssl-devel
+    install_rakudo_linux
   ;;
   *)
     printf "Your OS (%s) is not supported\n" "$OS"
@@ -76,13 +79,13 @@ esac
 if raku -MTomtit -e 1; then
   echo "Tomtit already installed"
 else
-  zef install --/test --force-install --install-to=home Tomtit
+  zef install --/test --force-install Tomtit
 fi
 
 if raku -MSparky::JobApi -e 1; then
   echo "Sparky::JobApi already installed"
 else
-  zef install --/test --force-install --install-to=home Sparky::JobApi
+  zef install --/test --force-install Sparky::JobApi
 fi
 
 

@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+    - Use prebuilt rakudo binaries
+      for most of linuxes
+      to reduce dependencies on
+      external packaging systems
+
 0.1.27 2024-02-01T10:00:00Z
 
     - Don't use Distribution::Resource Str method

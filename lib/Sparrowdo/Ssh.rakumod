@@ -167,7 +167,7 @@ sub bootstrap-ssh-host ($host, %args?) is export {
 
   push @cmd, (
     "$host",
-    "sudo --login sh \\\$PWD/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
+    "sudo --login sh \\\$PWD/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh {rakudo-linux-version()} {rakudo-linux-install-prefix()}"
   );
 
   my $cmd =  @cmd.join(" ");
