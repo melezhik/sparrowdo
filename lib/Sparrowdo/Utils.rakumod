@@ -52,7 +52,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("# activate sparrowdo shipped rakudo");
 
-  $fh.say("eval \$({rakudo-linux-install-prefix()}/{rakudo-linux-version()}/scripts/set-env.sh --quiet)");
+  $fh.say("eval \$({rakudo-linux-install-prefix()}/{rakudo-linux-version()}/scripts/set-env.sh --quiet 2>/dev/null)");
 
   $fh.say("# add binaries installed via zef install --to=home");
   
