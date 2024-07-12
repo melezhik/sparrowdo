@@ -53,7 +53,7 @@ tasks:
     language: Bash
     code: |
       if test $os = "alpine"; then
-        apk add ncurses
+        sudo apk add ncurses
       fi
       set -e
       cd source
