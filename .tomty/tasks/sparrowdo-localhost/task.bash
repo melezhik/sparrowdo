@@ -1,1 +1,1 @@
-sparrowdo --localhost
+sparrowdo --localhost --no_sudo

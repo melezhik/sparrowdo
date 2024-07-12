@@ -14,7 +14,7 @@ tasks:
     code: |
       set -e
       set -x
-      cd source 
+      cd source
       tomty --show-failed --color --profile ci
     depends:
       -
@@ -47,11 +47,14 @@ tasks:
 
       tom --clean
       fez upload --unattended
-      
+
   -
     name: install-deps
     language: Bash
     code: |
+      if test $os = "alpine"; then
+        apk add ncurses
+      fi
       set -e
       cd source
       zef install . --/test
