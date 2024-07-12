@@ -91,7 +91,7 @@ sub generate-sparrowdo-harness (%args) is export {
     if $%args<index-update> {
       $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
     }
-    $fh.say("sudo env PATH=\$PATH d=\$dir SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::DSL sparrowfile");
+    $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::DSL sparrowfile");
   } else {
     if $%args<index-update> {
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
