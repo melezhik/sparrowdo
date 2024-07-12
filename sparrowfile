@@ -5,8 +5,6 @@ say "config: ", config().perl;
 
 task-run "files/tasks/hello-world";
 
-package-install "ncurses" if os() eq "alpine";
-
 zef "Term::TablePrint", %(:force);
 
 zef "Prettier::Table";
