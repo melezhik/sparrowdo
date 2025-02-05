@@ -5,7 +5,7 @@ unit module Sparrowdo::Utils;
 use Sparrowdo::Bootstrap;
 
 sub rakudo-linux-version () is export {
-  'rakudo-moar-2024.06-01-linux-x86_64-gcc'
+  'rakudo-moar-2025.01-01-linux-x86_64-gcc'
 }
 
 sub rakudo-linux-install-prefix () is export {
@@ -128,7 +128,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   my @files;
 
-  push @files, "config.pl6" if "config.pl6".IO ~~ :f;
+  push @files, "config.raku" if "config.raku".IO ~~ :f;
   push @files, "templates" if "templates".IO ~~ :d;
   push @files, "files" if "files".IO ~~ :d;
   push @files, "conf" if "conf".IO ~~ :d;

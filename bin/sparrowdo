@@ -50,7 +50,7 @@ sub MAIN (
     die "configuration file $conf does not exist";
   }
 
-  my $path-to-config = $conf || "config.pl6";
+  my $path-to-config = $conf || "config.raku";
 
   # check for conflict parameters combination
   if $localhost && $host && $host.IO ~~ :f {
@@ -353,7 +353,7 @@ sub MAIN (
 
        copy $watch, "{$cache-dir}/sparrowfile";
 
-       spurt "{$cache-dir}/config.pl6", %( jobs => @jobs ).perl;
+       spurt "{$cache-dir}/config.raku", %( jobs => @jobs ).perl;
 
        spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 

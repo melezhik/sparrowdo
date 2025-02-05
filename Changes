@@ -2,6 +2,13 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.28 2025-05-02T23:55:00Z
+
+    - Use latest (2025.01) version of Rakudo
+      in bootstrap
+
+    - Default config.raku (instead of config.pl6)
+
     - Use prebuilt rakudo binaries
       for most of linuxes
       to reduce dependencies on

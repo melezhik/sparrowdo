@@ -196,7 +196,7 @@ Thus Sparrowdo _project_ might consists of various files and folders:
     .
     ├── conf
     │   └── alternative.pl6
-    ├── config.pl6
+    ├── config.raku
     ├── data
     │   └── list.dat
     ├── files
@@ -217,7 +217,7 @@ One may optionally define other data that make up the whole set up:
 
 Directory to hold configuration files
 
-* `config.pl6` 
+* `config.raku` 
 
 Default configuration file, if placed in current working directory will define Sparrowdo configuration, see
 also [scenarios configuration](#scenario-configuration) section, alternatively one may place configuration file to `conf` directory and
@@ -260,12 +260,12 @@ The same as `files` and `templates` folder but to keep "data" files, just anothe
 
 # Scenario configuration
 
-If `config.pl6` file exists at the current working directory it _will be
+If `config.raku` file exists at the current working directory it _will be
 loaded_ via Raku [EVALFILE](https://docs.raku.org/routine/EVALFILE) at the _beginning_ of scenario. 
 
 For example:
 
-    $ cat config.pl6
+    $ cat config.raku
 
     {
       user         => 'foo',
