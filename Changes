@@ -3,7 +3,10 @@ Revision history for Sparrowdo
 {{$NEXT}}
 
 
-0.1.28 2025-06-02T12:10:00Z
+0.1.28 2025-06-02T13:20:00Z
+
+   - Fix host.docker.internal not resolving
+     issue
 
    - Move ci to sparky
 
