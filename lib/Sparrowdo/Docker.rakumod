@@ -40,7 +40,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       "--rm",
       "--stop-timeout",
       "1",
-      "add-host",
+      "--add-host",
       "host.docker.internal:host-gateway",
       "--name",
       $host,
