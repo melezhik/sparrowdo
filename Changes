@@ -2,6 +2,13 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+
+0.1.28 2025-06-02T12:10:00Z
+
+   - Move ci to sparky
+
+   -  Use latest version of Sparrow6
+
 0.1.28 2025-05-02T23:55:00Z
 
     - Use latest (2025.01) version of Rakudo
