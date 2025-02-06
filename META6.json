@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "Sparrow6:ver<0.0.56+>"
+    "Sparrow6:ver<0.0.55+>"
   ],
   "description": "Run Sparrow tasks remotely (and not only)",
   "license": "Artistic-2.0",
