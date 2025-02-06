@@ -3,7 +3,11 @@ Revision history for Sparrowdo
 {{$NEXT}}
 
 
-0.1.28 2025-06-02T13:20:00Z
+0.1.30 2025-06-02T13:50:00Z
+
+    Fix changes log
+
+0.1.29 2025-06-02T13:20:00Z
 
    - Fix host.docker.internal not resolving
      issue
