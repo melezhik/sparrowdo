@@ -2,12 +2,15 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.31 2025-02-14T15:30:00Z
 
-0.1.30 2025-06-02T13:50:00Z
+   Use latest version of Sparrow6
+
+0.1.30 2025-02-06T13:50:00Z
 
     Fix changes log
 
-0.1.29 2025-06-02T13:20:00Z
+0.1.29 2025-02-06T13:20:00Z
 
    - Fix host.docker.internal not resolving
      issue
@@ -16,7 +19,7 @@ Revision history for Sparrowdo
 
    -  Use latest version of Sparrow6
 
-0.1.28 2025-05-02T23:55:00Z
+0.1.28 2025-02-05T23:55:00Z
 
     - Use latest (2025.01) version of Rakudo
       in bootstrap
