@@ -189,6 +189,46 @@ Or as Raku Arrays:
 ];
 ```
 
+Bool tags allow one easily implement groups of hosts in Ansible inventory style:
+
+```raku
+[
+  %( 
+    host => "db.host1.co",
+    tags => %(
+      :5432port,
+      :db_user<admin>,
+      :database,
+      :master,
+    ), 
+  ),
+  %( 
+    host => "db.host2.co",
+    tags => %(
+      :5432port,
+      :db_user<admin>,
+      :database,
+      :replica,
+    ), 
+  ),
+  %( 
+    host => "db.host3.co",
+    tags => %(
+      :5432port,
+      :db_user<admin>,
+      :database,
+      :replica,
+    ), 
+  ),
+];
+
+```
+
+To select only database nodes with replica:
+
+```bash
+--tags=database,replica
+```
 
 To handle `key/value` pairs use standard Raku Hash mechanism:
 
