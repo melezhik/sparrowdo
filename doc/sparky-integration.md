@@ -88,7 +88,8 @@ sparrowdo --host=192.168.0.1 --with_sparky
 
 Tags are symbolic labels attached to hosts, tags allow to: 
 
-* separate one hosts from another.
+* separate one hosts from another (ala ansible groups)
+
 * pass key/value pairs to hosts configurations
 
 To assign tag one need to declare hosts in `host` file using Raku Hash notation:
@@ -114,60 +115,78 @@ if tags()<loadbalancer> or tags()<frontend> {
 One can attach more then one tag using `,` separator:
 
 ```raku
-%(
-  host => "192.168.0.1", 
-  tags => "database,dev" 
-);
+[
+  %(
+    host => "192.168.0.1", 
+    tags => "database,mysql", 
+  ),
+  %(
+    host => "192.168.0.2", 
+    tags => "database,mongodb", 
+  ),
+];
 ```
 
 Or using Raku List syntax:
 
 
 ```raku
-%(
-  host => "192.168.0.1", 
-  tags => [ "database", "dev" ]
-);
+[
+  %(
+    host => "192.168.0.1", 
+    tags => [ "database", "mysql" ],
+  ),
+  %(
+    host => "192.168.0.2", 
+    tags =>[ "database", "mongodb" ],
+  ),
+];
 ```
 
 One can filter out certain hosts by providing `--tags` cli option:
 
 ```raku
-sparrowdo --sparrowfile=database.raku --tags=database,prod --host=hosts.raku
+sparrowdo --sparrowfile=database.raku --tags=database,mysql --host=hosts.raku
 ```
 
-This command will queues builds only for hosts having `database` and `prod` tags.
+This command will queues builds only for hosts having `database` and `mysql` tags.
 
 ## key/value pairs
 
 To assign key/value parameters to hosts use `tags` with `key=value` syntax:
 
 ```raku
-%(
-    host => "192.168.0.1",
-    tags => "server=nginx,port=443"
-)
+[
+  %(
+      host => "192.168.0.1",
+      tags => "server=nginx,port=443",
+  ),
+];
 ```
 
 Alternatively one can use Raku hashes for tags:
 
 ```raku
-%( 
-   host => "localhost",
-   tags => %(
-     server => "nginx",
-     port => "443" 
-   ) 
-);
+[
+  %( 
+    host => "localhost",
+    tags => %(
+      server => "nginx",
+      port => "443", 
+    ), 
+  ),
+];
 ```
 
 Or as Raku Arrays:
 
 ```raku
-%( 
-   host => "localhost",
-   tags => [ "frontend", "dev" ]
-);
+[
+  %( 
+    host => "localhost",
+    tags => [ "frontend", "dev" ],
+  ),
+];
 ```
 
 
@@ -206,14 +225,16 @@ A build name will appear in Sparky reports list:
 
 
 ```raku
-%( 
-   host => "localhost",
-   tags => %(
-     server => "nginx",
-     port => "443",
-     name => "web-server"
-   ),
-);
+[
+  %( 
+    host => "localhost",
+    tags => %(
+      server => "nginx",
+      port => "443",
+      name => "web-server",
+    ),
+  ),
+];
 ```
 
 ## Bind build to project
@@ -221,10 +242,12 @@ A build name will appear in Sparky reports list:
 To run a build on a certain Sparky project use `project` key:
 
 ```raku
-%(
-   host => "localhost",
-   project => "web-app-build" 
-);
+[
+  %(
+    host => "localhost",
+    project => "web-app-build", 
+  ),
+];
 ```
 
 ## Reserved tags
