@@ -233,8 +233,8 @@ To select only database nodes with replica:
 To handle `key/value` pairs use standard Raku Hash mechanism:
 
 ```raku
-
-my $port = tags()<nginx-port>
+my $port = tags()<port>; # 5432
+my $db_user = tags()<db_user>; # admin
 ```
 
 You can pass `key/value` tags as cli parameters as well:
