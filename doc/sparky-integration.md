@@ -88,7 +88,7 @@ sparrowdo --host=192.168.0.1 --with_sparky
 
 Tags are symbolic labels attached to hosts, tags allow to: 
 
-* separate one hosts from another (ala ansible groups)
+* group hosts or separate them from earch other (ala ansible groups)
 
 * pass key/value pairs to hosts configurations
 
@@ -96,9 +96,13 @@ To assign tag one need to declare hosts in `host` file using Raku Hash notation:
 
 ```raku
 [
-   %( host => "192.168.0.1", tags => "loadbalancer" ),
-   %( host => "192.168.0.2", tags => "frontend" ),
-   %( host => "192.168.0.3", tags => "database" ),
+   %( host => "192.168.0.1", tags => "frontend" ),
+   %( host => "192.168.0.2", tags => "loadbalancer" ),
+   %( host => "192.168.0.3", tags => "backend" ),
+   %( host => "192.168.0.4", tags => "backend" ),
+   %( host => "192.168.0.5", tags => "database" ),
+   %( host => "192.168.0.6", tags => "database" ),
+   %( host => "192.168.0.7", tags => "database" ),
 ]
 ```
 
@@ -112,44 +116,57 @@ if tags()<loadbalancer> or tags()<frontend> {
 }
 ```
 
+To run Sparrowdo deployment on all database hosts, use `--tags` cli parameter:
+
+```bash
+sparrowdo --sparrowfile=database.raku --tags=database --host=hosts.raku
+```
+
 One can attach more then one tag using `,` separator:
 
 ```raku
 [
   %(
     host => "192.168.0.1", 
-    tags => "database,mysql", 
+    tags => "database,master", 
   ),
   %(
     host => "192.168.0.2", 
-    tags => "database,mongodb", 
+    tags => "database,replica", 
+  ),
+  %(
+    host => "192.168.0.3", 
+    tags => "database,replica", 
   ),
 ];
 ```
 
 Or using Raku List syntax:
 
-
 ```raku
 [
   %(
     host => "192.168.0.1", 
-    tags => [ "database", "mysql" ],
+    tags => [ "database", "master" ],
   ),
   %(
     host => "192.168.0.2", 
-    tags =>[ "database", "mongodb" ],
+    tags =>[ "database", "replica" ],
+  ),
+  %(
+    host => "192.168.0.3", 
+    tags =>[ "database", "replica" ],
   ),
 ];
 ```
 
-One can filter out certain hosts by providing `--tags` cli option:
+To filter out specific hosts for deployment provide `--tags` cli option:
 
-```raku
+```bash
 sparrowdo --sparrowfile=database.raku --tags=database,mysql --host=hosts.raku
 ```
 
-This command will queues builds only for hosts having `database` and `mysql` tags.
+This command will queues builds only for hosts having  both `database` and `replica` tags set.
 
 ## key/value pairs
 
@@ -164,15 +181,22 @@ To assign key/value parameters to hosts use `tags` with `key=value` syntax:
 ];
 ```
 
-Alternatively one can use Raku hashes for tags:
+Alternatively one can use Raku hashes to assign values to tags:
 
 ```raku
 [
   %( 
-    host => "localhost",
+    host => "192.168.0.1",
     tags => %(
       server => "nginx",
       port => "443", 
+    ), 
+  ),
+  %( 
+    :host<192.168.0.2>,
+    tags => %(
+      :server<nginx>,
+      :443port, 
     ), 
   ),
 ];
@@ -189,12 +213,12 @@ Or as Raku Arrays:
 ];
 ```
 
-Bool tags allow one easily implement groups of hosts in Ansible inventory style:
+Bool values for tags allow one easily implement hosts grouing in Ansible inventory style:
 
 ```raku
 [
   %( 
-    host => "db.host1.co",
+    :host<db.host1.co>,
     tags => %(
       :5432port,
       :db_user<admin>,
@@ -203,7 +227,7 @@ Bool tags allow one easily implement groups of hosts in Ansible inventory style:
     ), 
   ),
   %( 
-    host => "db.host2.co",
+    :host<db.host2.co>,
     tags => %(
       :5432port,
       :db_user<admin>,
@@ -212,7 +236,7 @@ Bool tags allow one easily implement groups of hosts in Ansible inventory style:
     ), 
   ),
   %( 
-    host => "db.host3.co",
+    :host<db.host3.co>,
     tags => %(
       :5432port,
       :db_user<admin>,
@@ -224,45 +248,48 @@ Bool tags allow one easily implement groups of hosts in Ansible inventory style:
 
 ```
 
-To select only database nodes with replica:
+To select only database nodes with replica use following form:
 
 ```bash
 --tags=database,replica
 ```
 
-To handle `key/value` pairs use standard Raku Hash mechanism:
+To handle `key/value` pairs inside Sparrowdo scenarios use standard Raku Hash mechanism:
 
 ```raku
 my $port = tags()<port>; # 5432
 my $db_user = tags()<db_user>; # admin
 ```
 
-You can pass `key/value` tags as cli parameters as well:
+You can pass `key/value` tags as cli parameters as well, effectively overriding tags
+if exist or setting new ones:
 
 ```
-sparrowdo --sparrowfile=database.raku --tags=nginx_port=443,mode=production --host=hosts.raku
+# override port and db_user for database replicas:
+sparrowdo --sparrowfile=database.raku --tags=port=5400,db_user=operator,database,replica --host=hosts.raku
 ```
 
-One can use spaces in tags value as well:
+Spaces are valid in tags values:
 
-```
-  --tags="author=good robot,message=hello world,version=0.0.1"
+```bash
+--tags="author=funky coder,message=hello world,version=0.0.1"
 ```
 
 ```raku
   tags => %(
-    author => "good robot",
-    message => "hello world",
-    version => "0.0.1"
+    band => "Perl Jam",
+    singer => "Eddie Vedder",
+    album => "Ten"
   )
 ```
+
+## Special tags
 
 ## names
 
 To give builds descriptive names use `name` key.
 
 A build name will appear in Sparky reports list:
-
 
 ```raku
 [
@@ -271,7 +298,7 @@ A build name will appear in Sparky reports list:
     tags => %(
       server => "nginx",
       port => "443",
-      name => "web-server",
+      name => "deploy web server",
     ),
   ),
 ];
@@ -279,7 +306,7 @@ A build name will appear in Sparky reports list:
 
 ## Bind build to project
 
-To run a build on a certain Sparky project use `project` key:
+To run a build for specific Sparky project use `project` key:
 
 ```raku
 [
