@@ -163,7 +163,7 @@ Or using Raku List syntax:
 To filter out specific hosts for deployment provide `--tags` cli option:
 
 ```bash
-sparrowdo --sparrowfile=database.raku --tags=database,mysql --host=hosts.raku
+sparrowdo --sparrowfile=database.raku --tags=database,replica --host=hosts.raku
 ```
 
 This command will queues builds only for hosts having  both `database` and `replica` tags set.
