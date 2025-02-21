@@ -49,8 +49,8 @@ case "$OS" in
     apk add rakudo-pkg
     install_zef
   ;;
-  amazon|centos|red)
-    yum -q -y install curl bash openssl-devel
+  amazon|centos|red|rocky)
+    yum -q -y install curl bash openssl-devel wget
     install_rakudo_linux
   ;;
   arch|archlinux)
