@@ -17,7 +17,7 @@ sub MAIN (
   Str  :$host = "127.0.0.1", 
   Str  :$sparrowfile, 
   Str  :$tags, 
-  Str  :$repo = "http://sparrowhub.io/repo/", 
+  Str  :$repo = "http://sparrowhub.io/repo", 
   Str  :$ssh_user, 
   Int  :$ssh_port = 22, 
   Str  :$ssh_private_key, 
