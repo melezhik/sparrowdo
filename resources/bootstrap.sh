@@ -50,7 +50,7 @@ case "$OS" in
     install_zef
   ;;
   amazon|centos|red|rocky)
-    yum -q -y install curl bash wget openssl-devel
+    yum -q -y install curl bash wget openssl-devel perl-JSON-PP
     install_rakudo_linux
   ;;
   arch|archlinux)
