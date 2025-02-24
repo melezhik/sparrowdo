@@ -5,10 +5,9 @@ say "config: ", config().perl;
 
 task-run "files/tasks/hello-world";
 
-zef "Term::TablePrint", %(:force);
-
-zef "Prettier::Table";
-zef "Teddy::Bear";
-zef "Terminal::Print";
+#zef "Term::TablePrint", %(:force);
+#zef "Prettier::Table";
+#zef "Teddy::Bear";
+#zef "Terminal::Print";
 
 
