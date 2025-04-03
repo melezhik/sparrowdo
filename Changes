@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  - Optimize bootstrap
+    process
+
 0.1.33 2025-02-24T22:30:00Z
 
   - Bump Sparrow6 version
