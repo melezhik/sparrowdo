@@ -80,6 +80,7 @@ esac
 
 if raku -MTomtit -e 1 2>/dev/null; then
   echo "Tomtit already installed"
+  zef upgrade --/test Sparrow6
 else
   zef install --/test OpenSSL
   zef install --/test JSON::Tiny
