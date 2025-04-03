@@ -78,13 +78,25 @@ case "$OS" in
     exit 1
 esac
 
-if raku -MTomtit -e 1; then
+if raku -MTomtit -e 1 2>/dev/null; then
   echo "Tomtit already installed"
 else
+  zef install --/test --force-install OpenSSL
+  zef install --/test --force-install JSON::Tiny
+  zef install --/test --force-install IO::Socket::SSL
+  zef install --/test --force-install HTTP::Tiny
+  zef install --/test --force-install MIME::Base64
+  zef install --/test --force-install File::Directory::Tree
+  zef install --/test --force-install Data::Dump
+  zef install --/test --force-install JSON::Fast
+  zef install --/test --force-install Terminal::ANSIColor
+  zef install --/test --force-install YAMLish
+  zef install --/test --force-install Tomtit
+  zef install --/test --force-install Sparrow6
   zef install --/test --force-install Tomtit
 fi
 
-if raku -MSparky::JobApi -e 1; then
+if raku -MSparky::JobApi -e 1 2>/dev/null; then
   echo "Sparky::JobApi already installed"
 else
   zef install --/test --force-install Sparky::JobApi
