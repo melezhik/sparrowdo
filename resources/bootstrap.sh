@@ -36,7 +36,7 @@ install_zef()
     rm -rf /tmp/zef
     git clone https://github.com/ugexe/zef.git /tmp/zef
     cd /tmp/zef
-    raku -I. bin/zef install . --/test --force-install
+    raku -I. bin/zef install . --/test 
   fi
 }
 
@@ -81,25 +81,26 @@ esac
 if raku -MTomtit -e 1 2>/dev/null; then
   echo "Tomtit already installed"
 else
-  zef install --/test --force-install OpenSSL
-  zef install --/test --force-install JSON::Tiny
-  zef install --/test --force-install IO::Socket::SSL
-  zef install --/test --force-install HTTP::Tiny
-  zef install --/test --force-install MIME::Base64
-  zef install --/test --force-install File::Directory::Tree
-  zef install --/test --force-install Data::Dump
-  zef install --/test --force-install JSON::Fast
-  zef install --/test --force-install Terminal::ANSIColor
-  zef install --/test --force-install YAMLish
-  zef install --/test --force-install Tomtit
-  zef install --/test --force-install Sparrow6
-  zef install --/test --force-install Tomtit
+  zef install --/test OpenSSL
+  zef install --/test JSON::Tiny
+  zef install --/test IO::Socket::SSL
+  zef install --/test HTTP::Tiny
+  zef install --/test MIME::Base64
+  zef install --/test File::Directory::Tree
+  zef install --/test Data::Dump
+  zef install --/test JSON::Fast
+  zef install --/test Terminal::ANSIColor
+  zef install --/test YAMLish
+  zef install --/test Tomtit
+  zef install --/test Sparrow6
+  zef upgrade --/test Sparrow6
+  zef install --/test Tomtit
 fi
 
 if raku -MSparky::JobApi -e 1 2>/dev/null; then
   echo "Sparky::JobApi already installed"
 else
-  zef install --/test --force-install Sparky::JobApi
+  zef install --/test  Sparky::JobApi
 fi
 
 
