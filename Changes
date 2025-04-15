@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.36 2025-04-15T18:40:00Z
+
+  - Fix localhost bootstrap
+
 0.1.35 2025-04-03T21:40:00Z
 
   - Bootstrap - always

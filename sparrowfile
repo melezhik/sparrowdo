@@ -1,13 +1,16 @@
 #!raku
 
-say "tags: ", tags().perl;
-say "config: ", config().perl;
+#say "tags: ", tags().perl;
+#say "config: ", config().perl;
 
-task-run "files/tasks/hello-world";
+#task-run "files/tasks/hello-world";
 
 #zef "Term::TablePrint", %(:force);
 #zef "Prettier::Table";
 #zef "Teddy::Bear";
 #zef "Terminal::Print";
+
+task-run "files/tasks/sleep";
+
 
 
