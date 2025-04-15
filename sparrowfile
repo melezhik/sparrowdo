@@ -3,7 +3,7 @@
 #say "tags: ", tags().perl;
 #say "config: ", config().perl;
 
-#task-run "files/tasks/hello-world";
+task-run "files/tasks/hello-world";
 
 #zef "Term::TablePrint", %(:force);
 #zef "Prettier::Table";
