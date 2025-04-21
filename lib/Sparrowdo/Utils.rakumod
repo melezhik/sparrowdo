@@ -56,7 +56,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   $fh.say("# workaround for alpine line");
 
-  $fh.say("export PATH=/opt/rakudo-pkg/bin/:\$PATH");
+  $fh.say("export PATH=/opt/rakudo-pkg/bin/:/opt/rakudo-pkg/share/perl6/site/bin:\$PATH");
 
   $fh.say("# add binaries installed via zef install --to=home");
   
