@@ -45,9 +45,13 @@ case "$OS" in
   alpine)
     apk update --wait 120
     apk add --no-cache --wait 120 curl perl bash git openssl-dev
-    curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.alpine.sh' | bash
-    apk add rakudo-pkg
     export PATH=/opt/rakudo-pkg/bin/:/opt/rakudo-pkg/share/perl6/site/bin:$PATH
+    if raku --version 2>/dev/null; then
+      echo "rakudo already installed"
+    else
+      curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.alpine.sh' | bash
+      apk add rakudo-pkg
+    fi
     install_zef
   ;;
   amazon|centos|red|rocky)
