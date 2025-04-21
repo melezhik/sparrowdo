@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  - Patches for Alpine Linux
+
+  - Bootstrap - don't install
+    Tomtit
+
 0.1.36 2025-04-15T18:40:00Z
 
   - Fix localhost bootstrap

@@ -79,9 +79,8 @@ case "$OS" in
     exit 1
 esac
 
-if raku -MTomtit -e 1 2>/dev/null; then
-  echo "Tomtit already installed"
-  zef upgrade --/test Sparrow6
+if raku -MSparrow6 -e 1 2>/dev/null; then
+  echo "Sparrow6 already installed"
 else
   zef install --/test OpenSSL
   zef install --/test JSON::Tiny
@@ -93,11 +92,10 @@ else
   zef install --/test JSON::Fast
   zef install --/test Terminal::ANSIColor
   zef install --/test YAMLish
-  zef install --/test Tomtit
   zef install --/test Sparrow6
-  zef upgrade --/test Sparrow6
-  zef install --/test Tomtit
 fi
+
+zef upgrade --/test Sparrow6
 
 if raku -MSparky::JobApi -e 1 2>/dev/null; then
   echo "Sparky::JobApi already installed"
