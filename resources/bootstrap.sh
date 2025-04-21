@@ -47,7 +47,7 @@ case "$OS" in
     apk add --no-cache --wait 120 curl perl bash git openssl-dev
     curl -1sLf 'https://dl.cloudsmith.io/public/nxadm-pkgs/rakudo-pkg/setup.alpine.sh' | bash
     apk add rakudo-pkg
-    export PATH=/opt/rakudo-pkg/bin/:$PATH
+    export PATH=/opt/rakudo-pkg/bin/:/opt/rakudo-pkg/share/perl6/site/bin:$PATH
     install_zef
   ;;
   amazon|centos|red|rocky)
