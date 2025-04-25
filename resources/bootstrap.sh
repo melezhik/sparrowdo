@@ -63,8 +63,7 @@ case "$OS" in
     repo=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
     apk update --wait 120
     apk add --no-cache --wait 120 curl bash zef
-    apk add -u --repository=$repo \
-    raku-sparrow6 raku-sparky-job-api
+    apk add --no-cache --wait 120 -u --repository=$repo raku-sparrow6 raku-sparky-job-api
   ;;
   amazon|centos|red|rocky)
     yum -q -y install curl bash wget openssl-devel perl-JSON-PP
