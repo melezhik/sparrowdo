@@ -27,19 +27,6 @@ install_rakudo_linux()
     fi
 }
 
-install_zef()
-{
-  export PATH=$PATH:$HOME/.raku/bin/
-  if zef -v 2>/dev/null; then
-    echo "zef already installed"
-  else
-    rm -rf /tmp/zef
-    git clone https://github.com/ugexe/zef.git /tmp/zef
-    cd /tmp/zef
-    raku -I. bin/zef install . --/test 
-  fi
-}
-
 install_sparrow()
 {
 
