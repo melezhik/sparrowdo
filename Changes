@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.38 2025-05-01T17:10:00Z
+
   - Use native Alpine packages
     for Alpine OS bootstrap
     kudos to @Celeste
