@@ -124,7 +124,9 @@ sub bootstrap-docker-host ($host, %args?) is export {
     "-i",
     "$host",
     "sh", 
-    "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh"
+    "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh",
+    rakudo-linux-version(),
+    rakudo-linux-install-prefix(),
   );
 
   run @cmd;
