@@ -9,10 +9,10 @@ rakudo_linux_install_prefix=$2
 install_rakudo_linux()
 {
 
-    # try to use already installed rakudo
-    eval $($rakudo_linux_install_prefix/$rakudo_linux_version/scripts/set-env.sh --quiet)
+   # try to use already installed rakudo
+   eval $($rakudo_linux_install_prefix/$rakudo_linux_version/scripts/set-env.sh --quiet)
 
-   if raku --version 2>/dev/null; then 
+   if raku --version 2>/dev/null; then
       echo "rakudo already installed"
    else
       mkdir -p $rakudo_linux_install_prefix
@@ -24,7 +24,7 @@ install_rakudo_linux()
       eval $($rakudo_linux_install_prefix/$rakudo_linux_version/scripts/set-env.sh --quiet)
       raku --version
       zef --version
-    fi
+   fi
 }
 
 install_sparrow()
@@ -66,6 +66,12 @@ case "$OS" in
     apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community/  rakudo
     echo "install Sparrow6, Sparky-Job-Api ..."
     apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ raku-sparrow6 raku-sparky-job-api
+  ;;
+  rocky)
+    yum -q -y install curl-minimal || yum -q -y install curl
+    yum -q -y install bash wget openssl-devel perl-JSON-PP
+    install_rakudo_linux
+    install_sparrow
   ;;
   amazon|centos|red|rocky|fedora)
     yum -q -y install curl bash wget openssl-devel perl-JSON-PP

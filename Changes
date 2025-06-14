@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  - Workaround for curl install
+    issue for Rocky
+
+0.1.39 2025-05-04T00:00:00Z
+
   - Fedora support
   - Fixes in docker bootstrap
 
