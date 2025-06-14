@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.40 2025-06-14T20:40:00Z
+
   - Workaround for curl install
     issue for Rocky
 
