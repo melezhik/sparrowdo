@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  - Bootstrap: Support Red 
+    as a memo for RHEL
+
 0.1.41 2025-06-18T22:20:00Z
 
   - RHEL support

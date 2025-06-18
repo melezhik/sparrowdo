@@ -67,7 +67,7 @@ case "$OS" in
     echo "install Sparrow6, Sparky-Job-Api ..."
     apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ raku-sparrow6 raku-sparky-job-api
   ;;
-  rocky|rhel)
+  rocky|rhel|red)
     yum -q -y install curl-minimal || yum -q -y install curl
     yum -q -y install bash wget openssl-devel perl-JSON-PP
     install_rakudo_linux
