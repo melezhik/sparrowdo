@@ -73,7 +73,7 @@ case "$OS" in
     install_rakudo_linux
     install_sparrow
   ;;
-  amazon|centos|red|fedora)
+  amazon|centos|fedora)
     yum -q -y install curl bash wget openssl-devel perl-JSON-PP
     install_rakudo_linux
     install_sparrow
