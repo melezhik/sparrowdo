@@ -60,12 +60,9 @@ install_sparrow()
 
 case "$OS" in
   alpine)
-    repo=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
     apk update --wait 120
-    apk add --no-cache --wait 120 curl bash zef
-    apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community/  rakudo
-    echo "install Sparrow6, Sparky-Job-Api ..."
-    apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ raku-sparrow6 raku-sparky-job-api
+    apk add --no-cache --wait 120 curl bash
+    apk add --no-cache --wait 120 -u --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community zef raku-sparrow6 raku-sparky-job-api
   ;;
   rocky|rhel|red)
     yum -q -y install curl-minimal || yum -q -y install curl

@@ -2,6 +2,12 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.43 2025-07-03T21:50:00Z
+
+  - Fix Alpine bootstrap
+    as raku packages moved
+    to new repo
+
 0.1.42 2025-06-18T23:20:00Z
 
   - Bootstrap: Red 
