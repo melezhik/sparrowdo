@@ -343,6 +343,10 @@ In case you need to run sparrowdo on localhost use `--localhost` flag:
 
 `sparrowdo` is Sparrowdo cli to run Sparrowdo scenarios, it accepts following arguments:
 
+* `--version`
+
+Show version and exit
+
 * `--host`
 
 One of two things:

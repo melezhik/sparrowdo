@@ -28,6 +28,7 @@ sub MAIN (
   Bool :$bootstrap = False, 
   Bool :$no_sudo = False,
   Bool :$localhost = False,
+  Bool :$version  = False,
   Str  :$docker,
   Str  :$image,
   Str  :$conf,
@@ -41,6 +42,11 @@ sub MAIN (
 )
 
 {
+
+  if $version {
+    say $Sparrowdo::VERSION;
+    return;
+  }
 
   my @jobs; # queued jobs
 
