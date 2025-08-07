@@ -94,7 +94,7 @@ case "$OS" in
     install_rakudo_linux
     install_sparrow
   ;;
-  opensuse)
+  opensuse|opensuse-leap)
     zypper install -y curl tar gzip libopenssl-devel
     install_rakudo_linux
     install_sparrow
