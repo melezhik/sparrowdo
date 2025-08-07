@@ -18,6 +18,7 @@ install_rakudo_linux()
       mkdir -p $rakudo_linux_install_prefix
       chmod a+r -R $rakudo_linux_install_prefix
       rm -rf $rakudo_linux_install_prefix/$rakudo_linux_version.tar.gz
+      echo "get $rakudo_linux_tarball ..."
       wget $rakudo_linux_tarball -P $rakudo_linux_install_prefix
       cd $rakudo_linux_install_prefix
       tar -xzf $rakudo_linux_version.tar.gz
@@ -95,7 +96,7 @@ case "$OS" in
     install_sparrow
   ;;
   opensuse|opensuse-leap)
-    zypper install -y curl tar gzip libopenssl-devel
+    zypper install -y curl wget tar gzip libopenssl-devel
     install_rakudo_linux
     install_sparrow
   ;;
