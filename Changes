@@ -2,6 +2,10 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.45 2025-08-08T08:50:00Z
+
+  - opensuse-leap support
+
 0.1.44 2025-07-03T23:10:00Z
 
   - Cli version support
