@@ -255,6 +255,10 @@ say tags()<token>; # myToken
 
 ```
 
+To use host specific env files, use `.env/vars.host-foo.bar.baz.env` format, for example:
+
+`.env/vars.host-192.168.0.0.1.env` will use  env vars from this file if `--host` parameter is set to `192.168.0.1` during sparrowdo run 
+
 * `files`
 
 Directory containing files, so one could write such a scenario:
