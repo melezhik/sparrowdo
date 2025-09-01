@@ -78,6 +78,7 @@ sub MAIN (
     type => $docker ?? "docker" !! "default",
     localhost => $localhost,
     color => $color,
+    host => $host,
   );
 
   if ($docker) {

@@ -72,7 +72,6 @@ sub generate-sparrowdo-harness (%args) is export {
 
   }
 
-
   $fh.say("export SP6_CONFIG={%args<config>}") if %args<config> and %args<config>.IO ~~ :e ; 
 
   if %args<sync> {
@@ -86,6 +85,8 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_CARTON_OFF={%*ENV<SP6_CARTON_OFF>}") if %*ENV<SP6_CARTON_OFF>;
   $fh.say("export SP6_TAGS='{%args<tags>}'") if %args<tags>;
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
+
+  $fh.say("test -f vars.env && source vars.env");
 
   if %args<sudo> && %args<type> eq 'default' {
     if $%args<index-update> {
@@ -106,7 +107,7 @@ sub generate-sparrowdo-harness (%args) is export {
     say slurp(".sparrowdo/sparrowrun.sh");
   }
 
-  prepare-sparrowdo-files %( verbose => %args<verbose> );
+  prepare-sparrowdo-files %( verbose => %args<verbose>, host => %args<host> || "" );
 
 }
 
@@ -133,6 +134,19 @@ sub prepare-sparrowdo-files (%args?)  is export {
   push @files, "files" if "files".IO ~~ :d;
   push @files, "conf" if "conf".IO ~~ :d;
   push @files, "data" if "data".IO ~~ :d;
+
+  if %args<host>:exists {
+    my $env-file;
+    if  ".env/vars-host-{%args<host>}.env".IO ~~ :f {
+      $env-file = ".env/vars-host-{%args<host>}.env";
+    } elsif ".env/vars.env".IO ~~ :f {
+      $env-file = ".env/vars.env";
+    }
+    if $env-file {
+      say "[utils] copy $env-file to .sparrowdo/vars.env" if %args<verbose>;
+      copy $env-file, ".sparrowdo/vars.env";
+    }
+  }
 
 
   if @files.elems > 0 {

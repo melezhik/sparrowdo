@@ -234,9 +234,10 @@ Directory containing env file where, env file is just a Bash file with some envi
 
 `.env/vars.env`
 
-```
-PASSWORD=supersecret
-TOKEN=myToken123
+```bash
+#!bash
+export PASSWORD=supersecret
+export TOKEN=myToken123
 ```
 
 This allow to safely pass sensitive data to remote host, without exposing it command line:
