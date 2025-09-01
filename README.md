@@ -197,6 +197,8 @@ Thus Sparrowdo _project_ might consists of various files and folders:
     ├── conf
     │   └── alternative.pl6
     ├── config.raku
+    ├── .env
+    │   └── vars.env
     ├── data
     │   └── list.dat
     ├── files
@@ -226,6 +228,32 @@ choose to run with that file:
 
     $ sparrowdo --conf=conf/alternative.pl6
 
+* `.env`
+
+Directory containing env files, env files are just Bash file with some environment vars in it, for example:
+
+`.env/vars.env`
+
+```
+PASSWORD=supersecret
+TOKEN=myToken123
+```
+
+This allow to safely pass sensitive data to remote host, without exposing it command line:
+
+```
+sparrowdo --tags password=.env[PASSWORD],token=.env[TOKEN] --host admin.panel
+```
+
+That way env file will copied over scp to remote host and env variable will be available in Sparrowdo scenario via tags() function:
+
+```raku
+#!raku
+
+say tags()<password>; # supersecret
+say tags()<token>; # myToken
+
+```
 
 * `files`
 
