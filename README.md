@@ -240,7 +240,7 @@ export PASSWORD=supersecret
 export TOKEN=myToken123
 ```
 
-This allow to safely pass sensitive data to remote host, without exposing it command line:
+This allow to safely pass sensitive data to remote host, without exposing anything in command line, bash history or `ps aux`:
 
 ```
 sparrowdo --tags password=.env[PASSWORD],token=.env[TOKEN] --host admin.panel
