@@ -86,17 +86,16 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_TAGS='{%args<tags>}'") if %args<tags>;
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
-  $fh.say("test -f vars.env && source vars.env");
-
   if %args<sudo> && %args<type> eq 'default' {
     if $%args<index-update> {
       $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
     }
-    $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'test -f vars.env && source vars.env; raku -MSparrow6::DSL sparrowfile'");
+    $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'test -f vars.env && source vars.env && rm -rf vars.env; raku -MSparrow6::DSL sparrowfile'");
   } else {
     if $%args<index-update> {
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
     }
+    $fh.say("test -f vars.env && source vars.env && rm -rf vars.env");
     $fh.say("raku -MSparrow6::DSL sparrowfile");
   }
 
