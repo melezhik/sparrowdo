@@ -230,7 +230,7 @@ choose to run with that file:
 
 * `.env`
 
-Directory containing env files, env files are just Bash file with some environment vars in it, for example:
+Directory containing env file where, env file is just a Bash file with some environment varibales declared inside, for example:
 
 `.env/vars.env`
 
