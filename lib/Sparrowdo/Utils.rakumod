@@ -134,19 +134,14 @@ sub prepare-sparrowdo-files (%args?)  is export {
   push @files, "conf" if "conf".IO ~~ :d;
   push @files, "data" if "data".IO ~~ :d;
 
-  if %args<host>:exists {
-    my $env-file;
-    if  ".env/vars-host-{%args<host>}.env".IO ~~ :f {
-      $env-file = ".env/vars-host-{%args<host>}.env";
-    } elsif ".env/vars.env".IO ~~ :f {
-      $env-file = ".env/vars.env";
-    }
-    if $env-file {
-      say "[utils] copy $env-file to .sparrowdo/vars.env" if %args<verbose>;
-      copy $env-file, ".sparrowdo/vars.env";
-    }
+  my $env-files-source = ( 
+    %args<host>:exists && ".env/vars-host-{%args<host>}.env".IO ~~ :f
+  ) ?? ".env/vars-host-{%args<host>}.env" !! ".env/vars.env";
+  
+  if $env-files-source.IO ~~ :f {
+    say "[utils] copy $env-files-source to .sparrowdo/vars.env" if %args<verbose>;
+    copy $env-files-source, ".sparrowdo/vars.env";
   }
-
 
   if @files.elems > 0 {
 
