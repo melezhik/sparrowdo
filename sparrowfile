@@ -12,5 +12,5 @@ task-run "files/tasks/hello-world";
 
 task-run "files/tasks/sleep";
 
-
+task-run "tasks/make";
 

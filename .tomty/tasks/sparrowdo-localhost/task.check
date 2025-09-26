@@ -1,1 +1,5 @@
+note: files/tasks/ task should be available
 [task run: task.bash - files/tasks/hello-world]
+
+note: tasks/ task should be available
+hello from tasks/make
