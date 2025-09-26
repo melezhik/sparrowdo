@@ -201,11 +201,14 @@ Thus Sparrowdo _project_ might consists of various files and folders:
     │   └── vars.env
     ├── data
     │   └── list.dat
+    ├── tasks
+    │   └── install
+    │       └─── task.bash
     ├── files
     │   └── baz.txt
     ├── sparrowfile
     └── templates
-        └── animals.tmpl
+        └── conf.tt
 
 * `sparrowfile`
 
@@ -230,7 +233,7 @@ choose to run with that file:
 
 * `.env`
 
-Directory containing env file where, env file is just a Bash file with some environment varibales declared inside, for example:
+Directory containing env file where, env file is just a Bash file with some environment variables declared inside, for example:
 
 `.env/vars.env`
 
@@ -265,6 +268,13 @@ To use host specific env files, use `.env/vars.host-foo.bar.baz.env` format, for
 Directory containing files, so one could write such a scenario:
 
     file "/foo/bar/baz.txt", %( source => "files/baz.txt" )
+
+* `tasks`
+
+Directory containing tasks files, for example for `tasks/install/task.bash`
+sparrow task:
+
+    task-run "tasks/install";
 
 * `templates`
 

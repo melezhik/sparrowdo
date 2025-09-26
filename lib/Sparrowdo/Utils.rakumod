@@ -130,6 +130,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   push @files, "config.raku" if "config.raku".IO ~~ :f;
   push @files, "templates" if "templates".IO ~~ :d;
+  push @files, "tasks" if "tasks".IO ~~ :d;
   push @files, "files" if "files".IO ~~ :d;
   push @files, "conf" if "conf".IO ~~ :d;
   push @files, "data" if "data".IO ~~ :d;
