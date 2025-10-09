@@ -87,6 +87,7 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
   if %args<sudo> && %args<type> eq 'default' {
+    #$fh.say("# case1");
     if $%args<index-update> {
       $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
     }
@@ -95,6 +96,8 @@ sub generate-sparrowdo-harness (%args) is export {
     if $%args<index-update> {
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
     }
+    #$fh.say("# case2");
+    #$fh.say("ls -l");
     $fh.say("test -f vars.env && source vars.env && rm -rf vars.env");
     $fh.say("raku -MSparrow6::DSL sparrowfile");
   }
@@ -135,13 +138,21 @@ sub prepare-sparrowdo-files (%args?)  is export {
   push @files, "conf" if "conf".IO ~~ :d;
   push @files, "data" if "data".IO ~~ :d;
 
+  my $env-files-source-dir = ".env/";
+  
+  if %*ENV:exists<SPARROWDO_ENV_FILE> && %*ENV:exists<SPARROWDO_ENV_FILE>.IO ~~ :f {
+    say "[utils] SPARROWDO_ENV_FILE is set, copy env-files from {%*ENV<SPARROWDO_ENV_FILE>}" if %args<verbose>;
+    $env-files-source-dir = %*ENV<SPARROWDO_ENV_FILE>;
+  } 
+  
   my $env-files-source = ( 
-    %args<host>:exists && ".env/vars-host-{%args<host>}.env".IO ~~ :f
-  ) ?? ".env/vars-host-{%args<host>}.env" !! ".env/vars.env";
+    %args<host>:exists && "{$env-files-source-dir}/vars-host-{%args<host>}.env".IO ~~ :f
+  ) ?? "$env-files-source-dir/vars-host-{%args<host>}.env" !! "{$env-files-source-dir}/vars.env";
+
   
   if $env-files-source.IO ~~ :f {
-    say "[utils] copy $env-files-source to .sparrowdo/vars.env" if %args<verbose>;
-    copy $env-files-source, ".sparrowdo/vars.env";
+    say "[utils] copy {$env-files-source-dir}/{$env-files-source} to .sparrowdo/vars.env" if %args<verbose>;
+    copy "{$env-files-source-dir}/{$env-files-source}", ".sparrowdo/vars.env";
   }
 
   if @files.elems > 0 {

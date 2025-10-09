@@ -263,6 +263,15 @@ To use host specific env files, use `.env/vars.host-foo.bar.baz.env` format, for
 
 `.env/vars.host-192.168.0.0.1.env` will use  env vars from this file if `--host` parameter is set to `192.168.0.1` during sparrowdo run 
 
+
+To override location of .env file use SPARROWDO_ENV_FILE variable:
+
+```bash
+export SPARROWDO_ENV_FILE=~/.env
+```
+
+This will force sparrowdo to look for env files in `~/.env` instead of `.env/`
+
 * `files`
 
 Directory containing files, so one could write such a scenario:
