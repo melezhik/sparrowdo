@@ -140,7 +140,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   my $env-files-source-dir = ".env/";
   
-  if %*ENV:exists<SPARROWDO_ENV_FILE> && %*ENV:exists<SPARROWDO_ENV_FILE>.IO ~~ :d {
+  if %*ENV:exists<SPARROWDO_ENV_FILE> && %*ENV<SPARROWDO_ENV_FILE>.IO ~~ :d {
     say "[utils] SPARROWDO_ENV_FILE is set, copy env-files from {%*ENV<SPARROWDO_ENV_FILE>}" if %args<verbose>;
     $env-files-source-dir = %*ENV<SPARROWDO_ENV_FILE>;
   } 
