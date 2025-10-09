@@ -147,7 +147,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
   
   my $env-files-source = ( 
     %args<host>:exists && "{$env-files-source-dir}/vars.host-{%args<host>}.env".IO ~~ :f
-  ) ?? "$env-files-source-dir/vars.host-{%args<host>}.env" !! "{$env-files-source-dir}/vars.env";
+  ) ?? "vars.host-{%args<host>}.env" !! "vars.env";
 
   
   if $env-files-source.IO ~~ :f {
