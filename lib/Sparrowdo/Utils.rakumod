@@ -150,7 +150,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
   ) ?? "vars.host-{%args<host>}.env" !! "vars.env";
 
   
-  if $env-files-source.IO ~~ :f {
+  if "{$env-files-source-dir}/{$env-files-source}".IO ~~ :f {
     say "[utils] copy {$env-files-source-dir}/{$env-files-source} to .sparrowdo/vars.env" if %args<verbose>;
     copy "{$env-files-source-dir}/{$env-files-source}", ".sparrowdo/vars.env";
   }
