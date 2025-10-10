@@ -400,6 +400,47 @@ In case you need to run sparrowdo on localhost use `--localhost` flag:
 
     $ sparrowdo --localhost
 
+# Safe mechanism to pass secrets
+
+Sparrowdo allow safely pass secrets to remote ssh host by using secret files:
+
+Create file with some secrets in Bash format, pay attention, variables should be exported:
+
+`nano ~/secrets.env`
+
+```
+export LOGIN=admin
+export PASSWORD=12345
+```
+
+Use `--secretsfile` option to specify file:
+
+```bash
+sparrowdo --secretsfile ~/secrets.env
+```
+
+Sparrowdo will copy file on remote host, source it exporting declared Bash variables and remove immediately,
+so file won't be kept on remote host. Bash variables are available in Sparrowdo scenario using standard
+Rakulang `%*ENV` notation:
+
+
+```raku
+say %*ENV<LOGIN>;
+say %*ENV<PASSWORD>;
+```
+
+For convenience, secrets could be passed in `vars/` format using tags:
+
+```bash
+sparrowdo --secretsfile ~/secrets.env --tags user=.env[LOGIN],password=.env[PASSWORD]
+```
+
+```raku
+say tags()<user>; # the same as %*ENV<LOGIN>;
+say tags()<password>; # the same as %*ENV<PASSWORD>;
+```
+
+
 # Sparrowdo cli 
 
 `sparrowdo` is Sparrowdo cli to run Sparrowdo scenarios, it accepts following arguments:
