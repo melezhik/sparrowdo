@@ -87,7 +87,8 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
   if %args<secretsfile> {
-    $fh.say("if test -f {%args<secretsfile>}; then mv {%args<secretsfile>} secret.env || :; fi; rm -rf {%args<secretsfile>}");
+    my $localsecretfile = %args<secretsfile>.IO.basename;
+    $fh.say("if test -f {$localsecretfile}; then mv {$localsecretfile} secret.env || :; fi; rm -rf {$localsecretfile}");
   }
   if %args<sudo> && %args<type> eq 'default' {
     #$fh.say("# case1");
