@@ -164,6 +164,8 @@ sub MAIN (
 
     say "required tags: {@required-tags.perl}" if $verbose;
 
+    my %sparrowdo-host-ops;
+
     for @hosts -> $i {
 
       my $h;
@@ -173,6 +175,7 @@ sub MAIN (
       if $i.isa("Hash") {
         $h = $i<host>;
         $host-tags = $i<tags> if $i<tags>;
+        %sparrowdo-host-ops = $i<sparrowdo> if $i<sparrowdo>;
       } else {
         $h = $i;
       } 
@@ -308,6 +311,10 @@ sub MAIN (
       }
 
       %trigger<sparrowdo> = %sparrowdo-config;
+
+      for %sparrowdo-host-ops.kv -> $k, $v {
+        %trigger<sparrowdo>{$k} = $v;
+      }
 
       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
 
