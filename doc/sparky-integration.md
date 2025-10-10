@@ -329,6 +329,23 @@ Sparky Job ID
 
 Sparky project name
 
+## Override Sparrowdo parameter
+
+Host files allow also override sparrowdo parameters, specific for host:
+
+```raku
+[
+  %(
+    host => "localhost",
+    project => "web-app-build", 
+  ),
+  sparrowdo => %(
+    :verbose,
+    :ssh_private_key</app/.ssh/id_rsa>,
+    :secretsfile</app/.main.env>,
+  ),
+];
+```
 
 ## Watcher jobs
 
