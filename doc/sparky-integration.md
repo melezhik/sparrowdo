@@ -329,7 +329,7 @@ Sparky Job ID
 
 Sparky project name
 
-## Override Sparrowdo parameter
+## Override Sparrowdo parameters
 
 Host files allow also override sparrowdo parameters, specific for host:
 
@@ -407,7 +407,6 @@ To get job details use `status()` and `info()` methods:
     say "status-url: ", $j.info()<status-url>;
   }
 ```
-
 
 ## Existing IAAS tools integration
 
