@@ -243,7 +243,7 @@ export NAME=alexey
 export LASTNAME=melezhik
 ```
 
-To used variables either reference them through tags:
+To use variables either reference them through tags:
 
 ```
 sparrowdo --tags name=.env[NAME],lastname=.env[NAME] --host admin.panel
@@ -258,7 +258,7 @@ say tags()<name>; # alexey
 say tags()<lastname>; # melezhik
 ```
 
-Or just use Rakulang `%*ENV` syntax:
+Or use standard Rakulang `%*ENV` syntax:
 
 ```raku
 #!raku
