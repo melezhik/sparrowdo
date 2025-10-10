@@ -16,6 +16,7 @@ sub MAIN (
 
   Str  :$host = "127.0.0.1", 
   Str  :$sparrowfile, 
+  Str  :$secretsfile, 
   Str  :$tags, 
   Str  :$repo = "http://sparrowhub.io/repo", 
   Str  :$ssh_user, 
@@ -79,6 +80,7 @@ sub MAIN (
     localhost => $localhost,
     color => $color,
     host => $host,
+    secretsfile => $secretsfile,
   );
 
   if ($docker) {
@@ -378,8 +380,8 @@ sub MAIN (
         ssh-private-key => $ssh_private_key,
         verbose => $verbose,
         sync    => $sync,
-        prefix  => $prefix 
-
+        prefix  => $prefix, 
+        secretsfile => $secretsfile,
       )
     );
 

@@ -57,8 +57,12 @@ sub prepare-ssh-host ($host,%args?) is export {
     "StrictHostKeyChecking=no",
     (  %args<ssh-port> ?? "-P {%args<ssh-port>}" !! "-P 22" ),
     ( %args<ssh-private-key> ?? "-i {%args<ssh-private-key>}" !! "" ),
-    ".sparrowdo/",
-    (  %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/env/$prefix/" !! "$host:.sparrowdo/env/$prefix/" ),
+    ".sparrowdo/"
+  );
+
+  @cmd.push( %args<secretsfile>) if  %args<secretsfile>;
+  @cmd.push(
+    %args<ssh-user> ?? "{%args<ssh-user>}\@$host:.sparrowdo/env/$prefix/" !! "$host:.sparrowdo/env/$prefix/"
   );
 
   $cmd =  @cmd.join(" ");

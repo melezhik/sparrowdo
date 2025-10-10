@@ -197,7 +197,7 @@ Thus Sparrowdo _project_ might consists of various files and folders:
     ├── conf
     │   └── alternative.pl6
     ├── config.raku
-    ├── .env
+    ├── vars
     │   └── vars.env
     ├── data
     │   └── list.dat
@@ -231,46 +231,55 @@ choose to run with that file:
 
     $ sparrowdo --conf=conf/alternative.pl6
 
-* `.env`
+* `vars`
 
-Directory containing env file where, env file is just a Bash file with some environment variables declared inside, for example:
+Directory containing file with some environment variables, for example:
 
-`.env/vars.env`
+`vars/vars.env`
 
 ```bash
 #!bash
-export PASSWORD=supersecret
-export TOKEN=myToken123
+export NAME=alexey
+export LASTNAME=melezhik
 ```
 
-This allow to safely pass sensitive data to remote host, without exposing anything in command line, bash history or `ps aux`:
+To used variables either reference them through tags:
 
 ```
-sparrowdo --tags password=.env[PASSWORD],token=.env[TOKEN] --host admin.panel
+sparrowdo --tags name=.env[NAME],lastname=.env[NAME] --host admin.panel
 ```
 
-That way env file will copied over scp to remote host and env variable will be available in Sparrowdo scenario via tags() function:
+And then:
 
 ```raku
 #!raku
 
-say tags()<password>; # supersecret
-say tags()<token>; # myToken
-
+say tags()<name>; # alexey
+say tags()<lastname>; # melezhik
 ```
 
-To use host specific env files, use `.env/vars.host-foo.bar.baz.env` format, for example:
+Or just use Rakulang `%*ENV` syntax:
 
-`.env/vars.host-192.168.0.0.1.env` will use  env vars from this file if `--host` parameter is set to `192.168.0.1` during sparrowdo run 
+```raku
+#!raku
+
+say %*ENV<NAME>; # alexey
+say %*ENV<LASTNAME>; # melezhik
+```
 
 
-To override location of .env file use SPARROWDO_ENV_FILE variable:
+To use host specific env files, use `vars/vars.host-foo.bar.baz.env` format, for example:
+
+`vars/vars.host-192.168.0.0.1.env` will use  env vars from this file if `--host` parameter is set to `192.168.0.1` during sparrowdo run 
+
+
+To override location of vars file use SPARROWDO_ENV_FILE variable:
 
 ```bash
-export SPARROWDO_ENV_FILE=~/.env
+export SPARROWDO_ENV_FILE=~/vars
 ```
 
-This will force sparrowdo to look for env files in `~/.env` instead of `.env/`
+This will force sparrowdo to look for env files in `~/vars` instead of `vars/`
 
 * `files`
 

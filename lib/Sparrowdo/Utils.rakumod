@@ -86,19 +86,21 @@ sub generate-sparrowdo-harness (%args) is export {
   $fh.say("export SP6_TAGS='{%args<tags>}'") if %args<tags>;
   $fh.say("export SP6_FORMAT_COLOR=1") if %args<color>;
 
+  if %args<secretsfile> {
+    $fh.say("if test -f {%args<secretsfile>}; then mv {%args<secretsfile>} secret.env || :; fi; rm -rf {%args<secretsfile>}");
+  }
   if %args<sudo> && %args<type> eq 'default' {
     #$fh.say("# case1");
     if $%args<index-update> {
       $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update;");
     }
-    $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'test -f vars.env && source vars.env && rm -rf vars.env; raku -MSparrow6::DSL sparrowfile'");
+    $fh.say("sudo env PATH=\$PATH SP6_FORMAT_COLOR=\$SP6_FORMAT_COLOR  SP6_CONFIG=\$SP6_CONFIG SP6_CARTON_OFF=\$SP6_CARTON_OFF SP6_PREFIX=\$SP6_PREFIX SP6_DEBUG=\$SP6_DEBUG SP6_REPO=\$SP6_REPO SP6_TAGS=\$SP6_TAGS bash -c 'if test -f secret.env; then source secret.env || :; fi; rm -rf secret.env; test -f vars.env && source vars.env; raku -MSparrow6::DSL sparrowfile'");
   } else {
+    $fh.say("if test -f secret.env; then source secret.env || :; fi; rm -rf secret.env");
     if $%args<index-update> {
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
     }
-    #$fh.say("# case2");
-    #$fh.say("ls -l");
-    $fh.say("test -f vars.env && source vars.env && rm -rf vars.env");
+    $fh.say("test -f vars.env && source vars.env");
     $fh.say("raku -MSparrow6::DSL sparrowfile");
   }
 
@@ -138,7 +140,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
   push @files, "conf" if "conf".IO ~~ :d;
   push @files, "data" if "data".IO ~~ :d;
 
-  my $env-files-source-dir = ".env/";
+  my $env-files-source-dir = "vars/";
   
   if %*ENV<SPARROWDO_ENV_FILE>:exists && %*ENV<SPARROWDO_ENV_FILE>.IO ~~ :d {
     say "[utils] SPARROWDO_ENV_FILE is set, copy env-files from {%*ENV<SPARROWDO_ENV_FILE>}" if %args<verbose>;
@@ -157,7 +159,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   if @files.elems > 0 {
 
-    say "copy additional sparrowdo files: {@files.perl}" if %args<verbose>;
+    say "copy additional sparrowdo files: {@files.raku}" if %args<verbose>;
 
     push @cmd, @files, ".sparrowdo/";
 
@@ -169,6 +171,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
 
   }
+
 
 }
 
