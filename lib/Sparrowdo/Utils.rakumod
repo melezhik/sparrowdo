@@ -88,7 +88,7 @@ sub generate-sparrowdo-harness (%args) is export {
 
   if %args<secretsfile> {
     my $localsecretfile = %args<secretsfile>.IO.basename;
-    $fh.say("if test -f {$localsecretfile}; then mv {$localsecretfile} secret.env || :; fi; rm -rf {$localsecretfile}");
+    $fh.say("if test -f ../{$localsecretfile}; then mv ../{$localsecretfile} secret.env || :; fi; rm -rf ../{$localsecretfile}");
   }
   if %args<sudo> && %args<type> eq 'default' {
     #$fh.say("# case1");
