@@ -158,11 +158,11 @@ sub MAIN (
 
     my %tags = $tags ?? parse-tags($tags) !! %(); 
 
-    say "cli tags: {%tags.perl}" if $verbose;
+    say "cli tags: {%tags.raku}" if $verbose;
 
     my @required-tags = %tags.keys.grep({ %tags{$_}.isa(Bool) });
 
-    say "required tags: {@required-tags.perl}" if $verbose;
+    say "required tags: {@required-tags.raku}" if $verbose;
 
     my %sparrowdo-host-ops;
 
@@ -214,7 +214,7 @@ sub MAIN (
 
       }
 
-      say "host tags: ", %host-tags.perl if $verbose;
+      say "host tags: ", %host-tags.raku if $verbose;
       
       if $tag-pass {
         say "ALLOW host {$h} by tags creteria" if $verbose;
@@ -282,7 +282,7 @@ sub MAIN (
 
       push @effective-tags, $tags if $tags;
 
-      say "effective tags: ", @effective-tags.perl if $verbose;
+      say "effective tags: ", @effective-tags.raku if $verbose;
 
       if @effective-tags.elems {
         %sparrowdo-config<tags> = @effective-tags.join(",");
@@ -316,7 +316,7 @@ sub MAIN (
         %trigger<sparrowdo>{$k} = $v;
       }
 
-      spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
+      spurt "{$sparky-project-dir}/.triggers/$id", %trigger.raku;
 
       say "queue build for [$project] on [$h] id = $id";
 
@@ -369,9 +369,9 @@ sub MAIN (
 
        copy $watch, "{$cache-dir}/sparrowfile";
 
-       spurt "{$cache-dir}/config.raku", %( jobs => @jobs ).perl;
+       spurt "{$cache-dir}/config.raku", %( jobs => @jobs ).raku;
 
-       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.perl;
+       spurt "{$sparky-project-dir}/.triggers/$id", %trigger.raku;
 
        say "queue build for [$wid] on [localhost] id = $id";
 
