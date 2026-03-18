@@ -31,7 +31,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       "echo",
       "'docker conrainer $host is not running'"
     );
-    say "[docker] container stop: {@docker-cont-stop.perl}" if %args<verbose>;
+    say "[docker] container stop: {@docker-cont-stop.raku}" if %args<verbose>;
     shell @docker-cont-stop.join(" ");
     my @docker-image-run = (
       docker-cmd(),
@@ -47,7 +47,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       $image,
     );
 
-    say "[docker] run image: {@docker-image-run.perl}" if %args<verbose>;
+    say "[docker] run image: {@docker-image-run.raku}" if %args<verbose>;
     run @docker-image-run;
 
   } else {

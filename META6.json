@@ -1,5 +1,5 @@
 {
- "auth": "zef:melezhik",
+ "auth": "zef:sp1983",
  "authors": [
     "Alexey Melezhik"
   ],
@@ -33,5 +33,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.1.48"
+  "version": "0.1.49"
 }
