@@ -102,7 +102,7 @@ sub generate-sparrowdo-harness (%args) is export {
       $fh.say("raku -MSparrow6::Task::Repository -e Sparrow6::Task::Repository::Api.new.index-update");
     }
     $fh.say("test -f vars.env && source vars.env");
-    $fh.say("raku -MSparrow6::DSL sparrowfile");
+    $fh.say("valgrind raku -MSparrow6::DSL sparrowfile");
   }
 
   $fh.close;
