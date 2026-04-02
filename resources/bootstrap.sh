@@ -74,7 +74,7 @@ case "$OS" in
         rpm="https://github.com/nxadm/rakudo-pkg/releases/download/v2026.03/rakudo-pkg-EL8-2026.03-01.aarch64.rpm"
       fi
       if [[ "$VERSION_ID" == 9* ]]; then
-        rpm="https://github.com/nxadm/rakudo-pkg/releases/download/v2026.03/rakudo-pkg-EL9-2026.03-01.x86_64.rpm"
+        rpm="https://github.com/nxadm/rakudo-pkg/releases/download/v2026.03/rakudo-pkg-EL9-2026.03-01.aarch64.rpm"
       fi
       if [[ "$VERSION_ID" == 10* ]]; then
         rpm="https://github.com/nxadm/rakudo-pkg/releases/download/v2026.03/rakudo-pkg-EL10-2026.03-01.aarch64.rpm"
