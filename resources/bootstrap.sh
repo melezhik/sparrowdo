@@ -74,7 +74,7 @@ case "$OS" in
         dnf copr enable grayeul/TestProj -y
         yum install raku-sparrow6 -y -q
         export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:~/.raku/bin:$PATH
-        yum install raku-sparrow6 -y -q
+        yum install git -y -q
         git clone https://github.com/ugexe/zef.git
         cd zef
         raku -I. bin/zef install . --/test
