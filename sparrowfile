@@ -1,6 +1,7 @@
 #!raku
 
-#say "tags: ", tags().perl;
+say "tags: ", tags().raku;
+say tags()<foo>;
 #say "config: ", config().perl;
 
 task-run "files/tasks/hello-world";
@@ -10,7 +11,7 @@ task-run "files/tasks/hello-world";
 #zef "Teddy::Bear";
 #zef "Terminal::Print";
 
-task-run "files/tasks/sleep";
+#task-run "files/tasks/sleep";
 
 task-run "tasks/make";
 

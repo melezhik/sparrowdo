@@ -11,7 +11,8 @@
     project => "test123",
     tags => %(
       message => "hello world",
-      name => "example build"
+      name => "example build",
+      :foo<hello world ok kkkkk>
     ),
   ),
 ]

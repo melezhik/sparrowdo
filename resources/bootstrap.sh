@@ -68,7 +68,17 @@ case "$OS" in
   rocky|rhel|red)
     yum -q -y install curl-minimal || yum -q -y install curl
     yum -q -y install bash wget openssl-devel perl-JSON-PP
-    if [[ "$OS" == *rocky* &&  $(uname -m) == "aarch64" ]]; then
+    if [[ "$OS" == *rocky* &&  $(uname -m) == "x86_64" ]]; then
+      source /etc/os-release
+      if [[ "$VERSION_ID" == 9* ]]; then
+        dnf copr enable grayeul/TestProj -y
+        yum install raku-sparrow6 -y -q
+        export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
+      else
+        install_rakudo_linux
+        install_sparrow
+      fi
+    elif [[ "$OS" == *rocky* &&  $(uname -m) == "aarch64" ]]; then
       source /etc/os-release
       if [[ "$VERSION_ID" == 8* ]]; then
         rpm="https://github.com/nxadm/rakudo-pkg/releases/download/v2026.03/rakudo-pkg-EL8-2026.03-01.aarch64.rpm"
@@ -86,10 +96,11 @@ case "$OS" in
       export PATH=/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bin:$PATH
       cd /opt/rakudo-pkg/var/zef
       raku -I. bin/zef --/test install .
+      install_sparrow
     else
       install_rakudo_linux
+      install_sparrow
     fi
-    install_sparrow
   ;;
   amazon|centos|fedora)
     yum -q -y install curl bash wget openssl-devel perl-JSON-PP
