@@ -2,6 +2,9 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  Use grayeul/TestProj repo 
+  for RL9
+
 0.1.51  2026-04-07T12:10:00Z
 
   Use rpms for aarch64, RL
