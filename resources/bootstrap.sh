@@ -73,7 +73,11 @@ case "$OS" in
       if [[ "$VERSION_ID" == 9* ]]; then
         dnf copr enable grayeul/TestProj -y
         yum install raku-sparrow6 -y -q
-        export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
+        export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:~/.raku/bin:$PATH
+        git clone https://github.com/ugexe/zef.git
+        cd zef
+        raku -I. bin/zef install . --/test
+        zef install --/test Sparky::JobApi
       else
         install_rakudo_linux
         install_sparrow
