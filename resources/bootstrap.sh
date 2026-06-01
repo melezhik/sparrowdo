@@ -70,7 +70,7 @@ case "$OS" in
     yum -q -y install bash wget openssl-devel perl-JSON-PP
     if [[ "$OS" == *rocky* ]]; then
       source /etc/os-release
-      if [[ "$VERSION_ID" == 9* ]]; then
+      if [[ "$VERSION_ID" == 9* ]] || [[ "$VERSION_ID" == 10* ]]; then
         dnf copr enable grayeul/TestProj -y
         yum install raku-sparrow6 raku-sparky-job-api -y -q
         export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
