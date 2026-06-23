@@ -2,6 +2,8 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+0.1.54  2026-06-23T12:50:00Z
+
   Use dnf-command(copr)
   in RL bootstrap
   to support stripped
