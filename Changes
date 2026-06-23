@@ -2,6 +2,11 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  Use dnf-command(copr)
+  in RL bootstrap
+  to support stripped
+  docker images
+  
 0.1.53  2026-06-02T12:30:00Z
 
   Use grayeul/TestProj repo
