@@ -99,7 +99,7 @@ case "$OS" in
   debian|ubuntu)
     DEBIAN_FRONTEND=noninteractive
     apt-get update -q -o Dpkg::Use-Pty=0
-    apt-get install -q -y -o Dpkg::Use-Pty=0 curl bash libssl-dev
+    apt-get install -q -y -o Dpkg::Use-Pty=0 curl bash libssl-dev wget
     install_rakudo_linux
     install_sparrow
   ;;
