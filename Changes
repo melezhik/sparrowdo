@@ -2,10 +2,13 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
-  Bootstrap: Install zef
-  for Rocky Linux;
-  Install wget for ubuntu/
-  debian
+  Bootstrap: 
+
+  Install zef for Rocky Linux;
+  Install wget for ubuntu/debian
+
+  Bump rakudo version (2026.07)
+
 
 0.1.54  2026-06-23T12:50:00Z
 

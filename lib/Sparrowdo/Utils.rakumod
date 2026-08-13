@@ -5,7 +5,7 @@ unit module Sparrowdo::Utils;
 use Sparrowdo::Bootstrap;
 
 sub rakudo-linux-version () is export {
-  'rakudo-moar-2025.01-01-linux-x86_64-gcc'
+  'rakudo-moar-2026.07-01-linux-x86_64-gcc'
 }
 
 sub rakudo-linux-install-prefix () is export {
