@@ -1,4 +1,6 @@
-#!raku
+#!/usr/bin/env /home/ubuntu/projects/rakupp/rakupp/bin/rakupp
+
+#raku
 
 use Sparrowdo;
 

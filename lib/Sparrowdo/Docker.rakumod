@@ -15,10 +15,10 @@ sub prepare-docker-host ($host_str,%args?) is export {
   say "[docker] prepare instance: $host_str" if %args<verbose>;
 
   say "[docker] copy harness files" if %args<verbose>;
-
   my @d = $host_str.split('@');
   my $host;
   if @d.elems > 1 {
+    say "LLL";
     my $image = shift @d;
     $host = shift @d;
     my @docker-cont-stop = (
@@ -46,7 +46,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
       $host,
       $image,
     );
-
     say "[docker] run image: {@docker-image-run.raku}" if %args<verbose>;
     run @docker-image-run;
 
@@ -68,21 +67,21 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  run @rmdir-cmd;
+  qqx[@rmdir-cmd.join(" ")];
 
   my @cp-cmd = (
     docker-cmd(),
     "exec",
     "--user",
     "root",
-    "-i",
+    "-it",
     $host,
     "mkdir",
     "-p",
     "/var/.sparrowdo/env/$prefix",
   );
 
-  run @cp-cmd;
+  qqx[@cp-cmd.join(" ")];
 
   @cp-cmd = (
     docker-cmd(),
@@ -106,7 +105,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  run @chmod-cmd;
+  qqx[@chmod-cmd.join(" ")];
 }
 
 
@@ -129,7 +128,7 @@ sub bootstrap-docker-host ($host, %args?) is export {
     rakudo-linux-install-prefix(),
   );
 
-  run @cmd;
+  say qqx[@cmd.join(" ")];
 
 }
 
@@ -139,11 +138,11 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "{docker-cmd()} exec -i $host sh -l /var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my $cmd = "{docker-cmd()} exec $host sh -l /var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
-  shell $cmd;
+  say qqx[$cmd].chomp;
 
 }
 
