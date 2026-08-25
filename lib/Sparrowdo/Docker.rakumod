@@ -58,9 +58,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @rmdir-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-i",
     $host,
     "rm",
     "-rf",
@@ -72,9 +69,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @cp-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-it",
     $host,
     "mkdir",
     "-p",
@@ -95,9 +89,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @chmod-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-i",
     $host,
     "chmod",
     "-R",
@@ -117,10 +108,6 @@ sub bootstrap-docker-host ($host, %args?) is export {
 
   my @cmd = (
     docker-cmd(),
-    "exec",
-    "--user",
-    "root",
-    "-i",
     "$host",
     "sh", 
     "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh",
