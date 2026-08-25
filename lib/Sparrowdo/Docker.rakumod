@@ -129,7 +129,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
-  say qqx[$cmd].chomp;
+  shell($cmd);
 
 }
 
