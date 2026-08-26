@@ -64,7 +64,8 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  qqx[@rmdir-cmd.join(" ")];
+  #qqx[@rmdir-cmd.join(" ")];
+  run @rmdir-cmd;
 
   my @cp-cmd = (
     docker-cmd(),
@@ -75,7 +76,8 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  qqx[@cp-cmd.join(" ")];
+  #qqx[@cp-cmd.join(" ")];
+  run @cp-cmd;
 
   @cp-cmd = (
     docker-cmd(),
@@ -96,7 +98,8 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  qqx[@chmod-cmd.join(" ")];
+  #qqx[@chmod-cmd.join(" ")];
+  run @chmod-cmd;
 }
 
 
@@ -115,7 +118,8 @@ sub bootstrap-docker-host ($host, %args?) is export {
     rakudo-linux-install-prefix(),
   );
 
-  say qqx[@cmd.join(" ")];
+  #say qqx[@cmd.join(" ")];
+  run @cmd;
 
 }
 
