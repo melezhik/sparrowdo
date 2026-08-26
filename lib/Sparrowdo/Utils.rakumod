@@ -168,9 +168,18 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
     say "[utils] effective cmd: [$cmd]" if %args<verbose>;
 
-    qqx[pwd && ls -l];
+    #qqx[pwd && ls -l];
 
-    qqx[@cmd.join(" ")];
+    if %args<verbose> {
+
+      run "pwd";
+      run "ls", "-l";
+
+    }
+
+    run @cmd;
+
+    #qqx[@cmd.join(" ")];
 
 
   }
