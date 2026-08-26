@@ -18,7 +18,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @d = $host_str.split('@');
   my $host;
   if @d.elems > 1 {
-    say "LLL";
     my $image = shift @d;
     $host = shift @d;
     my @docker-cont-stop = (
@@ -133,7 +132,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   say "[docker] effective cmd: $cmd" if %args<verbose>;
 
-  shell($cmd);
+  shell $cmd;
 
 }
 
