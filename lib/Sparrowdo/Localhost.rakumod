@@ -12,7 +12,7 @@ sub run-tasks-localhost (%args?) is export {
 
   say "[localhost] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  run @cmd, :err, :out;
+  run @cmd;
 
 }
 
