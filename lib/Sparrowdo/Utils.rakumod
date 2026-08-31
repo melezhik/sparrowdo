@@ -130,7 +130,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   #push @cmd, "-v" if %args<verbose>;
 
-  push @cmd, "2>&1";
+  #push @cmd, "2>&1";
 
   my @files;
 

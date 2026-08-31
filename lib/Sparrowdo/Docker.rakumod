@@ -128,11 +128,12 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "{docker-cmd()} exec $host sh -l /var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my @cmd = (docker-cmd(), "exec", $host, "sh", "-l", "/var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh");
 
-  say "[docker] effective cmd: $cmd" if %args<verbose>;
+  say "[docker] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  shell $cmd;
+  #run @cmd;
+  shell @cmd.join(" ")
 
 }
 
