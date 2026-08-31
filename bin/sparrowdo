@@ -49,8 +49,6 @@ sub MAIN (
     return;
   }
 
-  ($*OUT,$*ERR).map: {.out-buffer = 0};
-
   my @jobs; # queued jobs
 
   my $spf = $sparrowfile || 'sparrowfile'; # Sparrowfile to run
