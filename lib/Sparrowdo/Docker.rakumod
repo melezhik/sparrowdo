@@ -132,7 +132,7 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   say "[docker] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  ($*OUT,$*ERR).map: {.out-buffer = 0};
+  #($*OUT,$*ERR).map: {.out-buffer = 0};
 
   run @cmd;
 

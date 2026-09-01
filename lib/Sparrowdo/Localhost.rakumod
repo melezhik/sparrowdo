@@ -12,7 +12,7 @@ sub run-tasks-localhost (%args?) is export {
 
   say "[localhost] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  ($*OUT,$*ERR).map: {.out-buffer = 0};
+  #($*OUT,$*ERR).map: {.out-buffer = 0};
 
   run @cmd;
 
