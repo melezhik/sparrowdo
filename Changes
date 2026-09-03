@@ -2,6 +2,13 @@ Revision history for Sparrowdo
 
 {{$NEXT}}
 
+  Bootstrap:
+
+  Use @rocky-testing/rakudo-rpms
+  as a corp repo for
+  Rocky Linux, thanks to
+  @StackKorora
+
 0.1.55  2026-08-20T07:52:00Z
 
   Bootstrap: 
