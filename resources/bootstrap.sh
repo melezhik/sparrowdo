@@ -72,7 +72,7 @@ case "$OS" in
       source /etc/os-release
       if [[ "$VERSION_ID" == 9* ]] || [[ "$VERSION_ID" == 10* ]]; then
         dnf install 'dnf-command(copr)' -y -q
-        dnf copr enable grayeul/TestProj -y
+        dnf copr enable @rocky-testing/rakudo-rpms -y
         yum install raku-sparrow6 raku-sparky-job-api zef -y -q
         export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
       else
