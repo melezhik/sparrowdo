@@ -123,15 +123,6 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   shell "touch .sparrowdo/sparrowdo.dummy";
 
-  my @cmd = (
-    'cp',
-    '-r',
-  );
-
-  #push @cmd, "-v" if %args<verbose>;
-
-  #push @cmd, "2>&1";
-
   my @files;
 
   push @files, "config.raku" if "config.raku".IO ~~ :f;
@@ -162,28 +153,19 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
     say "copy additional sparrowdo files: {@files.raku}" if %args<verbose>;
 
-    push @cmd, @files, ".sparrowdo/";
-
-    my $cmd = join " ", @cmd;
-
-    say "[utils] effective cmd: [$cmd]" if %args<verbose>;
-
-    #qqx[pwd && ls -l];
-
     if %args<verbose> {
-
       run "pwd";
       run "ls", "-l";
-
     }
 
-    run @cmd;
-
-    #qqx[@cmd.join(" ")];
-
+    for @files -> $i {
+      if %args<verbose> {
+        say "cp -r $i .sparrowdo/$i ...";
+      }
+      run "cp", "-r", $i, ".sparrowdo/$i";
+    }
 
   }
-
 
 }
 

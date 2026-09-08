@@ -30,7 +30,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       "echo",
       "'docker conrainer $host is not running'"
     );
-    say "[docker] container stop: {@docker-cont-stop.raku}" if %args<verbose>;
+    say "[docker] container stop: {@docker-cont-stop}" if %args<verbose>;
     shell @docker-cont-stop.join(" ");
     my @docker-image-run = (
       docker-cmd(),
@@ -45,7 +45,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       $host,
       $image,
     );
-    say "[docker] run image: {@docker-image-run.raku}" if %args<verbose>;
+    say "[docker] run image: {@docker-image-run}" if %args<verbose>;
     run @docker-image-run;
 
   } else {
@@ -63,7 +63,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  #qqx[@rmdir-cmd.join(" ")];
   run @rmdir-cmd;
 
   my @cp-cmd = (
@@ -75,7 +74,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  #qqx[@cp-cmd.join(" ")];
   run @cp-cmd;
 
   @cp-cmd = (
@@ -97,7 +95,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
-  #qqx[@chmod-cmd.join(" ")];
   run @chmod-cmd;
 }
 
@@ -110,6 +107,7 @@ sub bootstrap-docker-host ($host, %args?) is export {
 
   my @cmd = (
     docker-cmd(),
+    "exec",
     "$host",
     "sh", 
     "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh",
@@ -117,7 +115,8 @@ sub bootstrap-docker-host ($host, %args?) is export {
     rakudo-linux-install-prefix(),
   );
 
-  #say qqx[@cmd.join(" ")];
+  say "[docker] bootstrap-docker-host: {@cmd}" if %args<verbose>;
+
   run @cmd;
 
 }
@@ -132,11 +131,8 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   say "[docker] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  #($*OUT,$*ERR).map: {.out-buffer = 0};
-
   run @cmd;
 
-  #shell @cmd.join(" ")
 
 }
 
