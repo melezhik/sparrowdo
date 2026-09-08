@@ -15,7 +15,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   say "[docker] prepare instance: $host_str" if %args<verbose>;
 
   say "[docker] copy harness files" if %args<verbose>;
-
   my @d = $host_str.split('@');
   my $host;
   if @d.elems > 1 {
@@ -46,7 +45,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
       $host,
       $image,
     );
-
     say "[docker] run image: {@docker-image-run.raku}" if %args<verbose>;
     run @docker-image-run;
 
@@ -59,29 +57,25 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @rmdir-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-i",
     $host,
     "rm",
     "-rf",
     "/var/.sparrowdo/env/$prefix",
   );
 
+  #qqx[@rmdir-cmd.join(" ")];
   run @rmdir-cmd;
 
   my @cp-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-i",
     $host,
     "mkdir",
     "-p",
     "/var/.sparrowdo/env/$prefix",
   );
 
+  #qqx[@cp-cmd.join(" ")];
   run @cp-cmd;
 
   @cp-cmd = (
@@ -96,9 +90,6 @@ sub prepare-docker-host ($host_str,%args?) is export {
   my @chmod-cmd = (
     docker-cmd(),
     "exec",
-    "--user",
-    "root",
-    "-i",
     $host,
     "chmod",
     "-R",
@@ -106,6 +97,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
     "/var/.sparrowdo/env/$prefix",
   );
 
+  #qqx[@chmod-cmd.join(" ")];
   run @chmod-cmd;
 }
 
@@ -118,10 +110,6 @@ sub bootstrap-docker-host ($host, %args?) is export {
 
   my @cmd = (
     docker-cmd(),
-    "exec",
-    "--user",
-    "root",
-    "-i",
     "$host",
     "sh", 
     "/var/.sparrowdo/env/$prefix/.sparrowdo/bootstrap.sh",
@@ -129,6 +117,7 @@ sub bootstrap-docker-host ($host, %args?) is export {
     rakudo-linux-install-prefix(),
   );
 
+  #say qqx[@cmd.join(" ")];
   run @cmd;
 
 }
@@ -139,11 +128,15 @@ sub run-tasks-docker-host ($host,%args?) is export {
 
   my $prefix = %args<prefix> || "default";
 
-  my $cmd = "{docker-cmd()} exec -i $host sh -l /var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh";
+  my @cmd = (docker-cmd(), "exec", $host, "sh", "-l", "/var/.sparrowdo/env/$prefix/.sparrowdo/sparrowrun.sh");
 
-  say "[docker] effective cmd: $cmd" if %args<verbose>;
+  say "[docker] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  shell $cmd;
+  #($*OUT,$*ERR).map: {.out-buffer = 0};
+
+  run @cmd;
+
+  #shell @cmd.join(" ")
 
 }
 

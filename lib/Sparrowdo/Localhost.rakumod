@@ -8,11 +8,13 @@ sub run-tasks-localhost (%args?) is export {
 
   say "[localhost] run tasks" if %args<verbose>;
 
-  my $cmd = "bash --login .sparrowdo/sparrowrun.sh";
+  my @cmd = ("bash", "--login", ".sparrowdo/sparrowrun.sh");
 
-  say "[localhost] effective cmd: $cmd" if %args<verbose>;
+  say "[localhost] effective cmd: {@cmd.join(' ')}" if %args<verbose>;
 
-  shell $cmd;
+  #($*OUT,$*ERR).map: {.out-buffer = 0};
+
+  run @cmd;
 
 }
 

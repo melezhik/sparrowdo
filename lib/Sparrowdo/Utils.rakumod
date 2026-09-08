@@ -130,7 +130,7 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
   #push @cmd, "-v" if %args<verbose>;
 
-  push @cmd, "2>&1";
+  #push @cmd, "2>&1";
 
   my @files;
 
@@ -166,9 +166,20 @@ sub prepare-sparrowdo-files (%args?)  is export {
 
     my $cmd = join " ", @cmd;
 
-    say "[utils] effective cmd: $cmd" if %args<verbose>;
+    say "[utils] effective cmd: [$cmd]" if %args<verbose>;
 
-    shell @cmd;
+    #qqx[pwd && ls -l];
+
+    if %args<verbose> {
+
+      run "pwd";
+      run "ls", "-l";
+
+    }
+
+    run @cmd;
+
+    #qqx[@cmd.join(" ")];
 
 
   }
