@@ -69,15 +69,24 @@ case "$OS" in
     yum -q -y install curl-minimal || yum -q -y install curl
     yum -q -y install bash wget openssl-devel perl-JSON-PP
     if [[ "$OS" == *rocky* ]]; then
-      source /etc/os-release
-      if [[ "$VERSION_ID" == 9* ]] || [[ "$VERSION_ID" == 10* ]]; then
-        dnf install 'dnf-command(copr)' -y -q
-        dnf copr enable @rocky-testing/rakudo-rpms -y
-        yum install raku-sparrow6 raku-sparky-job-api zef -y -q
-        export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
+      arch=$(uname -m)
+      if test "$arch" = "riscv64"; then
+        curl -L -s -f  http://sparrowhub.io/riscv/rakupp -o /usr/local/bin/rakupp
+        chmod a+x /usr/local/bin/rakupp
+        ln -fs /usr/local/bin/rakupp /usr/local/bin/raku
+        rakupp install --no-test Sparrow6
+        rakupp install --no-test Sparky::JobApi
       else
-        install_rakudo_linux
-        install_sparrow
+        source /etc/os-release
+        if [[ "$VERSION_ID" == 9* ]] || [[ "$VERSION_ID" == 10* ]]; then
+          dnf install 'dnf-command(copr)' -y -q
+          dnf copr enable @rocky-testing/rakudo-rpms -y
+          yum install raku-sparrow6 raku-sparky-job-api zef -y -q
+          export PATH=/opt/rakudo/bin:/opt/rakudo/share/perl6/site/bin:$PATH
+        else
+          install_rakudo_linux
+          install_sparrow
+        fi
       fi
     else
       install_rakudo_linux
@@ -100,8 +109,17 @@ case "$OS" in
     DEBIAN_FRONTEND=noninteractive
     apt-get update -q -o Dpkg::Use-Pty=0
     apt-get install -q -y -o Dpkg::Use-Pty=0 curl bash libssl-dev wget
-    install_rakudo_linux
-    install_sparrow
+    arch=$(uname -m)
+    if test "$arch" = "riscv64"; then
+      curl -L -s -f  http://sparrowhub.io/riscv/rakupp -o /usr/local/bin/rakupp
+      chmod a+x /usr/local/bin/rakupp
+      ln -fs /usr/local/bin/rakupp /usr/local/bin/raku
+      rakupp install --no-test Sparrow6
+      rakupp install --no-test Sparky::JobApi
+    else
+      install_rakudo_linux
+      install_sparrow
+    fi
   ;;
   fedora)
     dnf -yq install curl bash openssl-devel
