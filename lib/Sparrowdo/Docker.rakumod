@@ -28,7 +28,7 @@ sub prepare-docker-host ($host_str,%args?) is export {
       $host,
       "||",
       "echo",
-      "'docker conrainer $host is not running'"
+      "'docker container $host is not running'"
     );
     say "[docker] container stop: {@docker-cont-stop}" if %args<verbose>;
     shell @docker-cont-stop.join(" ");
