@@ -1,6 +1,6 @@
 use v6;
 
-unit module Sparrowdo:ver<0.1.57>;
+unit module Sparrowdo:ver<0.1.58>;
 
-our $VERSION = "0.1.57.a";
+our $VERSION = "0.1.58";
 
